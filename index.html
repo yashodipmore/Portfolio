@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashodip | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white font-mono">
+
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <div class="w-64 bg-gray-800 p-6 fixed h-full">
+            <h1 class="text-xl font-bold text-center mb-6">Yashodip More</h1>
+            <nav class="flex flex-col gap-4">
+                <button class="menu-btn active" data-section="home">🏠 Home</button>
+                <button class="menu-btn" data-section="about">👤 About</button>
+                <button class="menu-btn" data-section="projects">💻 Projects</button>
+                <button class="menu-btn" data-section="skills">⚡ Skills</button>
+                <button class="menu-btn" data-section="resume">📄 Resume</button>
+                <button class="menu-btn" data-section="contact">📩 Contact</button>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="ml-64 p-10 w-full">
+            <section id="home" class="section flex flex-col items-center text-center">
+                <!-- Profile Picture -->
+                <div class="relative">
+                    <img src="assests\profile.jpeg" alt="Profile Picture"
+                        class="w-36 h-36 rounded-full border-4 border-yellow-400 shadow-lg transition-transform duration-300 hover:scale-105">
+                    <div class="absolute -bottom-2 right-0 bg-green-500 w-4 h-4 rounded-full animate-pulse"></div>
+                </div>
+            
+                <!-- Name & Typewriter Effect -->
+                <h1 class="text-4xl font-bold text-white mt-4">Yashodip More</h1>
+                <p class="text-lg text-yellow-300 font-mono mt-2">
+                    <span id="typing-text"></span><span class="animate-blink">|</span>
+                </p>
+            
+                <!-- Quick Stats -->
+                <div class="mt-6 flex gap-6">
+                    <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-600 transition-transform hover:scale-105">
+                        <p class="text-sm text-gray-400">LeetCode Rating</p>
+                        <p class="text-xl font-bold text-yellow-300">1514</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-600 transition-transform hover:scale-105">
+                        <p class="text-sm text-gray-400">Codeforces Rank</p>
+                        <p class="text-xl font-bold text-yellow-300">Expert</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-600 transition-transform hover:scale-105">
+                        <p class="text-sm text-gray-400">GitHub Contributions</p>
+                        <p class="text-xl font-bold text-yellow-300">500+</p>
+                    </div>
+                </div>
+            
+                <!-- Terminal-style Welcome Message -->
+                <div class="mt-8 bg-black p-4 rounded-lg border border-gray-600 text-green-400 text-left w-full max-w-lg font-mono">
+                    <p><span class="text-blue-400">🚀 Welcome to my portfolio!</span></p>
+                    <p><span class="text-red-400">🌟 Passionate about Competitive Programming & Software Development.</span></p>
+                    <p><span class="text-yellow-400">🛠 Skilled in Java, React.js, Node.js, and more.</span></p>
+                    <p><span class="text-purple-400">📫 Let's connect and build something amazing!</span></p>
+                </div>
+            </section>
+            
+            <section id="about" class="section flex flex-col items-center text-center">
+                <h2 class="text-4xl font-extrabold text-yellow-400 mb-6">🙋‍♂️ About Me</h2>
+            
+                <!-- Typing Animation Effect -->
+                <p class="text-lg text-green-300 font-mono bg-gray-800 px-4 py-2 rounded-lg shadow-md border border-gray-600 inline-block">
+                    <span id="intro-text"></span><span class="animate-blink">|</span>
+                </p>
+            
+                <!-- Profile Summary -->
+                <div class="mt-6 max-w-3xl text-gray-300 text-lg leading-relaxed text-center">
+                    <p>
+                        I’m <span class="text-yellow-300 font-semibold">Yashodip More</span>, a <span class="text-green-400">Competitive Programmer</span>  
+                        and <span class="text-blue-400">Software Developer</span> passionate about **building scalable solutions**  
+                        and **solving complex problems** with **DSA & AI/ML**.  
+                    </p>
+                </div>
+            
+                <!-- Skill Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                    <div class="skill-card">⚡ Java</div>
+                    <div class="skill-card">🚀 C++</div>
+                    <div class="skill-card">📜 Python</div>
+                    <div class="skill-card">🛠 JavaScript</div>
+                    <div class="skill-card">💻 React.js</div>
+                    <div class="skill-card">🌐 Node.js</div>
+                </div>
+            
+                <!-- Competitive Programming Stats -->
+                <h3 class="text-3xl font-semibold text-blue-400 mt-10 mb-4">📊 Competitive Programming</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <p class="text-gray-400">LeetCode Rating</p>
+                        <p class="text-3xl font-bold text-yellow-300">1700+</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="text-gray-400">LeetCode Problems Solved</p>
+                        <p class="text-3xl font-bold text-yellow-300">800+</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="text-gray-400">Codeforces Rank</p>
+                        <p class="text-3xl font-bold text-yellow-300">Expert</p>
+                    </div>
+                </div>
+            
+                <!-- Hackathon Achievements -->
+                <h3 class="text-3xl font-semibold text-purple-400 mt-10 mb-4">🏆 Hackathon Achievements</h3>
+                <ul class="text-lg text-gray-300 text-left list-disc list-inside max-w-3xl">
+                    <li>🥇 **Rank 1343/34,000+** in LeetCode Weekly Contest #407</li>
+                    <li>🏆 **Winner of Startup Innovation Competitions** at Sage University & SKH Technofest.</li>
+                    <li>🚀 **Global Rank 645/12,000+** in Techgig Prime Code Champ Competition.</li>
+                    <li>🌍 **Navigator, NASA Space Apps Challenge** (Developed space tech solutions).</li>
+                </ul>
+            </section>
+            
+            <section id="projects" class="section flex flex-col items-center text-center">
+                <h2 class="text-4xl font-extrabold text-yellow-400 mb-6">💻 Projects</h2>
+                <p class="text-gray-300 max-w-2xl mb-6">
+                    Here are some of the projects I've worked on, focusing on **competitive programming, AI, and full-stack development**.
+                </p>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-yellow-300">Algorithm Visualizer</h3>
+                        <p class="text-gray-400 text-sm">Tech: HTML, CSS, JavaScript, DSA</p>
+                        <p class="text-gray-300 text-sm mt-2">
+                            An interactive web app that visualizes sorting algorithms like **QuickSort & MergeSort**.
+                        </p>
+                        <a href="https://github.com/yashodipmore/Algorithm-Explorer" target="_blank" class="project-link">🔗 View on GitHub</a>
+                    </div>
+            
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-yellow-300">DeeFace Recognizer</h3>
+                        <p class="text-gray-400 text-sm">Tech: Python, OpenFace, Machine Learning</p>
+                        <p class="text-gray-300 text-sm mt-2">
+                            A **real-time face recognition system** using deep learning, achieving **95% accuracy**.
+                        </p>
+                        <a href="https://github.com/yashodipmore/FaceRecognitionSystem" target="_blank" class="project-link">🔗 View on GitHub</a>
+                    </div>
+            
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-yellow-300">Notepad App</h3>
+                        <p class="text-gray-400 text-sm">Tech: Java, Swing</p>
+                        <p class="text-gray-300 text-sm mt-2">
+                            A **fully functional text editor** built using Java Swing, with **multi-file support & auto-save**.
+                        </p>
+                        <a href="https://github.com/yashodipmore/Notepad---NonCSCoder" target="_blank" class="project-link">🔗 View on GitHub</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="skills" class="section flex flex-col items-center text-center">
+                <h2 class="text-4xl font-extrabold text-yellow-400 mb-6">⚡ Skills</h2>
+                <p class="text-gray-300 max-w-2xl mb-6">
+                    My technical expertise includes **competitive programming, full-stack development, and AI/ML**.  
+                    Here’s a categorized breakdown of my skills:
+                </p>
+            
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="skill-box">🔥 Java</div>
+                    <div class="skill-box">🚀 C++</div>
+                    <div class="skill-box">💻 Python</div>
+                    <div class="skill-box">🌐 JavaScript</div>
+                    <div class="skill-box">📱 React.js</div>
+                    <div class="skill-box">🛠 Node.js</div>
+                    <div class="skill-box">🎨 Tailwind CSS</div>
+                    <div class="skill-box">🔗 Git & GitHub</div>
+                    <div class="skill-box">📊 Machine Learning</div>
+                    <div class="skill-box">☁️ Cloud Computing</div>
+                    <div class="skill-box">🗄️ SQL & NoSQL</div>
+                    <div class="skill-box">🔌 REST APIs</div>
+                </div>
+            </section>
+            
+            <section id="resume" class="section flex flex-col items-center text-center">
+                <h2 class="text-4xl font-extrabold text-yellow-400 mb-6">📄 Resume</h2>
+                <p class="text-gray-300 max-w-2xl mb-6">
+                    Download my latest resume to learn more about my skills, experience, and achievements.
+                </p>
+            
+                <!-- Resume Preview -->
+                <iframe src="assests\CV_Yashodip_More94.pdf" class="resume-preview"></iframe>
+            
+                <!-- Download Button -->
+                <a href="assests\CV_Yashodip_More94.pdf" download class="resume-btn">
+                    ⬇️ Download Resume
+                </a>
+            </section>
+            
+            <section id="contact" class="section flex flex-col items-center text-center">
+                <h2 class="text-4xl font-extrabold text-yellow-400 mb-6">📩 Contact Me</h2>
+                <p class="text-gray-300 max-w-2xl mb-6">
+                    Have a project in mind or just want to say hi? Feel free to reach out!  
+                </p>
+            
+                <!-- Contact Links -->
+                <div class="flex gap-6 mb-6">
+                    <a href="mailto:yashodip2026@gmail.com" class="contact-link">📧 Email</a>
+                    <a href="https://linkedin.com/in/yashodipmore22" class="contact-link">🔗 LinkedIn</a>
+                    <a href="https://github.com/yashodipmore" class="contact-link">💻 GitHub</a>
+                </div>
+            
+                <!-- Contact Form -->
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required class="contact-input">
+                    <input type="email" placeholder="Your Email" required class="contact-input">
+                    <textarea placeholder="Your Message" required class="contact-input h-32"></textarea>
+                    <button type="submit" class="contact-btn">🚀 Send Message</button>
+                </form>
+            </section>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

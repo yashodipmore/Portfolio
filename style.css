@@ -1,0 +1,259 @@
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #292929);
+    padding: 20px;
+    position: fixed;
+    box-shadow: 4px 0 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Sidebar Title */
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+}
+
+/* Menu Buttons */
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-btn {
+    background: none;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 6px;
+}
+
+.menu-btn:hover, .menu-btn.active {
+    background: rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    transform: scale(1.05);
+}
+
+/* Smooth Transition Effect */
+.menu-btn:hover {
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+}
+
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-blink {
+    animation: blink 1s infinite;
+}
+
+img {
+    object-fit: cover;
+}
+
+.font-mono {
+    font-family: "Courier New", monospace;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-blink {
+    animation: blink 1s infinite;
+}
+
+/* Skill Cards */
+.skill-card {
+    background-color: #1f1f1f;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #444;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+}
+
+.skill-card:hover {
+    transform: scale(1.1);
+    background-color: #444;
+}
+
+/* Competitive Programming Cards */
+.stat-card {
+    background: linear-gradient(to right, #2a2a2a, #1f1f1f);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #555;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.project-card {
+    background-color: #1f1f1f;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    text-align: left;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.project-link {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+.skill-box {
+    background-color: #1f1f1f;
+    padding: 14px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #444;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+}
+
+.skill-box:hover {
+    transform: scale(1.1);
+    background-color: #444;
+}
+
+.resume-preview {
+    width: 80%;
+    height: 500px;
+    border: 1px solid #555;
+    margin-bottom: 20px;
+}
+
+.resume-btn {
+    background-color: #ffcc00;
+    color: black;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.resume-btn:hover {
+    background-color: #ffd700;
+    transform: scale(1.1);
+}
+
+
+.contact-link {
+    background-color: #1f1f1f;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #444;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+    text-decoration: none;
+    color: #ffcc00;
+}
+
+.contact-link:hover {
+    transform: scale(1.1);
+    background-color: #444;
+    color: white;
+}
+
+/* Contact Form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.contact-input {
+    background-color: #1f1f1f;
+    border: 1px solid #444;
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.contact-input:focus {
+    border-color: #ffcc00;
+}
+
+.contact-btn {
+    background-color: #ffcc00;
+    color: black;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.contact-btn:hover {
+    background-color: #ffd700;
+    transform: scale(1.1);
+}
+
+
+.section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
