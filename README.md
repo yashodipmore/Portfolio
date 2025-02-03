@@ -14,6 +14,8 @@ Hi, I'm **Yashodip More**, a passionate **Competitive Programmer & Software Deve
 ## 💻 Live Portfolio  
 🔗 **[Check it out here!](https://your-portfolio-link.com/)**  
 
+# Portfolio Website - Deployed on Netlify 🎉
+
 ## 🏆 Highlights  
 
 - 🥇 **Rank 1343 / 34,000+** in LeetCode Weekly Contest #407  
@@ -47,4 +49,5 @@ Feel free to reach out for collaborations, projects, or just a chat:
 
 ---
 
-⚡ **"Passionate about building scalable solutions and solving problems with DSA & AI/ML."**  
+⚡ **"Passionate about building scalable solutions and solving problems with DSA & AI/ML."** 
+
