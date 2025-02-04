@@ -12,7 +12,7 @@ Hi, I'm **Yashodip More**, a passionate **Competitive Programmer & Software Deve
 - **Competitive Programming**: Codeforces (Expert), LeetCode (1700+ rating)  
 
 ## 💻 Live Portfolio  
-🔗 **[Check it out here!](https://your-portfolio-link.com/)**  
+🔗 **[Check it out here!](https://yashodipmore.netlify.app/)**  
 
 # Portfolio Website - Deployed on Netlify 🎉
 
