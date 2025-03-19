@@ -67,3 +67,6 @@ Welcome to my **personal portfolio website**, a dynamic and interactive space sh
 ```sh
 git clone https://github.com/yashodipmore/portfolio.git
 cd portfolio
+
+
+![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
