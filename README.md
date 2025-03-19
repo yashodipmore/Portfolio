@@ -61,6 +61,9 @@ Welcome to my **personal portfolio website**, a dynamic and interactive space sh
 
 ---
 
+![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
+
+
 ## 🚀 **Installation & Setup**  
 
 ### 📥 Clone the Repository  
@@ -69,4 +72,4 @@ git clone https://github.com/yashodipmore/portfolio.git
 cd portfolio
 
 
-![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
+
