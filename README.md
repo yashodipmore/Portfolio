@@ -51,13 +51,12 @@ Welcome to my **personal portfolio website**, a dynamic and interactive space sh
 ![Typed.js](https://img.shields.io/badge/Typed.js-ff69b4?style=for-the-badge&logo=javascript&logoColor=white)  
 
 ### ⚡ **Backend & APIs**  
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)  
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)  
 ![Formspree](https://img.shields.io/badge/Formspree-FF5733?style=for-the-badge&logo=gmail&logoColor=white)  
 
 ### ☁️ **Hosting & Deployment**  
 ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=github&logoColor=white)  
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)  
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+ 
 
 ---
 
