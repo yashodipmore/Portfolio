@@ -137,6 +137,9 @@
 <section id="home" class="relative h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-16 gap-12 overflow-hidden" 
     style="background: linear-gradient(135deg, #2C3E50, #34495E);">
     
+    <!-- Graph Paper Grid Background -->
+    <div class="absolute inset-0 w-full h-full graph-paper-grid"></div>
+    
     <!-- Moving Particle Background -->
     <div id="particles-js" class="absolute inset-0 w-full h-full"></div>
 
@@ -168,31 +171,25 @@
                 <i class="fa-brands fa-github"></i> GitHub
             </a>
         </div>
-    </div>
-
-    <!-- Right Side: Unique SVG Image Frame with Hover Border -->
-    <div class="relative w-80 h-80 md:w-96 md:h-96 group"
+    </div>    <!-- Right Side: Profile Photo with Floating Keywords -->
+    <div class="relative w-80 h-80 md:w-96 md:h-96"
          data-aos="flip-left" data-aos-duration="1500">
         
-        <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full animate-wave">
-            <path fill="none" stroke="transparent" stroke-width="4" 
-                  d="M50,-70C65,-60 80,-45 85,-30C90,-15 85,0 80,15C75,30 70,50 55,65C40,80 20,90 0,90
-                  C-20,90 -40,80 -55,65C-70,50 -75,30 -80,15C-85,0 -90,-15 -85,-30C-80,-45 -65,-60 -50,-70Z" 
-                  transform="translate(100,100)" />
-        </svg>
-
-        <!-- Hover Effect Border -->
-        <div class="absolute inset-0 border-4 border-transparent rounded-3xl 
-                    group-hover:border-blue-400 group-hover:shadow-blue-400 
-                    group-hover:shadow-2xl transition-all duration-300">
+        <!-- Floating Keywords Around Photo -->
+        <div class="floating-keywords">
+            <span class="keyword keyword-1" data-tech="AI">AI</span>
+            <span class="keyword keyword-2" data-tech="ML">ML</span>
+            <span class="keyword keyword-3" data-tech="DL">DL</span>
+            <span class="keyword keyword-4" data-tech="Blockchain">Blockchain</span>
+            <span class="keyword keyword-5" data-tech="Dev">Dev</span>
         </div>
-
-        <!-- Profile Image -->
-        <img src="assests/yash.png" alt="Yashodip More" 
-     class="profile-img absolute inset-0 w-full h-full object-cover animate-float rounded-3xl">
-     <div class="absolute bottom-8 animate-bounce">
-</div>
-
+        
+        <!-- Profile Image Container -->
+        <div class="relative w-full h-full rounded-3xl overflow-hidden">
+            <!-- Profile Image -->
+            <img src="assests/yash.png" alt="Yashodip More" 
+                 class="w-full h-full object-cover">
+        </div>
     </div>
 </section>
 
@@ -238,8 +235,7 @@ particlesJS("particles-js", {
         "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
         "move": { "enable": true, "speed": 2 }
     },
-    "interactivity": {
-        "events": {
+    "interactivity": {        "events": {
             "onhover": { "enable": true, "mode": "repulse" },
             "onclick": { "enable": true, "mode": "push" }
         }
@@ -253,7 +249,109 @@ particlesJS("particles-js", {
 <!-- Button & Image Floating Animation Styles -->
 <style>
     * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Graph Paper Grid Effect */
+.graph-paper-grid {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+    background-size: 45px 45px;
+    opacity: 0.6;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(45px, 45px); }
+}
+
+/* Floating Keywords Around Photo */
+.floating-keywords {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.keyword {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: floatKeyword 4s infinite ease-in-out;
+    white-space: nowrap;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual keyword positioning and delays */
+.keyword-1 {
+    top: 10%;
+    left: -10%;
+    animation-delay: 0s;
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.1));
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.keyword-2 {
+    top: 20%;
+    right: -15%;
+    animation-delay: 0.8s;
+    background: linear-gradient(45deg, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.1));
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.keyword-3 {
+    bottom: 30%;
+    left: -20%;
+    animation-delay: 1.6s;
+    background: linear-gradient(45deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.1));
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.keyword-4 {
+    bottom: 15%;
+    right: -10%;
+    animation-delay: 2.4s;
+    background: linear-gradient(45deg, rgba(245, 158, 11, 0.3), rgba(245, 158, 11, 0.1));
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+.keyword-5 {
+    top: 60%;
+    left: -15%;
+    animation-delay: 3.2s;
+    background: linear-gradient(45deg, rgba(239, 68, 68, 0.3), rgba(239, 68, 68, 0.1));
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+@keyframes floatKeyword {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(-15px) translateX(8px) scale(1.05);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-25px) translateX(-5px) scale(0.95);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateY(-10px) translateX(12px) scale(1.02);
+        opacity: 1;
+    }
 }
 
 /* Import FontAwesome for Icons */
@@ -339,6 +437,1760 @@ particlesJS("particles-js", {
 .profile-img {
         transition: opacity 0.4s ease-in-out;
 }
+
+/* 3D Floating Keywords */
+.floating-keywords {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.keyword {
+    position: absolute;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: float3d 6s infinite ease-in-out;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.keyword:hover {
+    transform: scale(1.2) rotateY(360deg);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Individual keyword positions and colors */
+.keyword-1 { top: 10%; left: 85%; animation-delay: 0s; background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+.keyword-2 { top: 20%; right: 90%; animation-delay: 1s; background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+.keyword-3 { top: 70%; left: -15%; animation-delay: 2s; background: linear-gradient(135deg, #a8edea, #fed6e3); }
+.keyword-4 { bottom: 20%; right: -20%; animation-delay: 3s; background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.keyword-5 { top: 50%; left: -20%; animation-delay: 4s; background: linear-gradient(135deg, #667eea, #764ba2); }
+.keyword-6 { bottom: 10%; left: 85%; animation-delay: 5s; background: linear-gradient(135deg, #f093fb, #f5576c); }
+.keyword-7 { top: 40%; right: -25%; animation-delay: 1.5s; background: linear-gradient(135deg, #ffa726, #fb8c00); }
+.keyword-8 { bottom: 60%; left: -25%; animation-delay: 2.5s; background: linear-gradient(135deg, #ab47bc, #8e24aa); }
+
+@keyframes float3d {
+    0%, 100% { 
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+        opacity: 0.8;
+    }
+    25% { 
+        transform: translateY(-20px) rotateX(10deg) rotateY(90deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-10px) rotateX(-5deg) rotateY(180deg);
+        opacity: 0.9;
+    }
+    75% { 
+        transform: translateY(-25px) rotateX(8deg) rotateY(270deg);
+        opacity: 1;
+    }
+}
+
+/* Next-Level Profile Photo Effects */
+.profile-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* Rotating Rings */
+@keyframes spin-slow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse {
+    animation: spin-reverse 15s linear infinite;
+}
+
+/* Pulsing Energy Rings */
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-ring-delay {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.animate-pulse-ring {
+    animation: pulse-ring 3s ease-in-out infinite;
+}
+
+.animate-pulse-ring-delay {
+    animation: pulse-ring-delay 3s ease-in-out infinite 1.5s;
+}
+
+/* Floating Particles */
+.floating-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #00f5ff, #0080ff);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00f5ff, 0 0 20px #0080ff;
+    animation: float-particle 8s infinite ease-in-out;
+}
+
+.particle-1 { top: 10%; left: 20%; animation-delay: 0s; }
+.particle-2 { top: 30%; right: 15%; animation-delay: 1.5s; }
+.particle-3 { bottom: 25%; left: 10%; animation-delay: 3s; }
+.particle-4 { bottom: 40%; right: 20%; animation-delay: 4.5s; }
+.particle-5 { top: 60%; left: 5%; animation-delay: 2s; }
+.particle-6 { top: 45%; right: 8%; animation-delay: 5s; }
+
+@keyframes float-particle {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.8;
+    }
+    25% { 
+        transform: translateY(-30px) translateX(10px);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-15px) translateX(-10px);
+        opacity: 0.6;
+    }
+    75% { 
+        transform: translateY(-40px) translateX(15px);
+        opacity: 1;
+    }
+}
+
+/* Holographic Border */
+.holographic-border {
+    background: linear-gradient(45deg, 
+        transparent 20%, 
+        rgba(0, 245, 255, 0.15) 30%, 
+        rgba(255, 0, 255, 0.15) 50%, 
+        rgba(0, 245, 255, 0.15) 70%, 
+        transparent 80%
+    );
+    background-size: 300% 300%;
+    animation: holographic-move 4s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: screen;
+}
+
+.profile-container:hover .holographic-border {
+    opacity: 1;
+}
+
+@keyframes holographic-move {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Scanning Lines */
+.scanning-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f5ff, transparent);
+    box-shadow: 0 0 10px #00f5ff;
+    animation: scan-vertical 3s linear infinite;
+}
+
+.scan-line-1 {
+    animation-delay: 0s;
+}
+
+.scan-line-2 {
+    animation-delay: 1.5s;
+}
+
+@keyframes scan-vertical {
+    0% {
+        top: -2px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* Light Streak Effect */
+.light-streak {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.3) 55%,
+        transparent 70%
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: overlay;
+}
+
+.image-container:hover .light-streak {
+    left: 100%;
+}
+
+/* Mouse Follow Light */
+.mouse-follow-light {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    filter: blur(1px);
+}
+
+.profile-container:hover .mouse-follow-light {
+    opacity: 1;
+}
+
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Info HUD */
+
+
+/* Enhanced Image Effects */
+.image-container {
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+.profile-container:hover .image-container {
+    transform: rotateY(5deg) rotateX(5deg);
+    filter: drop-shadow(0 20px 40px rgba(0, 245, 255, 0.3));
+}
+
+/* ========================================
+   NEXT-LEVEL 3D COMPETITIVE PROGRAMMING EFFECTS
+   ======================================== */
+
+/* Main Section Styling */
+.next-gen-coding-section {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Grid Paper Background (Like Hero Section) */
+.competitive-grid-bg {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+    background-size: 45px 45px;
+    opacity: 0.6;
+    animation: gridMove 20s linear infinite;
+}
+
+/* Coding Matrix Background */
+.coding-matrix-bg {
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    animation: backgroundShift 15s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+/* Live Coding Display */
+.live-coding-display {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    z-index: 5;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+.editor-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editor-title {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.editor-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.control-dot {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.editor-content {
+    padding: 15px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.code-line {
+    display: flex;
+    margin-bottom: 4px;
+    align-items: center;
+    min-height: 18px;
+}
+
+.line-number {
+    color: #888;
+    margin-right: 15px;
+    width: 20px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.code-text {
+    color: #ffffff;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.active-line {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.typing-code {
+    animation: typeText 4s steps(30) infinite;
+}
+
+.cursor {
+    color: #ffffff;
+    animation: blink 1s infinite;
+    font-weight: bold;
+}
+
+@keyframes typeText {
+    0%, 50% { 
+        width: 0;
+        border-right: 2px solid #ffffff;
+    }
+    100% { 
+        width: 100%;
+        border-right: none;
+    }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Live Code Rain Effect (Monochrome) */
+.code-rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.code-column {
+    position: absolute;
+    top: -100%;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #ffffff 10%,
+        #ffffff 90%,
+        transparent 100%
+    );
+    animation: codeRain 8s linear infinite;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0.6;
+}
+
+.column-1 { left: 10%; animation-delay: 0s; }
+.column-2 { left: 20%; animation-delay: 1s; }
+.column-3 { left: 30%; animation-delay: 2s; }
+.column-4 { left: 40%; animation-delay: 3s; }
+.column-5 { left: 50%; animation-delay: 4s; }
+.column-6 { left: 60%; animation-delay: 1.5s; }
+.column-7 { left: 70%; animation-delay: 2.5s; }
+.column-8 { left: 80%; animation-delay: 3.5s; }
+.column-9 { left: 90%; animation-delay: 0.5s; }
+.column-10 { left: 95%; animation-delay: 4.5s; }
+
+@keyframes codeRain {
+    0% { 
+        top: -100%; 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 0.6; 
+    }
+    90% { 
+        opacity: 0.6; 
+    }
+    100% { 
+        top: 100%; 
+        opacity: 0; 
+    }
+}
+
+/* Floating 3D Code Blocks (Monochrome) */
+.floating-code-blocks {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.code-block {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 32px rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    animation: float3DCode 12s infinite ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.block-1 { top: 15%; left: 5%; animation-delay: 0s; }
+.block-2 { top: 25%; right: 10%; animation-delay: 2s; }
+.block-3 { top: 60%; left: 8%; animation-delay: 4s; }
+.block-4 { bottom: 30%; right: 5%; animation-delay: 6s; }
+.block-5 { bottom: 20%; left: 15%; animation-delay: 8s; }
+
+@keyframes float3DCode {
+    0%, 100% { 
+        transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+        opacity: 0.7;
+    }
+    25% { 
+        transform: translateY(-20px) rotateY(10deg) rotateX(5deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-10px) rotateY(-5deg) rotateX(-3deg);
+        opacity: 0.8;
+    }
+    75% { 
+        transform: translateY(-30px) rotateY(8deg) rotateX(7deg);
+        opacity: 1;
+    }
+}
+
+/* 3D Geometric Programming Elements (Monochrome) */
+.programming-geometry {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.geo-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ffffff;
+    animation: rotate3D 20s linear infinite;
+    opacity: 0.4;
+}
+
+.geo-1 {
+    top: 20%;
+    left: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    animation-delay: 0s;
+}
+
+.geo-2 {
+    top: 70%;
+    left: 85%;
+    transform: rotate(45deg);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+    animation-delay: 5s;
+}
+
+.geo-3 {
+    top: 40%;
+    left: 5%;
+    border-radius: 20px;
+    background: conic-gradient(rgba(255, 255, 255, 0.1), transparent);
+    animation-delay: 10s;
+}
+
+.geo-4 {
+    bottom: 15%;
+    right: 80%;
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    animation-delay: 15s;
+}
+
+@keyframes rotate3D {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    33% { transform: rotateX(120deg) rotateY(120deg) rotateZ(120deg); }
+    66% { transform: rotateX(240deg) rotateY(240deg) rotateZ(240deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+/* Live Terminal Effect */
+.terminal-effect {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+    min-width: 300px;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+.terminal-line {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.terminal-prompt {
+    color: #ffffff;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.terminal-text {
+    color: #ffffff;
+    animation: typeWriter 3s steps(30) infinite;
+}
+
+.terminal-success {
+    color: #ffffff;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes typeWriter {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .live-coding-display {
+        width: 300px;
+        left: 2%;
+    }
+    
+    .terminal-effect {
+        right: 2%;
+        min-width: 250px;
+        font-size: 0.8rem;
+    }
+    
+    .code-block {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+    }
+}
+
+/* ========================================
+   PROJECTS SECTION - LIVE DEVELOPMENT ENVIRONMENT
+   ======================================== */
+
+/* Main Projects Section */
+.projects-dev-section {
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f, #1a1a1a);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Grid Paper Background */
+.projects-grid-bg {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 45px 45px;
+    opacity: 0.4;
+    animation: gridMove 20s linear infinite;
+}
+
+/* Development Environment Background */
+.dev-environment-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Live Code Editor Display */
+.dev-editor-display {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 450px;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.editor-window {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-titlebar {
+    background: rgba(60, 60, 60, 0.9);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.editor-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.control-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+}
+
+.control-btn.minimize {
+    background: #ffbd2e;
+}
+
+.control-btn.maximize {
+    background: #27ca3f;
+}
+
+.editor-filename {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+}
+
+.editor-body {
+    flex: 1;
+    display: flex;
+}
+
+.editor-sidebar {
+    width: 120px;
+    background: rgba(40, 40, 40, 0.9);
+    padding: 10px 5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.folder-item {
+    color: #ccc;
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    margin-bottom: 2px;
+    font-family: 'Courier New', monospace;
+}
+
+.folder-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+.editor-code {
+    flex: 1;
+    padding: 10px;
+    background: rgba(20, 20, 20, 0.9);
+}
+
+.code-line {
+    display: flex;
+    margin-bottom: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    min-height: 16px;
+}
+
+.line-num {
+    color: #666;
+    width: 25px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.code {
+    color: #ffffff;
+}
+
+.active-edit {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+.typing-cursor {
+    color: #ffffff;
+    animation: blink 1s infinite;
+}
+
+/* Moving GitHub Icons */
+.github-icons-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.github-icon {
+    position: absolute;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.3);
+    animation: floatGitHub 15s infinite ease-in-out;
+}
+
+.icon-1 { top: 10%; left: 80%; animation-delay: 0s; }
+.icon-2 { top: 30%; right: 85%; animation-delay: 2s; }
+.icon-3 { top: 60%; left: 75%; animation-delay: 4s; }
+.icon-4 { bottom: 20%; right: 80%; animation-delay: 6s; }
+.icon-5 { top: 80%; left: 85%; animation-delay: 8s; }
+.icon-6 { top: 50%; right: 90%; animation-delay: 1s; }
+.icon-7 { bottom: 40%; left: 90%; animation-delay: 3s; }
+.icon-8 { top: 20%; left: 70%; animation-delay: 5s; }
+
+@keyframes floatGitHub {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    25% { 
+        transform: translateY(-30px) translateX(20px) rotate(90deg);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-10px) translateX(-15px) rotate(180deg);
+        opacity: 0.4;
+    }
+    75% { 
+        transform: translateY(-40px) translateX(25px) rotate(270deg);
+        opacity: 0.7;
+    }
+}
+
+/* Terminal Window */
+.dev-terminal {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.terminal-header {
+    background: rgba(60, 60, 60, 0.9);
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-content {
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+}
+
+.terminal-line {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.command {
+    color: #ffffff;
+}
+
+.typing-cmd {
+    animation: typeCommand 3s steps(25) infinite;
+}
+
+.status {
+    color: #00ff00;
+}
+
+.success {
+    animation: pulse 2s infinite;
+}
+
+@keyframes typeCommand {
+    0%, 70% { width: 0; }
+    100% { width: 100%; }
+}
+
+/* Floating Development Icons */
+.dev-icons-float {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.dev-icon {
+    position: absolute;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    animation: floatDevIcon 12s infinite ease-in-out;
+}
+
+.dev-icon-1 { 
+    top: 15%; right: 15%; 
+    color: rgba(97, 218, 251, 0.4);
+    animation-delay: 0s; 
+}
+.dev-icon-2 { 
+    top: 40%; left: 10%; 
+    color: rgba(104, 160, 99, 0.4);
+    animation-delay: 2s; 
+}
+.dev-icon-3 { 
+    bottom: 30%; right: 20%; 
+    color: rgba(240, 219, 79, 0.4);
+    animation-delay: 4s; 
+}
+.dev-icon-4 { 
+    top: 70%; left: 15%; 
+    color: rgba(227, 79, 38, 0.4);
+    animation-delay: 6s; 
+}
+.dev-icon-5 { 
+    bottom: 15%; left: 80%; 
+    color: rgba(21, 114, 182, 0.4);
+    animation-delay: 8s; 
+}
+
+@keyframes floatDevIcon {
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
+        opacity: 0.4;
+    }
+    50% { 
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+/* Code Streams */
+.code-streams {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.code-stream {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.2);
+    animation: streamFlow 10s linear infinite;
+}
+
+.stream-1 { 
+    top: 25%; left: -100%; 
+    animation-delay: 0s; 
+}
+.stream-2 { 
+    top: 55%; left: -100%; 
+    animation-delay: 3s; 
+}
+.stream-3 { 
+    top: 85%; left: -100%; 
+    animation-delay: 6s; 
+}
+
+@keyframes streamFlow {
+    0% { 
+        left: -100%; 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 0.3; 
+    }
+    90% { 
+        opacity: 0.3; 
+    }
+    100% { 
+        left: 100%; 
+        opacity: 0; 
+    }
+}
+
+/* Responsive Design for Projects */
+@media (max-width: 768px) {
+    .dev-editor-display {
+        width: 300px;
+        height: 200px;
+        left: 2%;
+    }
+    
+    .dev-terminal {
+        width: 280px;
+        right: 2%;
+    }
+    
+    .github-icon {
+        font-size: 1.5rem;
+    }
+    
+    .dev-icon {
+        font-size: 1.2rem;
+    }
+      .editor-body {
+        font-size: 0.6rem;
+    }
+}
+
+/* ========================================
+   ENHANCED ANIMATED PROJECT CARDS - NEXT-GEN EFFECTS
+   ======================================== */
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    perspective: 1000px;
+}
+
+/* Enhanced Project Card Base */
+.project-card.floating-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    animation: floatingCard 6s infinite ease-in-out;
+    min-height: 500px;
+}
+
+/* Continuous Floating Animation */
+@keyframes floatingCard {
+    0%, 100% { 
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    }
+    25% { 
+        transform: translateY(-8px) rotateX(2deg) rotateY(1deg);
+    }
+    50% { 
+        transform: translateY(-15px) rotateX(0deg) rotateY(-1deg);
+    }
+    75% { 
+        transform: translateY(-5px) rotateX(-1deg) rotateY(2deg);
+    }
+}
+
+.project-card.floating-card:hover {
+    transform: translateY(-20px) rotateX(10deg) rotateY(10deg) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation-play-state: paused;
+}
+
+/* Enhanced Background Effects */
+.card-bg-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.card-mesh-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.02) 75%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    animation: meshFlow 8s infinite ease-in-out;
+}
+
+@keyframes meshFlow {
+    0%, 100% { 
+        background-position: 0% 0%;
+        opacity: 0.3;
+    }
+    50% { 
+        background-position: 100% 100%;
+        opacity: 0.7;
+    }
+}
+
+.card-ripple-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    pointer-events: none;
+}
+
+.project-card:hover .card-ripple-effect {
+    width: 300px;
+    height: 300px;
+    animation: ripplePulse 1.5s infinite ease-in-out;
+}
+
+@keyframes ripplePulse {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+}
+
+/* Animated Border System */
+.card-border-system {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.border-runner {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.border-top, .border-bottom {
+    height: 2px;
+    left: 0;
+    right: 0;
+}
+
+.border-left, .border-right {
+    width: 2px;
+    top: 0;
+    bottom: 0;
+}
+
+.border-top { top: 0; }
+.border-bottom { bottom: 0; }
+.border-left { left: 0; background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.8), transparent); }
+.border-right { right: 0; background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.8), transparent); }
+
+.project-card:hover .border-runner {
+    opacity: 1;
+    animation: borderRun 2s infinite linear;
+}
+
+@keyframes borderRun {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Dynamic Glow Effects */
+.card-glow.dynamic-glow {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 255, 255, 0) 0deg,
+        rgba(255, 255, 255, 0.4) 90deg,
+        rgba(255, 255, 255, 0) 180deg,
+        rgba(255, 255, 255, 0.4) 270deg,
+        rgba(255, 255, 255, 0) 360deg
+    );
+    border-radius: 24px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: -1;
+    animation: rotateGlow 4s linear infinite;
+}
+
+.project-card:hover .card-glow.dynamic-glow {
+    opacity: 1;
+}
+
+.card-ambient-light {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    right: 20%;
+    bottom: 20%;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    animation: ambientPulse 3s infinite ease-in-out;
+}
+
+.project-card:hover .card-ambient-light {
+    opacity: 1;
+}
+
+@keyframes ambientPulse {
+    0%, 100% { transform: scale(0.8); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+/* Interactive Particles */
+.card-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.interactive-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: particleFloat 12s infinite ease-in-out;
+}
+
+.project-card:hover .interactive-particle {
+    opacity: 1;
+}
+
+.interactive-particle.p-1 { top: 15%; left: 10%; animation-delay: 0s; }
+.interactive-particle.p-2 { top: 25%; right: 15%; animation-delay: 2s; }
+.interactive-particle.p-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+.interactive-particle.p-4 { top: 70%; right: 25%; animation-delay: 6s; }
+.interactive-particle.p-5 { bottom: 20%; right: 10%; animation-delay: 8s; }
+.interactive-particle.p-6 { top: 45%; left: 5%; animation-delay: 10s; }
+
+@keyframes particleFloat {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.4;
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) scale(1.2);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: translateY(-10px) translateX(-15px) scale(0.8);
+        opacity: 0.6;
+    }
+    75% { 
+        transform: translateY(-25px) translateX(20px) scale(1.1);
+        opacity: 0.9;
+    }
+}
+
+/* Enhanced Content */
+.card-content.enhanced-content {
+    position: relative;
+    padding: 28px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+}
+
+/* Parallax Image Container */
+.image-container.parallax-container {
+    position: relative;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    transform: perspective(1000px);
+    height: 220px;
+}
+
+.image-bg-layer {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+    border-radius: 20px;
+    transition: all 0.6s ease;
+    z-index: 0;
+}
+
+.project-card:hover .image-bg-layer {
+    transform: scale(1.1) rotate(1deg);
+}
+
+.project-image.floating-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+    filter: grayscale(0.4) brightness(0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.project-card:hover .project-image.floating-image {
+    transform: scale(1.15) translateZ(20px);
+    filter: grayscale(0) brightness(1.1);
+}
+
+/* Animated Overlay */
+.image-overlay.animated-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 2;
+}
+
+.project-card:hover .image-overlay.animated-overlay {
+    opacity: 1;
+}
+
+.overlay-ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    pointer-events: none;
+}
+
+.project-card:hover .overlay-ripple {
+    width: 200px;
+    height: 200px;
+    animation: overlayRipple 2s infinite ease-in-out;
+}
+
+@keyframes overlayRipple {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.2; }
+    100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+}
+
+.overlay-icon.floating-icon {
+    font-size: 2.5rem;
+    color: #ffffff;
+    transform: scale(0.3) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    z-index: 3;
+    margin-bottom: 1rem;
+}
+
+.project-card:hover .overlay-icon.floating-icon {
+    transform: scale(1) translateY(0);
+}
+
+.icon-pulse {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: iconPulse 2s infinite ease-in-out;
+}
+
+@keyframes iconPulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(0.8); opacity: 1; }
+}
+
+.overlay-stats {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.2s;
+}
+
+.project-card:hover .overlay-stats {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-number, .stat-label {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Enhanced Card Info */
+.card-info.animated-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.title-container {
+    position: relative;
+}
+
+.project-title.glitch-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1.3;
+    transition: all 0.4s ease;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.project-card:hover .project-title.glitch-title {
+    transform: translateX(8px);
+    color: #f8f8f8;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.title-underline {
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease 0.1s;
+}
+
+.project-card:hover .title-underline {
+    transform: scaleX(1);
+}
+
+.project-description.typing-description {
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex: 1;
+    transition: all 0.4s ease;
+    opacity: 0.9;
+}
+
+.project-card:hover .project-description.typing-description {
+    color: #e8e8e8;
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* Animated Tech Stack */
+.tech-stack.animated-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.tech-tag.floating-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-tag.floating-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.project-card:hover .tech-tag.floating-tag {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.project-card:hover .tech-tag.floating-tag::before {
+    left: 100%;
+}
+
+/* Enhanced Project Link */
+.project-link.enhanced-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.link-bg {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.project-link.enhanced-link:hover .link-bg {
+    left: 100%;
+}
+
+.project-link.enhanced-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.link-text, .link-icon {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.project-link.enhanced-link:hover .link-icon {
+    transform: translateX(8px) rotate(45deg);
+}
+
+.link-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.link-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-link.enhanced-link:hover .link-particle {
+    opacity: 1;
+    animation: linkParticleFloat 2s infinite ease-in-out;
+}
+
+.link-particle.lp-1 { top: 20%; left: 20%; animation-delay: 0s; }
+.link-particle.lp-2 { top: 60%; right: 30%; animation-delay: 0.7s; }
+.link-particle.lp-3 { bottom: 30%; left: 70%; animation-delay: 1.4s; }
+
+@keyframes linkParticleFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.2); }
+}
+
+/* Status Indicator */
+.card-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 4;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+}
+
+.project-card:hover .card-status {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff88;
+    animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.status-text {
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Card Stagger Delays */
+.card-1 { animation-delay: 0s; }
+.card-2 { animation-delay: 0.2s; }
+.card-3 { animation-delay: 0.4s; }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .project-card.floating-card {
+        min-height: 450px;
+        margin-bottom: 0;
+    }
+    
+    .card-content.enhanced-content {
+        padding: 20px;
+    }
+    
+    .image-container.parallax-container {
+        height: 180px;
+        margin-bottom: 20px;
+    }    
+    .project-title.glitch-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-description.typing-description {
+        font-size: 0.9rem;
+    }
+    
+    .project-link.enhanced-link {
+        padding: 0.8rem 1.2rem;
+    }
+}
+    
+    .card-content {
+        padding: 20px;
+    }
+    
+    .project-image {
+        height: 160px;
+    }
+    
+    .project-title {
+        font-size: 1.1rem;
+    }
+    
+    .tech-stack {
+        gap: 6px;
+    }
+    
+    .tech-tag {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+}
 </style>
 
 
@@ -347,54 +2199,169 @@ particlesJS("particles-js", {
     
 <!-- About Section -->
 <section id="about" class="relative py-20 bg-black text-white overflow-hidden">
+    <!-- Next-Gen Animated Background -->
+    <div class="absolute inset-0 next-gen-bg">
+        <!-- Animated Geometric Shapes -->
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+        <div class="geometric-shape shape-4"></div>
+        <div class="geometric-shape shape-5"></div>
+        
+        <!-- Floating Orbs -->
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+        
+        <!-- Matrix-like Code Rain -->
+        <div class="code-rain">
+            <div class="code-line line-1"></div>
+            <div class="code-line line-2"></div>
+            <div class="code-line line-3"></div>
+            <div class="code-line line-4"></div>
+            <div class="code-line line-5"></div>
+        </div>
+        
+        <!-- Animated Gradient Overlay -->
+        <div class="gradient-overlay"></div>
+    </div>
+    
     <!-- Particle Animation -->
-    <div id="about-particles" class="absolute inset-0"></div>
+    <div id="about-particles" class="absolute inset-0"></div>    <div class="relative container mx-auto z-10 px-6 md:px-16">
+        <!-- Compact Next-Gen Section Header -->
+        <div class="text-center mb-12" data-aos="fade-down" data-aos-duration="1200">
+            <h2 class="text-5xl md:text-6xl font-black tracking-wider mb-3 next-gen-title">
+                <span class="gradient-text">About</span> 
+                <span class="neon-text">Me</span>
+            </h2>
+            <div class="title-underline"></div>
+            <p class="text-lg text-gray-300 mt-4 max-w-xl mx-auto">
+                Discover the journey of a <span class="highlight-text">next-generation developer</span>
+            </p>
+        </div>
 
-    <div class="relative container mx-auto z-10 px-6 md:px-16">
-        <h2 class="text-5xl font-extrabold tracking-wide text-center mb-8"
-            data-aos="fade-down" data-aos-duration="1200">
-            About Me
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <!-- Left: Text Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <!-- Left: Compact Enhanced Text Content -->
             <div class="text-left space-y-6" data-aos="fade-right" data-aos-duration="1200">
-                <p class="text-lg leading-relaxed">
-                    🚀 Hi, I'm <span class="text-blue-400 font-semibold">Yashodip More</span>
-                    A Software Developer & Problem Solver passionate about building scalable and high-performance applications.
-                    
-                    With expertise in Frontend, Full-Stack Development, and AI/ML, I specialize in crafting intuitive user experiences and solving real-world challenges.
-                    
-                    Driven by innovation and continuous learning, I actively contribute to open source, hackathons, and coding competitions. 🚀
-                </p>
-                
-                <div class="p-6 border-l-4 border-yellow-400 bg-gray-900/50 rounded-lg shadow-lg"
-                     data-aos="fade-up" data-aos-duration="1400">
-                    <h3 class="text-2xl font-bold text-yellow-400">My Expertise</h3>
-                    <ul class="list-disc pl-6 mt-2 text-gray-300">
-                        <li>Frontend Development with React.js, Tailwind, & JavaScript</li>
-                        <li>Building Dynamic & Interactive Web Applications</li>
-                        <li>Problem Solving & Competitive Programming</li>
-                        <li>Backend & API Development</li>
-                        <li>UI/UX Design & Optimization</li>
-                    </ul>
+                <!-- Compact Main Bio -->
+                <div class="futuristic-card main-bio compact-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="bio-header compact-header">
+                            <span class="status-indicator"></span>
+                            <h3 class="text-lg font-bold text-cyan-400">DEVELOPER_PROFILE.exe</h3>
+                        </div>
+                        <p class="text-base leading-relaxed">
+                            🚀 <span class="text-cyan-400 font-semibold">Yashodip More</span> - 
+                            <span class="code-text">Next-Gen Software Architect & AI Innovator</span>
+                            <br/><br/>
+                            Expertise in <span class="tech-tag">Frontend</span>, 
+                            <span class="tech-tag">Full-Stack</span>, and 
+                            <span class="tech-tag">AI/ML</span>. Specializing in 
+                            <span class="highlight-gradient">scalable applications</span> and 
+                            <span class="highlight-gradient">algorithmic solutions</span>.
+                            <br/><br/>
+                            Contributing to <span class="glow-text">open source</span>, 
+                            <span class="glow-text">hackathons</span>, and 
+                            <span class="glow-text">competitions</span>. 🚀
+                        </p>
+                    </div>
                 </div>
 
-                <div class="p-6 border-r-4 border-yellow-400 bg-gray-900/50 rounded-lg shadow-lg text-right"
-                     data-aos="fade-up" data-aos-duration="1400" data-aos-delay="300">
-                    <h3 class="text-2xl font-bold text-yellow-400">What Drives Me?</h3>
-                    <p class="text-gray-300 mt-2">
-                        I thrive on innovation and problem-solving, constantly pushing boundaries to develop intelligent solutions.
-
-                        Whether it's optimizing algorithms, building scalable systems, or exploring AI/ML advancements, I'm always eager to learn, adapt, and create impactful technology.
-                    </p>
+                <!-- Compact Expertise Grid -->
+                <div class="futuristic-card expertise-panel compact-card" data-aos="fade-up" data-aos-duration="1400">
+                    <div class="card-glow expertise-glow"></div>
+                    <div class="card-content">
+                        <div class="panel-header compact-header">
+                            <div class="panel-indicator">
+                                <div class="indicator-dot dot-1"></div>
+                                <div class="indicator-dot dot-2"></div>
+                                <div class="indicator-dot dot-3"></div>
+                            </div>
+                            <h3 class="text-lg font-bold gradient-text">CORE_EXPERTISE.sys</h3>
+                        </div>
+                        <div class="expertise-grid compact-grid">
+                            <div class="expertise-item compact-item">
+                                <span class="expertise-icon">🔥</span>
+                                <span>React.js & Modern Frontend</span>
+                            </div>
+                            <div class="expertise-item compact-item">
+                                <span class="expertise-icon">⚡</span>
+                                <span>Interactive Web Applications</span>
+                            </div>
+                            <div class="expertise-item compact-item">
+                                <span class="expertise-icon">🧠</span>
+                                <span>Competitive Programming</span>
+                            </div>
+                            <div class="expertise-item compact-item">
+                                <span class="expertise-icon">🛠️</span>
+                                <span>Backend & API Development</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Right: Image with Fixes -->
-            <div class="relative mx-auto w-80 h-80 md:w-96 md:h-96" 
+                <!-- Compact Motivation Engine -->
+                <div class="futuristic-card motivation-engine compact-card" data-aos="fade-up" data-aos-duration="1400" data-aos-delay="200">
+                    <div class="card-glow motivation-glow"></div>
+                    <div class="card-content">
+                        <div class="engine-header compact-header">
+                            <div class="engine-status">
+                                <div class="status-bar compact-bar">
+                                    <div class="status-fill"></div>
+                                </div>
+                                <span class="status-text">MOTIVATION: 100%</span>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed">
+                            Driven by <span class="pulse-text">innovation</span> and 
+                            <span class="pulse-text">problem-solving</span>. Building 
+                            <span class="highlight-gradient">intelligent solutions</span> through 
+                            <span class="code-highlight">algorithms</span>, 
+                            <span class="code-highlight">scalable systems</span>, and 
+                            <span class="code-highlight">AI/ML</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>            <!-- Right: Enhanced Image with Next-Level Effects -->
+            <div class="relative mx-auto w-80 h-80 md:w-96 md:h-96 photo-container" 
                  data-aos="zoom-in" data-aos-duration="1500">
-                <!-- Fix: SVG Shape Positioned Below the Image -->
+                
+                <!-- Animated Tech Rings -->
+                <div class="tech-rings">
+                    <div class="tech-ring ring-1"></div>
+                    <div class="tech-ring ring-2"></div>
+                    <div class="tech-ring ring-3"></div>
+                    <div class="tech-ring ring-4"></div>
+                </div>
+                
+                <!-- Scanning Lines Effect -->
+                <div class="scan-lines">
+                    <div class="scan-line scan-1"></div>
+                    <div class="scan-line scan-2"></div>
+                    <div class="scan-line scan-3"></div>
+                </div>
+                
+                <!-- Holographic Border -->
+                <div class="holographic-border"></div>
+                
+                <!-- Energy Particles -->
+                <div class="energy-particles">
+                    <div class="particle particle-1"></div>
+                    <div class="particle particle-2"></div>
+                    <div class="particle particle-3"></div>
+                    <div class="particle particle-4"></div>
+                    <div class="particle particle-5"></div>
+                    <div class="particle particle-6"></div>
+                </div>
+                
+                <!-- Digital Grid Overlay -->
+                <div class="digital-grid"></div>
+                
+                <!-- Glitch Effect Layer -->
+                <div class="glitch-layer"></div>
+                
+                <!-- Original SVG and Image -->
                 <svg class="absolute inset-0 w-full h-full animate-morph z-0" viewBox="0 0 200 200">
                     <path id="blob" fill="none" stroke="transparent" stroke-width="4" 
                           d="M50,-70C65,-60 80,-45 85,-30C90,-15 85,0 80,15C75,30 70,50 55,65C40,80 20,90 0,90
@@ -402,14 +2369,32 @@ particlesJS("particles-js", {
                           transform="translate(100,100)" />
                 </svg>
 
-                <!-- Hover Effect Border -->
-                <div class="absolute inset-0 border-4 border-transparent rounded-3xl group-hover:border-yellow-400 transition-all duration-300"></div>
-
-                <!-- Profile Image with Fixes -->
-                <div class="relative group z-10">
+                <!-- Enhanced Profile Image -->
+                <div class="relative group z-10 photo-frame">
                     <img src="assests\b.jpg" alt="Yashodip More"
-                         class="relative w-full h-full object-cover rounded-3xl transform transition-transform duration-300 
-                         hover:scale-105 hover:rotate-3 hover:shadow-lg hover:shadow-yellow-500 block">
+                         class="enhanced-photo relative w-full h-full object-cover rounded-3xl transform transition-all duration-500 
+                         hover:scale-105 hover:brightness-110 hover:contrast-110 block">
+                    
+                    <!-- Cursor Follow Light -->
+                    <div class="cursor-light"></div>
+                    
+                    <!-- Info HUD -->
+                    <div class="info-hud">
+                        <div class="hud-content">
+                            <div class="hud-line">
+                                <span class="hud-label">STATUS:</span>
+                                <span class="hud-value online">ONLINE</span>
+                            </div>
+                            <div class="hud-line">
+                                <span class="hud-label">MODE:</span>
+                                <span class="hud-value">DEVELOPER</span>
+                            </div>
+                            <div class="hud-line">
+                                <span class="hud-label">LEVEL:</span>
+                                <span class="hud-value">EXPERT</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -460,7 +2445,7 @@ particlesJS("about-particles", {
 <!-- Morphing Shape Animation -->
 <style>
     * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
     @keyframes morph {
@@ -475,14 +2460,930 @@ particlesJS("about-particles", {
     .animate-float {
         animation: float 5s infinite ease-in-out;
     }
+
+/* Next-Generation About Section Background */
+.next-gen-bg {
+    background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
+    animation: bgShift 15s infinite ease-in-out;
+}
+
+@keyframes bgShift {
+    0%, 100% { background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e); }
+    50% { background: linear-gradient(225deg, #16213e, #0f3460, #1a1a2e); }
+}
+
+/* Geometric Shapes */
+.geometric-shape {
+    position: absolute;
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 5%;
+    border-radius: 50%;
+    animation: rotate3d 20s infinite linear;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 10%;
+    transform: rotate(45deg);
+    animation: float3dShape 15s infinite ease-in-out;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 300px;
+    top: 20%;
+    right: 20%;
+    border-radius: 50px;
+    animation: pulse3d 12s infinite ease-in-out;
+}
+
+.shape-4 {
+    width: 250px;
+    height: 100px;
+    bottom: 20%;
+    left: 15%;
+    border-radius: 50px;
+    animation: wave3d 18s infinite ease-in-out;
+}
+
+.shape-5 {
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    left: 50%;
+    border-radius: 20px;
+    animation: spin3d 10s infinite linear;
+}
+
+/* Floating Orbs */
+.floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.1));
+    filter: blur(1px);
+    animation: floatOrb 25s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 120px;
+    height: 120px;
+    top: 15%;
+    right: 30%;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 80px;
+    height: 80px;
+    bottom: 30%;
+    right: 5%;
+    animation-delay: 8s;
+}
+
+.orb-3 {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    left: 10%;
+    animation-delay: 16s;
+}
+
+/* Matrix Code Rain Effect */
+.code-rain {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.code-line {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 0, 0.8), transparent);
+    animation: codeRain 8s infinite linear;
+}
+
+.line-1 { left: 10%; animation-delay: 0s; }
+.line-2 { left: 25%; animation-delay: 2s; }
+.line-3 { left: 50%; animation-delay: 4s; }
+.line-4 { left: 75%; animation-delay: 6s; }
+.line-5 { left: 90%; animation-delay: 1s; }
+
+/* Animated Gradient Overlay */
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+        rgba(59, 130, 246, 0.05) 0%, 
+        transparent 25%, 
+        rgba(147, 51, 234, 0.05) 50%, 
+        transparent 75%, 
+        rgba(34, 197, 94, 0.05) 100%);
+    animation: gradientMove 20s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes rotate3d {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    33% { transform: rotateX(120deg) rotateY(120deg) rotateZ(120deg); }
+    66% { transform: rotateX(240deg) rotateY(240deg) rotateZ(240deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes float3dShape {
+    0%, 100% { transform: translateY(0px) rotateZ(45deg) scale(1); }
+    50% { transform: translateY(-30px) rotateZ(225deg) scale(1.1); }
+}
+
+@keyframes pulse3d {
+    0%, 100% { transform: scale(1) rotateY(0deg); opacity: 0.3; }
+    50% { transform: scale(1.2) rotateY(180deg); opacity: 0.7; }
+}
+
+@keyframes wave3d {
+    0%, 100% { transform: translateX(0px) rotateZ(0deg); }
+    25% { transform: translateX(20px) rotateZ(5deg); }
+    75% { transform: translateX(-20px) rotateZ(-5deg); }
+}
+
+@keyframes spin3d {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes floatOrb {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.3; }
+    25% { transform: translateY(-50px) translateX(30px) scale(1.1); opacity: 0.6; }
+    50% { transform: translateY(-20px) translateX(-40px) scale(0.9); opacity: 0.8; }
+    75% { transform: translateY(-70px) translateX(20px) scale(1.05); opacity: 0.4; }
+}
+
+@keyframes codeRain {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes gradientMove {
+    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+    25% { transform: translateX(0%) translateY(-50%) rotate(90deg); }
+    50% { transform: translateX(100%) translateY(0%) rotate(180deg); }
+    75% { transform: translateX(50%) translateY(100%) rotate(270deg); }
+}
+
+/* Next-Generation Content Styling */
+.next-gen-title {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    position: relative;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06d6a0);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+.neon-text {
+    color: #00ffff;
+    text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff;
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+.title-underline {
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06d6a0);
+    margin: 0 auto;
+    border-radius: 2px;
+    animation: underlineGlow 2s ease-in-out infinite;
+}
+
+.highlight-text {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+/* Futuristic Cards */
+.futuristic-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.futuristic-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.card-glow {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06d6a0, #3b82f6);
+    background-size: 300% 300%;
+    border-radius: 20px;
+    z-index: -1;
+    animation: borderGlow 4s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.futuristic-card:hover .card-glow {
+    opacity: 1;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Bio Header */
+.bio-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background: #00ff00;
+    border-radius: 50%;
+    animation: statusBlink 2s ease-in-out infinite;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.typed-text {
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    animation: typing 3s steps(15) infinite;
+}
+
+.code-text {
+    font-family: 'Courier New', monospace;
+    color: #8b5cf6;
+    font-weight: bold;
+}
+
+.tech-tag {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 0 2px;
+}
+
+.highlight-gradient {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.glow-text {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+    font-weight: bold;
+}
+
+/* Expertise Panel */
+.expertise-glow {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ff6b6b);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.panel-indicator {
+    display: flex;
+    gap: 5px;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.dot-1 { background: #ff6b6b; animation-delay: 0s; }
+.dot-2 { background: #4ecdc4; animation-delay: 0.5s; }
+.dot-3 { background: #8b5cf6; animation-delay: 1s; }
+
+.expertise-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.expertise-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.expertise-item:hover {
+    background: rgba(59, 130, 246, 0.2);
+    transform: translateX(10px);
+}
+
+.expertise-icon {
+    font-size: 1.5em;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+/* Motivation Engine */
+.motivation-glow {
+    background: linear-gradient(45deg, #8b5cf6, #06d6a0, #8b5cf6);
+}
+
+.engine-header {
+    margin-bottom: 1rem;
+}
+
+.engine-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.status-bar {
+    width: 150px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.status-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #00ffff);
+    animation: statusFill 3s ease-in-out infinite;
+}
+
+.status-text {
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.pulse-text {
+    color: #ff6b6b;
+    animation: textPulse 2s ease-in-out infinite;
+    font-weight: bold;
+}
+
+.code-highlight {
+    background: rgba(139, 92, 246, 0.3);
+    color: #8b5cf6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+/* Animations */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff; }
+    100% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+}
+
+@keyframes underlineGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); }
+}
+
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes typing {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+@keyframes statusFill {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+}
+
+@keyframes textPulse {
+    0%, 100% { color: #ff6b6b; text-shadow: 0 0 5px #ff6b6b; }
+    50% { color: #4ecdc4; text-shadow: 0 0 15px #4ecdc4; }
+}
+
+/* Compact Styling for Better Balance */
+.compact-card {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.compact-header {
+    margin-bottom: 0.75rem;
+}
+
+.compact-header h3 {
+    font-size: 1.125rem;
+}
+
+.compact-grid {
+    gap: 0.75rem;
+}
+
+.compact-item {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.compact-item .expertise-icon {
+    font-size: 1.2em;
+}
+
+.compact-bar {
+    width: 120px;
+    height: 6px;
+}
+
+.status-text {
+    font-size: 0.8rem;
+}
+
+/* Reduced section padding */
+#about {
+    padding: 4rem 0;
+}
+
+/* Next-Level Photo Effects */
+.photo-container {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.photo-container:hover {
+    transform: scale(1.02);
+}
+
+/* Animated Tech Rings */
+.tech-rings {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.photo-container:hover .tech-rings {
+    opacity: 1;
+}
+
+.tech-ring {
+    position: absolute;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    animation: techRingSpin 8s linear infinite;
+}
+
+.ring-1 {
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    border-top-color: #00ffff;
+    border-right-color: #00ffff;
+    animation-duration: 8s;
+}
+
+.ring-2 {
+    top: -40px; left: -40px; right: -40px; bottom: -40px;
+    border-bottom-color: #ff6b6b;
+    border-left-color: #ff6b6b;
+    animation-duration: 12s;
+    animation-direction: reverse;
+}
+
+.ring-3 {
+    top: -60px; left: -60px; right: -60px; bottom: -60px;
+    border-top-color: #4ecdc4;
+    border-bottom-color: #4ecdc4;
+    animation-duration: 15s;
+}
+
+.ring-4 {
+    top: -80px; left: -80px; right: -80px; bottom: -80px;
+    border-left-color: #8b5cf6;
+    border-right-color: #8b5cf6;
+    animation-duration: 20s;
+    animation-direction: reverse;
+}
+
+/* Scanning Lines Effect */
+.scan-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-container:hover .scan-lines {
+    opacity: 1;
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: scanMove 3s ease-in-out infinite;
+}
+
+.scan-1 { animation-delay: 0s; }
+.scan-2 { animation-delay: 1s; }
+.scan-3 { animation-delay: 2s; }
+
+/* Holographic Border */
+.holographic-border {
+    position: absolute;
+    inset: -4px;
+    z-index: 2;
+    border-radius: 1.5rem;
+    background: linear-gradient(45deg, #00ffff, #ff6b6b, #4ecdc4, #8b5cf6, #00ffff);
+    background-size: 300% 300%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: holographicShift 3s ease-in-out infinite;
+}
+
+.photo-container:hover .holographic-border {
+    opacity: 0.7;
+}
+
+/* Energy Particles */
+.energy-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.photo-container:hover .energy-particles {
+    opacity: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #00ffff, transparent);
+    border-radius: 50%;
+    animation: particleFloat 4s ease-in-out infinite;
+}
+
+.particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+.particle-2 { top: 40%; right: 15%; animation-delay: 0.7s; }
+.particle-3 { bottom: 30%; left: 20%; animation-delay: 1.4s; }
+.particle-4 { top: 60%; right: 25%; animation-delay: 2.1s; }
+.particle-5 { bottom: 20%; right: 10%; animation-delay: 2.8s; }
+.particle-6 { top: 80%; left: 30%; animation-delay: 3.5s; }
+
+/* Digital Grid Overlay */
+.digital-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: gridShift 5s linear infinite;
+}
+
+.photo-container:hover .digital-grid {
+    opacity: 0.3;
+}
+
+/* Glitch Effect */
+.glitch-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    border-radius: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 0, 0, 0.1) 31%, rgba(255, 0, 0, 0.1) 32%, transparent 33%);
+    animation: glitchShift 0.3s ease-in-out infinite;
+}
+
+.photo-container:hover .glitch-layer {
+    opacity: 1;
+    animation-duration: 0.1s;
+}
+
+/* Enhanced Photo */
+.enhanced-photo {
+    position: relative;
+    z-index: 5;
+    filter: saturate(1.1) contrast(1.05);
+    transition: all 0.5s ease;
+}
+
+.photo-container:hover .enhanced-photo {
+    filter: saturate(1.3) contrast(1.2) brightness(1.1);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 255, 0.3),
+        0 0 100px rgba(0, 255, 255, 0.2),
+        inset 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+/* Cursor Follow Light */
+.cursor-light {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 6;
+}
+
+.photo-container:hover .cursor-light {
+    opacity: 1;
+    animation: cursorPulse 2s ease-in-out infinite;
+}
+
+/* Info HUD */
+.info-hud {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 7;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ffff;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.photo-container:hover .info-hud {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hud-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    gap: 15px;
+}
+
+.hud-label {
+    color: #888;
+}
+
+.hud-value {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.hud-value.online {
+    color: #00ff00;
+    animation: onlineBlink 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes techRingSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes scanMove {
+    0% { top: -10px; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+@keyframes holographicShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-30px) scale(1.3); opacity: 1; }
+}
+
+@keyframes gridShift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 20px); }
+}
+
+@keyframes glitchShift {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+@keyframes cursorPulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+@keyframes onlineBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
 </style>
 
 
 
 
 <!-- Competitive Programming Section -->
-<section id="competitive" class="py-20 text-center px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #2C3E50, #34495E);">
-    <!-- Background Particles -->
+<section id="competitive" class="py-20 text-center px-6 relative overflow-hidden next-gen-coding-section">
+    <!-- Graph Paper Grid Background (Like Hero Section) -->
+    <div class="absolute inset-0 w-full h-full competitive-grid-bg"></div>
+    
+    <!-- Next-Level 3D Coding Background -->
+    <div class="absolute inset-0 coding-matrix-bg">
+        <!-- Live Coding Display -->
+        <div class="live-coding-display">
+            <div class="code-editor">
+                <div class="editor-header">
+                    <span class="editor-title">solution.cpp</span>
+                    <div class="editor-controls">
+                        <span class="control-dot"></span>
+                        <span class="control-dot"></span>
+                        <span class="control-dot"></span>
+                    </div>
+                </div>
+                <div class="editor-content">
+                    <div class="code-line">
+                        <span class="line-number">1</span>
+                        <span class="code-text">#include &lt;iostream&gt;</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">2</span>
+                        <span class="code-text">#include &lt;vector&gt;</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">3</span>
+                        <span class="code-text">using namespace std;</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">4</span>
+                        <span class="code-text"></span>
+                    </div>
+                    <div class="code-line active-line">
+                        <span class="line-number">5</span>
+                        <span class="code-text typing-code">int solve(vector&lt;int&gt;&amp; arr) {</span>
+                        <span class="cursor">|</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">6</span>
+                        <span class="code-text">    int n = arr.size();</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">7</span>
+                        <span class="code-text">    return dp[n-1];</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">8</span>
+                        <span class="code-text">}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Live Code Rain Effect (White/Gray) -->
+        <div class="code-rain-container">
+            <div class="code-column column-1"></div>
+            <div class="code-column column-2"></div>
+            <div class="code-column column-3"></div>
+            <div class="code-column column-4"></div>
+            <div class="code-column column-5"></div>
+            <div class="code-column column-6"></div>
+            <div class="code-column column-7"></div>
+            <div class="code-column column-8"></div>
+            <div class="code-column column-9"></div>
+            <div class="code-column column-10"></div>
+        </div>
+        
+        <!-- Floating 3D Code Blocks (Monochrome) -->
+        <div class="floating-code-blocks">
+            <div class="code-block block-1">
+                <span class="code-text">for(int i=0; i&lt;n; i++)</span>
+            </div>
+            <div class="code-block block-2">
+                <span class="code-text">vector&lt;int&gt; dp(n+1);</span>
+            </div>
+            <div class="code-block block-3">
+                <span class="code-text">if(dp[i] == -1)</span>
+            </div>
+            <div class="code-block block-4">
+                <span class="code-text">return solve(n-1);</span>
+            </div>
+            <div class="code-block block-5">
+                <span class="code-text">cout &lt;&lt; ans &lt;&lt; endl;</span>
+            </div>
+        </div>
+        
+        <!-- 3D Geometric Programming Elements (Monochrome) -->
+        <div class="programming-geometry">
+            <div class="geo-element geo-1"></div>
+            <div class="geo-element geo-2"></div>
+            <div class="geo-element geo-3"></div>
+            <div class="geo-element geo-4"></div>
+        </div>
+        
+        <!-- Live Terminal Effect -->
+        <div class="terminal-effect">
+            <div class="terminal-line line-1">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text typing-effect">g++ solution.cpp -o solution</span>
+            </div>
+            <div class="terminal-line line-2">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text typing-effect">./solution < input.txt</span>
+            </div>
+            <div class="terminal-line line-3">
+                <span class="terminal-success">✓ Accepted - Runtime: 0ms</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Particles -->
     <div id="competitive-particles" class="absolute inset-0"></div>
 
     <div class="relative container mx-auto z-10" data-aos="fade-up" data-aos-duration="1000">
@@ -562,18 +3463,79 @@ particlesJS("about-particles", {
     </div>
 </section>
 
-<!-- Particle.js for Competitive Section -->
+<!-- Enhanced Particle.js for Competitive Section (Monochrome) -->
 <script>
 particlesJS("competitive-particles", {
     "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.5 },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.5, "width": 1 },
-        "move": { "enable": true, "speed": 2 }
-    }
+        "number": { 
+            "value": 100, 
+            "density": { "enable": true, "value_area": 800 } 
+        },
+        "color": { 
+            "value": "#ffffff" 
+        },
+        "shape": { 
+            "type": ["circle", "triangle"],
+            "stroke": { "width": 1, "color": "#ffffff" }
+        },
+        "opacity": { 
+            "value": 0.4,
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 1,
+                "opacity_min": 0.1
+            }
+        },
+        "size": { 
+            "value": 3, 
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 2,
+                "size_min": 1
+            }
+        },
+        "line_linked": { 
+            "enable": true, 
+            "distance": 150, 
+            "color": "#ffffff", 
+            "opacity": 0.3, 
+            "width": 1 
+        },
+        "move": { 
+            "enable": true, 
+            "speed": 2,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "bounce",
+            "bounce": true
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": { 
+                "enable": true, 
+                "mode": "repulse" 
+            },
+            "onclick": { 
+                "enable": true, 
+                "mode": "push" 
+            }
+        },
+        "modes": {
+            "repulse": {
+                "distance": 100,
+                "duration": 0.4
+            },
+            "push": {
+                "particles_nb": 4
+            }
+        }
+    },
+    "retina_detect": true
 });
 </script>
 
@@ -594,7 +3556,148 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <!-- Projects Section -->
-<section id="projects" class="py-20 text-center px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #2E3440, #3B4252);">
+<section id="projects" class="py-20 text-center px-6 relative overflow-hidden projects-dev-section">
+    <!-- Grid Paper Background -->
+    <div class="absolute inset-0 w-full h-full projects-grid-bg"></div>
+    
+    <!-- Live Development Environment Background -->
+    <div class="absolute inset-0 dev-environment-bg">
+        <!-- Live Code Editor Display -->
+        <div class="dev-editor-display">
+            <div class="editor-window">
+                <div class="editor-titlebar">
+                    <div class="editor-controls">
+                        <span class="control-btn close"></span>
+                        <span class="control-btn minimize"></span>
+                        <span class="control-btn maximize"></span>
+                    </div>
+                    <span class="editor-filename">portfolio-project.jsx</span>
+                </div>
+                <div class="editor-body">
+                    <div class="editor-sidebar">
+                        <div class="folder-structure">
+                            <div class="folder-item">📁 src</div>
+                            <div class="folder-item">📁 components</div>
+                            <div class="folder-item">📄 App.jsx</div>
+                            <div class="folder-item active">📄 project.jsx</div>
+                        </div>
+                    </div>
+                    <div class="editor-code">
+                        <div class="code-line">
+                            <span class="line-num">1</span>
+                            <span class="code">import React from 'react';</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-num">2</span>
+                            <span class="code">import './Project.css';</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-num">3</span>
+                            <span class="code"></span>
+                        </div>
+                        <div class="code-line active-edit">
+                            <span class="line-num">4</span>
+                            <span class="code">const Project = () => {</span>
+                            <span class="typing-cursor">|</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-num">5</span>
+                            <span class="code">  return (</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-num">6</span>
+                            <span class="code">    &lt;div className="project"&gt;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Moving GitHub Icons -->
+        <div class="github-icons-container">
+            <div class="github-icon icon-1">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="github-icon icon-2">
+                <i class="fab fa-git-alt"></i>
+            </div>
+            <div class="github-icon icon-3">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="github-icon icon-4">
+                <i class="fab fa-git-alt"></i>
+            </div>
+            <div class="github-icon icon-5">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="github-icon icon-6">
+                <i class="fab fa-git-alt"></i>
+            </div>
+            <div class="github-icon icon-7">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="github-icon icon-8">
+                <i class="fab fa-git-alt"></i>
+            </div>
+        </div>
+        
+        <!-- Terminal Window -->
+        <div class="dev-terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command">git add .</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command typing-cmd">git commit -m "Add new project"</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command">git push origin main</span>
+                </div>
+                <div class="terminal-line success">
+                    <span class="status">✓ Pushed successfully to GitHub</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Development Icons -->
+        <div class="dev-icons-float">
+            <div class="dev-icon dev-icon-1">
+                <i class="fab fa-react"></i>
+            </div>
+            <div class="dev-icon dev-icon-2">
+                <i class="fab fa-node-js"></i>
+            </div>
+            <div class="dev-icon dev-icon-3">
+                <i class="fab fa-js-square"></i>
+            </div>
+            <div class="dev-icon dev-icon-4">
+                <i class="fab fa-html5"></i>
+            </div>
+            <div class="dev-icon dev-icon-5">
+                <i class="fab fa-css3-alt"></i>
+            </div>
+        </div>
+        
+        <!-- Code Streams -->
+        <div class="code-streams">
+            <div class="code-stream stream-1">
+                <div class="stream-text">function deployProject() {</div>
+            </div>
+            <div class="code-stream stream-2">
+                <div class="stream-text">npm run build</div>
+            </div>
+            <div class="code-stream stream-3">
+                <div class="stream-text">git push heroku main</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Background Particles -->
     <div id="projects-particles" class="absolute inset-0"></div>
 
@@ -604,42 +3707,265 @@ document.addEventListener("DOMContentLoaded", function () {
         </h2>
         <p class="mt-2 text-gray-200 text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="500">
             Here are some of my best projects showcasing my <b>Frontend, Backend, and Full-Stack Development</b> skills.
-        </p>
-
-        <!-- Project Cards -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+        </p>        <!-- Project Cards -->
+        <div class="projects-grid">
             
             <!-- Project 1 -->
-            <div class="relative bg-gray-900/50 p-6 rounded-xl shadow-lg border border-yellow-500 backdrop-blur-lg transition-all duration-300 hover:scale-105 hover:shadow-yellow-400"
-                data-aos="zoom-in" data-aos-duration="1500">
-                <img src="assests\Texteditor.png" alt="Algorithm Visualizer" class="rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold text-yellow-300 mt-4">MINI RICH TEXT EDITOR FOR KOLIBRI</h3>
-                <p class="text-gray-300 mt-2">Create a prototype Typescript-based text editor component using a well-maintained and robust text editing library.</p>
-                <a href="https://github.com/yashodipmore/Mini-rich-text-editor-for-Kolibri" target="_blank" class="mt-4 block text-yellow-400 font-semibold hover:underline">
-                    View on GitHub →
-                </a>
+            <div class="project-card floating-card card-1" data-aos="zoom-in" data-aos-duration="1500">
+                <!-- Enhanced Background Effects -->
+                <div class="card-bg-effects">
+                    <div class="card-mesh-gradient"></div>
+                    <div class="card-ripple-effect"></div>
+                </div>
+                
+                <!-- Animated Border System -->
+                <div class="card-border-system">
+                    <div class="border-runner border-top"></div>
+                    <div class="border-runner border-right"></div>
+                    <div class="border-runner border-bottom"></div>
+                    <div class="border-runner border-left"></div>
+                </div>
+                
+                <!-- Glow and Light Effects -->
+                <div class="card-glow dynamic-glow"></div>
+                <div class="card-ambient-light"></div>
+                
+                <!-- Interactive Particles -->
+                <div class="card-particles">
+                    <div class="interactive-particle p-1"></div>
+                    <div class="interactive-particle p-2"></div>
+                    <div class="interactive-particle p-3"></div>
+                    <div class="interactive-particle p-4"></div>
+                    <div class="interactive-particle p-5"></div>
+                    <div class="interactive-particle p-6"></div>
+                </div>
+                
+                <!-- Main Card Content -->
+                <div class="card-content enhanced-content">
+                    <div class="image-container parallax-container">
+                        <div class="image-bg-layer"></div>
+                        <img src="assests\Texteditor.png" alt="Mini Rich Text Editor" class="project-image floating-image">
+                        <div class="image-overlay animated-overlay">
+                            <div class="overlay-ripple"></div>
+                            <div class="overlay-icon floating-icon">
+                                <i class="fab fa-github"></i>
+                                <div class="icon-pulse"></div>
+                            </div>
+                            <div class="overlay-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">⭐ 12</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">TypeScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-info animated-info">
+                        <div class="title-container">
+                            <h3 class="project-title glitch-title">MINI RICH TEXT EDITOR FOR KOLIBRI</h3>
+                            <div class="title-underline"></div>
+                        </div>
+                        
+                        <p class="project-description typing-description">Create a prototype TypeScript-based text editor component using a well-maintained and robust text editing library.</p>
+                        
+                        <div class="tech-stack animated-stack">
+                            <span class="tech-tag floating-tag">TypeScript</span>
+                            <span class="tech-tag floating-tag">React</span>
+                            <span class="tech-tag floating-tag">Editor</span>
+                        </div>
+                        
+                        <a href="https://github.com/yashodipmore/Mini-rich-text-editor-for-Kolibri" target="_blank" class="project-link enhanced-link">
+                            <div class="link-bg"></div>
+                            <span class="link-text">View on GitHub</span>
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                            <div class="link-particles">
+                                <div class="link-particle lp-1"></div>
+                                <div class="link-particle lp-2"></div>
+                                <div class="link-particle lp-3"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Status Indicator -->
+                <div class="card-status">
+                    <div class="status-dot active"></div>
+                    <span class="status-text">ACTIVE</span>
+                </div>
             </div>
 
             <!-- Project 2 -->
-            <div class="relative bg-gray-900/50 p-6 rounded-xl shadow-lg border border-blue-500 backdrop-blur-lg transition-all duration-300 hover:scale-105 hover:shadow-blue-400"
-                data-aos="fade-up" data-aos-duration="1500">
-                <img src="assests\p5.png" alt="Flashcard Learning Tool" class="rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold text-blue-300 mt-4">P5.js Editor Accessibility Tools</h3>
-                <p class="text-gray-300 mt-2">Improving accessibility testing and implementation for the p5.js Editor by providing tools and examples.</p>
-                <a href="https://github.com/yashodipmore/flashcard-tool" target="_blank" class="mt-4 block text-blue-400 font-semibold hover:underline">
-                    View on GitHub →
-                </a>
+            <div class="project-card floating-card card-2" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                <!-- Enhanced Background Effects -->
+                <div class="card-bg-effects">
+                    <div class="card-mesh-gradient"></div>
+                    <div class="card-ripple-effect"></div>
+                </div>
+                
+                <!-- Animated Border System -->
+                <div class="card-border-system">
+                    <div class="border-runner border-top"></div>
+                    <div class="border-runner border-right"></div>
+                    <div class="border-runner border-bottom"></div>
+                    <div class="border-runner border-left"></div>
+                </div>
+                
+                <!-- Glow and Light Effects -->
+                <div class="card-glow dynamic-glow"></div>
+                <div class="card-ambient-light"></div>
+                
+                <!-- Interactive Particles -->
+                <div class="card-particles">
+                    <div class="interactive-particle p-1"></div>
+                    <div class="interactive-particle p-2"></div>
+                    <div class="interactive-particle p-3"></div>
+                    <div class="interactive-particle p-4"></div>
+                    <div class="interactive-particle p-5"></div>
+                    <div class="interactive-particle p-6"></div>
+                </div>
+                
+                <!-- Main Card Content -->
+                <div class="card-content enhanced-content">
+                    <div class="image-container parallax-container">
+                        <div class="image-bg-layer"></div>
+                        <img src="assests\p5.png" alt="P5.js Editor" class="project-image floating-image">
+                        <div class="image-overlay animated-overlay">
+                            <div class="overlay-ripple"></div>
+                            <div class="overlay-icon floating-icon">
+                                <i class="fab fa-github"></i>
+                                <div class="icon-pulse"></div>
+                            </div>
+                            <div class="overlay-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">⭐ 8</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-info animated-info">
+                        <div class="title-container">
+                            <h3 class="project-title glitch-title">P5.js Editor Accessibility Tools</h3>
+                            <div class="title-underline"></div>
+                        </div>
+                        
+                        <p class="project-description typing-description">Improving accessibility testing and implementation for the p5.js Editor by providing tools and examples.</p>
+                        
+                        <div class="tech-stack animated-stack">
+                            <span class="tech-tag floating-tag">JavaScript</span>
+                            <span class="tech-tag floating-tag">P5.js</span>
+                            <span class="tech-tag floating-tag">A11y</span>
+                        </div>
+                        
+                        <a href="https://github.com/yashodipmore/flashcard-tool" target="_blank" class="project-link enhanced-link">
+                            <div class="link-bg"></div>
+                            <span class="link-text">View on GitHub</span>
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                            <div class="link-particles">
+                                <div class="link-particle lp-1"></div>
+                                <div class="link-particle lp-2"></div>
+                                <div class="link-particle lp-3"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Status Indicator -->
+                <div class="card-status">
+                    <div class="status-dot active"></div>
+                    <span class="status-text">ACTIVE</span>
+                </div>
             </div>
 
             <!-- Project 3 -->
-            <div class="relative bg-gray-900/50 p-6 rounded-xl shadow-lg border border-green-500 backdrop-blur-lg transition-all duration-300 hover:scale-105 hover:shadow-green-400"
-                data-aos="fade-down" data-aos-duration="1500">
-                <img src="https://repository-images.githubusercontent.com/308054469/fbdde56e-f386-41a1-867b-2411dac10cea" alt="Algorithm Visualizer" class="rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold text-green-300 mt-4">Algorithm Visualizer</h3>
-                <p class="text-gray-300 mt-2">A web application that allows users to visualize various sorting algorithms in action.</p>
-                <a href="https://github.com/yashodipmore/flashcard-tool" target="_blank" class="mt-4 block text-green-400 font-semibold hover:underline">
-                    View on GitHub →
-                </a>
+            <div class="project-card floating-card card-3" data-aos="fade-down" data-aos-duration="1500" data-aos-delay="400">
+                <!-- Enhanced Background Effects -->
+                <div class="card-bg-effects">
+                    <div class="card-mesh-gradient"></div>
+                    <div class="card-ripple-effect"></div>
+                </div>
+                
+                <!-- Animated Border System -->
+                <div class="card-border-system">
+                    <div class="border-runner border-top"></div>
+                    <div class="border-runner border-right"></div>
+                    <div class="border-runner border-bottom"></div>
+                    <div class="border-runner border-left"></div>
+                </div>
+                
+                <!-- Glow and Light Effects -->
+                <div class="card-glow dynamic-glow"></div>
+                <div class="card-ambient-light"></div>
+                
+                <!-- Interactive Particles -->
+                <div class="card-particles">
+                    <div class="interactive-particle p-1"></div>
+                    <div class="interactive-particle p-2"></div>
+                    <div class="interactive-particle p-3"></div>
+                    <div class="interactive-particle p-4"></div>
+                    <div class="interactive-particle p-5"></div>
+                    <div class="interactive-particle p-6"></div>
+                </div>
+                
+                <!-- Main Card Content -->
+                <div class="card-content enhanced-content">
+                    <div class="image-container parallax-container">
+                        <div class="image-bg-layer"></div>
+                        <img src="https://repository-images.githubusercontent.com/308054469/fbdde56e-f386-41a1-867b-2411dac10cea" alt="Algorithm Visualizer" class="project-image floating-image">
+                        <div class="image-overlay animated-overlay">
+                            <div class="overlay-ripple"></div>
+                            <div class="overlay-icon floating-icon">
+                                <i class="fab fa-github"></i>
+                                <div class="icon-pulse"></div>
+                            </div>
+                            <div class="overlay-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">⭐ 15</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Algorithms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-info animated-info">
+                        <div class="title-container">
+                            <h3 class="project-title glitch-title">Algorithm Visualizer</h3>
+                            <div class="title-underline"></div>
+                        </div>
+                        
+                        <p class="project-description typing-description">A web application that allows users to visualize various sorting algorithms in action with interactive animations.</p>
+                        
+                        <div class="tech-stack animated-stack">
+                            <span class="tech-tag floating-tag">JavaScript</span>
+                            <span class="tech-tag floating-tag">HTML5</span>
+                            <span class="tech-tag floating-tag">Canvas</span>
+                        </div>
+                        
+                        <a href="https://github.com/yashodipmore/flashcard-tool" target="_blank" class="project-link enhanced-link">
+                            <div class="link-bg"></div>
+                            <span class="link-text">View on GitHub</span>
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                            <div class="link-particles">
+                                <div class="link-particle lp-1"></div>
+                                <div class="link-particle lp-2"></div>
+                                <div class="link-particle lp-3"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Status Indicator -->
+                <div class="card-status">
+                    <div class="status-dot active"></div>
+                    <span class="status-text">ACTIVE</span>
+                </div>
             </div>
 
         </div>
@@ -660,18 +3986,255 @@ fetchGitHubStats("flashcard-tool", "flashcard-tool-stars", "flashcard-tool-updat
 fetchGitHubStats("memoryalloc", "memoryalloc-stars", "memoryalloc-updated");
 </script>
 
-<!-- Particle.js for Projects Section -->
+<!-- Enhanced Project Cards Interactivity -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced project card interactions
+    const projectCards = document.querySelectorAll('.project-card.floating-card');
+    
+    projectCards.forEach((card, index) => {
+        // Mouse tracking for 3D effect
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `
+                translateY(-20px) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                scale(1.02)
+            `;
+            
+            // Update cursor light position
+            const cursorLight = card.querySelector('.card-ambient-light');
+            if (cursorLight) {
+                cursorLight.style.background = `
+                    radial-gradient(
+                        circle at ${(x/rect.width)*100}% ${(y/rect.height)*100}%, 
+                        rgba(255, 255, 255, 0.15) 0%, 
+                        transparent 70%
+                    )
+                `;
+            }
+        });
+        
+        // Reset on mouse leave
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            const cursorLight = card.querySelector('.card-ambient-light');
+            if (cursorLight) {
+                cursorLight.style.background = 'radial-gradient(ellipse, rgba(255, 255, 255, 0.1) 0%, transparent 70%)';
+            }
+        });
+        
+        // Enhanced click ripple effect
+        card.addEventListener('click', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    
+                    // Stagger particle animations
+                    const particles = entry.target.querySelectorAll('.interactive-particle');
+                    particles.forEach((particle, i) => {
+                        setTimeout(() => {
+                            particle.style.opacity = '1';
+                        }, i * 100);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+        
+        observer.observe(card);
+    });
+    
+    // Typing effect for project descriptions
+    function typeWriter(element, text, speed = 50) {
+        element.innerHTML = '';
+        let i = 0;
+        
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        
+        type();
+    }
+    
+    // Tech tag floating animation on scroll
+    const techTags = document.querySelectorAll('.tech-tag.floating-tag');
+    techTags.forEach((tag, index) => {
+        tag.addEventListener('mouseenter', () => {
+            tag.style.transform = `translateY(-6px) scale(1.1) rotate(${Math.random() * 6 - 3}deg)`;
+        });
+        
+        tag.addEventListener('mouseleave', () => {
+            tag.style.transform = '';
+        });
+    });
+    
+    // Enhanced project link interactions
+    const projectLinks = document.querySelectorAll('.project-link.enhanced-link');
+    projectLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            // Create dynamic particles on hover
+            const particles = link.querySelectorAll('.link-particle');
+            particles.forEach((particle, i) => {
+                setTimeout(() => {
+                    particle.style.opacity = '1';
+                    particle.style.transform = `translateY(-${Math.random() * 20 + 10}px) translateX(${Math.random() * 20 - 10}px)`;
+                }, i * 100);
+            });
+        });
+        
+        link.addEventListener('mouseleave', () => {
+            const particles = link.querySelectorAll('.link-particle');
+            particles.forEach(particle => {
+                particle.style.opacity = '0';
+                particle.style.transform = '';
+            });
+        });
+    });
+});
+
+// Add dynamic CSS for click ripple effect
+const rippleCSS = `
+    .click-ripple {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        animation: clickRipple 0.6s ease-out;
+        pointer-events: none;
+        z-index: 10;
+    }
+    
+    @keyframes clickRipple {
+        0% {
+            width: 0;
+            height: 0;
+            opacity: 1;
+        }
+        100% {
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+        }
+    }
+`;
+
+// Inject CSS
+const style = document.createElement('style');
+style.textContent = rippleCSS;
+document.head.appendChild(style);
+</script>
+
+<!-- Enhanced Particle.js for Projects Section (Development Theme) -->
 <script>
 particlesJS("projects-particles", {
     "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.4 },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.3, "width": 1 },
-        "move": { "enable": true, "speed": 2 }
-    }
+        "number": { 
+            "value": 60, 
+            "density": { "enable": true, "value_area": 800 } 
+        },
+        "color": { 
+            "value": "#ffffff" 
+        },
+        "shape": { 
+            "type": "circle",
+            "stroke": { "width": 1, "color": "#ffffff" }
+        },
+        "opacity": { 
+            "value": 0.3,
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 1,
+                "opacity_min": 0.1
+            }
+        },
+        "size": { 
+            "value": 2, 
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 1,
+                "size_min": 1
+            }
+        },
+        "line_linked": { 
+            "enable": true, 
+            "distance": 120, 
+            "color": "#ffffff", 
+            "opacity": 0.2, 
+            "width": 1 
+        },
+        "move": { 
+            "enable": true, 
+            "speed": 1.5,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "bounce",
+            "bounce": true
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": { 
+                "enable": true, 
+                "mode": "grab" 
+            },
+            "onclick": { 
+                "enable": true, 
+                "mode": "push" 
+            }
+        },
+        "modes": {
+            "grab": {
+                "distance": 150,
+                "line_linked": {
+                    "opacity": 0.4
+                }
+            },
+            "push": {
+                "particles_nb": 3
+            }
+        }
+    },
+    "retina_detect": true
 });
 </script>
 
@@ -686,155 +4249,1256 @@ particlesJS("projects-particles", {
     animation: glow 2s infinite;
 }
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 </style>
 
-<!-- Skills Section -->
-<section id="skills" class="py-20 text-center px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #1A1A2E, #16213E, #0F3460);">
-    <div class="relative container mx-auto z-10 max-w-4xl">
-        <h2 class="text-5xl font-bold text-white tracking-wide mb-6">🚀 My Skills</h2>
-        <p class="mt-2 text-gray-300 text-lg max-w-2xl mx-auto">
-            A categorized view of my **technical expertise** in different domains.
-        </p>
-
-        <!-- Skill Tabs -->
-        <div class="mt-8 flex justify-center space-x-4">
-            <button class="skill-tab active" onclick="showSkills('core')">🛠️ Core</button>
-            <button class="skill-tab" onclick="showSkills('programming')">💻 Programming</button>
-            <button class="skill-tab" onclick="showSkills('tools')">🛠️ Tools</button>
-            <button class="skill-tab" onclick="showSkills('ai')">🤖 AI/ML</button>
-            <button class="skill-tab" onclick="showSkills('electrical')">⚡ Electrical</button>
+<!-- Skills Section - Universe Galaxy Theme -->
+<section id="skills" class="galaxy-skills-section relative overflow-hidden">
+    <!-- Galaxy Background Effects -->
+    <div class="galaxy-bg">
+        <!-- Animated Stars -->
+        <div class="stars stars-small"></div>
+        <div class="stars stars-medium"></div>
+        <div class="stars stars-large"></div>
+        
+        <!-- Nebula Clouds -->
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+        
+        <!-- Floating Planets -->
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+        
+        <!-- Cosmic Particles -->
+        <div class="cosmic-particles">
+            <div class="cosmic-particle cp-1"></div>
+            <div class="cosmic-particle cp-2"></div>
+            <div class="cosmic-particle cp-3"></div>
+            <div class="cosmic-particle cp-4"></div>
+            <div class="cosmic-particle cp-5"></div>
+            <div class="cosmic-particle cp-6"></div>
+            <div class="cosmic-particle cp-7"></div>
+            <div class="cosmic-particle cp-8"></div>
+        </div>
+        
+        <!-- Galaxy Spiral -->
+        <div class="galaxy-spiral"></div>
+    </div>
+    
+    <!-- Skills Content -->
+    <div class="relative container mx-auto z-10 py-20 px-6 text-center">
+        <!-- Main Title -->
+        <div class="skills-header" data-aos="fade-up" data-aos-duration="1500">
+            <h2 class="galaxy-title">
+                <span class="title-glow">🌌 My Skills Universe</span>
+            </h2>
+            <p class="galaxy-subtitle">
+                Explore the constellation of my technical expertise across different domains
+            </p>
         </div>
 
-        <!-- Skills Content -->
-        <div class="mt-6 skills-container">
-            <div id="core" class="skill-content active">
-                <h3 class="text-2xl font-bold text-blue-300">🛠️ Core Skills</h3>
-                <ul class="skill-list">
-                    <li>Data Structures & Algorithms</li>
-                    <li>Full-Stack Development</li>
-                    <li>System Design</li>
-                    <li>Software Engineering</li>
-                    <li>Operating System</li>
-                    <li>Database Management System</li>
-                    <li>Cloud Computing</li>
-                </ul>
+        <!-- Galaxy Navigation -->
+        <div class="galaxy-nav" data-aos="fade-up" data-aos-delay="300">
+            <button class="galaxy-tab active" onclick="showGalaxySkills('core')" data-aos="zoom-in" data-aos-delay="100">
+                <div class="tab-icon">🛠️</div>
+                <span>Core Systems</span>
+                <div class="tab-orbit"></div>
+            </button>
+            <button class="galaxy-tab" onclick="showGalaxySkills('programming')" data-aos="zoom-in" data-aos-delay="200">
+                <div class="tab-icon">💻</div>
+                <span>Programming</span>
+                <div class="tab-orbit"></div>
+            </button>
+            <button class="galaxy-tab" onclick="showGalaxySkills('tools')" data-aos="zoom-in" data-aos-delay="300">
+                <div class="tab-icon">🔧</div>
+                <span>Dev Tools</span>
+                <div class="tab-orbit"></div>
+            </button>
+            <button class="galaxy-tab" onclick="showGalaxySkills('ai')" data-aos="zoom-in" data-aos-delay="400">
+                <div class="tab-icon">🤖</div>
+                <span>AI/ML</span>
+                <div class="tab-orbit"></div>
+            </button>
+            <button class="galaxy-tab" onclick="showGalaxySkills('electrical')" data-aos="zoom-in" data-aos-delay="500">
+                <div class="tab-icon">⚡</div>
+                <span>Electrical</span>
+                <div class="tab-orbit"></div>
+            </button>
+        </div>
+
+        <!-- Skills Constellation -->
+        <div class="skills-constellation mt-12">
+            
+            <!-- Core Skills Galaxy -->
+            <div id="core" class="skill-galaxy active" data-aos="fade-up" data-aos-duration="1500">
+                <div class="galaxy-center">
+                    <h3 class="constellation-title">🛠️ Core Systems</h3>
+                    <div class="constellation-subtitle">Foundation of the Universe</div>
+                </div>                <div class="skill-orbit orbit-1">
+                    <div class="skill-planet" data-skill="Data Structures & Algorithms">
+                        <div class="planet-core">
+                            <i class="fas fa-code-branch planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Data Structures & Algorithms</div>
+                        <div class="skill-name">DSA</div>
+                    </div>
+                    <div class="skill-planet" data-skill="System Design">
+                        <div class="planet-core">
+                            <i class="fas fa-sitemap planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">System Design</div>
+                        <div class="skill-name">System Design</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-2">
+                    <div class="skill-planet" data-skill="Full-Stack Development">
+                        <div class="planet-core">
+                            <i class="fas fa-layer-group planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Full-Stack Development</div>
+                        <div class="skill-name">Full-Stack</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Database Management">
+                        <div class="planet-core">
+                            <i class="fas fa-database planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Database Management</div>
+                        <div class="skill-name">Database</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Cloud Computing">
+                        <div class="planet-core">
+                            <i class="fas fa-cloud planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Cloud Computing</div>
+                        <div class="skill-name">Cloud</div>
+                    </div>
+                </div>
             </div>
 
-            <div id="programming" class="skill-content">
-                <h3 class="text-2xl font-bold text-green-300">💻 Programming & Frameworks</h3>
-                <ul class="skill-list">
-                    <li>C++</li>
-                    <li>JavaScript & React.js</li>
-                    <li>Vue.js</li>
-                    <li>HTML & CSS</li>
-                    <li>Next.js</li>
-                    <li>Python</li>
-                    <li>Node.js & MongoDB</li>
-                </ul>
+            <!-- Programming Skills Galaxy -->
+            <div id="programming" class="skill-galaxy" data-aos="fade-up" data-aos-duration="1500">
+                <div class="galaxy-center">
+                    <h3 class="constellation-title">💻 Programming</h3>
+                    <div class="constellation-subtitle">Language Constellation</div>
+                </div>                <div class="skill-orbit orbit-1">
+                    <div class="skill-planet" data-skill="JavaScript">
+                        <div class="planet-core js-planet">
+                            <i class="fab fa-js-square planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">JavaScript</div>
+                        <div class="skill-name">JavaScript</div>
+                    </div>
+                    <div class="skill-planet" data-skill="React.js">
+                        <div class="planet-core react-planet">
+                            <i class="fab fa-react planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">React.js</div>
+                        <div class="skill-name">React.js</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-2">
+                    <div class="skill-planet" data-skill="Python">
+                        <div class="planet-core python-planet">
+                            <i class="fab fa-python planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Python</div>
+                        <div class="skill-name">Python</div>
+                    </div>
+                    <div class="skill-planet" data-skill="C++">
+                        <div class="planet-core cpp-planet">
+                            <i class="fas fa-code planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">C++</div>
+                        <div class="skill-name">C++</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Node.js">
+                        <div class="planet-core node-planet">
+                            <i class="fab fa-node-js planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Node.js</div>
+                        <div class="skill-name">Node.js</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-3">
+                    <div class="skill-planet" data-skill="HTML5">
+                        <div class="planet-core html-planet">
+                            <i class="fab fa-html5 planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">HTML5</div>
+                        <div class="skill-name">HTML5</div>
+                    </div>
+                    <div class="skill-planet" data-skill="CSS3">
+                        <div class="planet-core css-planet">
+                            <i class="fab fa-css3-alt planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">CSS3</div>
+                        <div class="skill-name">CSS3</div>
+                    </div>
+                </div>
             </div>
 
-            <div id="tools" class="skill-content">
-                <h3 class="text-2xl font-bold text-purple-300">🛠️ Tools & Frameworks</h3>
-                <ul class="skill-list">
-                    <li>Git, GitHub, Gitlab</li>
-                    <li>Postman & APIs</li>
-                    <li>AWS</li>
-                    <li>Linux</li>
-                </ul>
+            <!-- Tools Skills Galaxy -->
+            <div id="tools" class="skill-galaxy" data-aos="fade-up" data-aos-duration="1500">
+                <div class="galaxy-center">
+                    <h3 class="constellation-title">🔧 Dev Tools</h3>
+                    <div class="constellation-subtitle">Developer Arsenal</div>
+                </div>                <div class="skill-orbit orbit-1">
+                    <div class="skill-planet" data-skill="Git & GitHub">
+                        <div class="planet-core git-planet">
+                            <i class="fab fa-github planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Git & GitHub</div>
+                        <div class="skill-name">Git</div>
+                    </div>
+                    <div class="skill-planet" data-skill="AWS">
+                        <div class="planet-core aws-planet">
+                            <i class="fab fa-aws planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">AWS</div>
+                        <div class="skill-name">AWS</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-2">
+                    <div class="skill-planet" data-skill="Docker">
+                        <div class="planet-core docker-planet">
+                            <i class="fab fa-docker planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Docker</div>
+                        <div class="skill-name">Docker</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Linux">
+                        <div class="planet-core linux-planet">
+                            <i class="fab fa-linux planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Linux</div>
+                        <div class="skill-name">Linux</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Postman">
+                        <div class="planet-core postman-planet">
+                            <i class="fas fa-paper-plane planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Postman & APIs</div>
+                        <div class="skill-name">Postman</div>
+                    </div>
+                </div>
             </div>
 
-            <div id="ai" class="skill-content">
-                <h3 class="text-2xl font-bold text-teal-300">🤖 AI/ML</h3>
-                <ul class="skill-list">
-                    <li>TensorFlow & PyTorch</li>
-                    <li>Natural Language Processing</li>
-                    <li>Deep Learning</li>
-                    <li>Machine Learning Algorithms</li>
-                </ul>
+            <!-- AI/ML Skills Galaxy -->
+            <div id="ai" class="skill-galaxy" data-aos="fade-up" data-aos-duration="1500">
+                <div class="galaxy-center">
+                    <h3 class="constellation-title">🤖 AI/ML</h3>
+                    <div class="constellation-subtitle">Intelligence Network</div>
+                </div>                <div class="skill-orbit orbit-1">
+                    <div class="skill-planet" data-skill="TensorFlow">
+                        <div class="planet-core tf-planet">
+                            <i class="fas fa-brain planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">TensorFlow</div>
+                        <div class="skill-name">TensorFlow</div>
+                    </div>
+                    <div class="skill-planet" data-skill="PyTorch">
+                        <div class="planet-core pytorch-planet">
+                            <i class="fas fa-fire planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">PyTorch</div>
+                        <div class="skill-name">PyTorch</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-2">
+                    <div class="skill-planet" data-skill="Machine Learning">
+                        <div class="planet-core ml-planet">
+                            <i class="fas fa-robot planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Machine Learning</div>
+                        <div class="skill-name">ML</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Deep Learning">
+                        <div class="planet-core dl-planet">
+                            <i class="fas fa-network-wired planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Deep Learning</div>
+                        <div class="skill-name">Deep Learning</div>
+                    </div>
+                    <div class="skill-planet" data-skill="NLP">
+                        <div class="planet-core nlp-planet">
+                            <i class="fas fa-language planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Natural Language Processing</div>
+                        <div class="skill-name">NLP</div>
+                    </div>
+                </div>
             </div>
 
-            <div id="electrical" class="skill-content">
-                <h3 class="text-2xl font-bold text-red-300">⚡ Electrical</h3>
-                <ul class="skill-list">
-                    <li>PLC</li>
-                    <li>Embedded Systems</li>
-                    <li>IoT & Automation</li>
-                    <li>MATLAB & Simulink</li>
-                </ul>
+            <!-- Electrical Skills Galaxy -->
+            <div id="electrical" class="skill-galaxy" data-aos="fade-up" data-aos-duration="1500">
+                <div class="galaxy-center">
+                    <h3 class="constellation-title">⚡ Electrical</h3>
+                    <div class="constellation-subtitle">Power Systems</div>
+                </div>                <div class="skill-orbit orbit-1">
+                    <div class="skill-planet" data-skill="PLC Programming">
+                        <div class="planet-core plc-planet">
+                            <i class="fas fa-microchip planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">PLC Programming</div>
+                        <div class="skill-name">PLC</div>
+                    </div>
+                    <div class="skill-planet" data-skill="Embedded Systems">
+                        <div class="planet-core embedded-planet">
+                            <i class="fas fa-memory planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">Embedded Systems</div>
+                        <div class="skill-name">Embedded</div>
+                    </div>
+                </div>
+                <div class="skill-orbit orbit-2">
+                    <div class="skill-planet" data-skill="IoT & Automation">
+                        <div class="planet-core iot-planet">
+                            <i class="fas fa-wifi planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">IoT & Automation</div>
+                        <div class="skill-name">IoT</div>
+                    </div>
+                    <div class="skill-planet" data-skill="MATLAB">
+                        <div class="planet-core matlab-planet">
+                            <i class="fas fa-chart-line planet-icon"></i>
+                        </div>
+                        <div class="planet-ring"></div>
+                        <div class="skill-tooltip">MATLAB & Simulink</div>
+                        <div class="skill-name">MATLAB</div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- CSS for Enhanced Skills UI -->
+<!-- Galaxy Skills CSS -->
 <style>
-/* Tab Buttons */
-.skill-tab {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 30px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-.skill-tab:hover, .skill-tab.active {
-    background: #2D98DA;
-    color: #000;
-    box-shadow: 0px 0px 15px #2D98DA;
+/* Galaxy Skills Section Base */
+.galaxy-skills-section {
+    min-height: 100vh;
+    position: relative;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    overflow: hidden;
 }
 
-/* Skill Content */
-.skill-content {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
+/* Galaxy Background */
+.galaxy-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
-.skill-content.active {
+
+/* Animated Stars */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stars::before,
+.stars::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 
+        10px 10px white,
+        20px 20px white,
+        30px 30px white,
+        40px 40px white,
+        50px 50px white,
+        100px 100px white,
+        150px 150px white,
+        200px 200px white,
+        250px 250px white,
+        300px 300px white,
+        350px 350px white,
+        400px 400px white,
+        450px 450px white,
+        500px 500px white,
+        550px 550px white,
+        600px 600px white,
+        650px 650px white,
+        700px 700px white,
+        750px 750px white,
+        800px 800px white,
+        850px 850px white,
+        900px 900px white,
+        950px 950px white,
+        1000px 1000px white,
+        1050px 1050px white,
+        1100px 1100px white,
+        1150px 1150px white,
+        1200px 1200px white,
+        1250px 1250px white,
+        1300px 1300px white,
+        1350px 1350px white,
+        1400px 1400px white,
+        1450px 1450px white,
+        1500px 1500px white;
+    animation: twinkle 20s infinite linear;
+}
+
+.stars-small::before {
+    width: 1px;
+    height: 1px;
+}
+
+.stars-medium::before {
+    width: 2px;
+    height: 2px;
+    animation-delay: -10s;
+}
+
+.stars-large::before {
+    width: 3px;
+    height: 3px;
+    animation-delay: -5s;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Nebula Clouds */
+.nebula {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    animation: nebulaDrift 30s infinite ease-in-out;
+}
+
+.nebula-1 {
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(45deg, #ff006e, #8338ec);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.nebula-2 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, #3a86ff, #06ffa5);
+    bottom: 20%;
+    right: 15%;
+    animation-delay: -10s;
+}
+
+.nebula-3 {
+    width: 250px;
+    height: 150px;
+    background: linear-gradient(45deg, #ffbe0b, #fb5607);
+    top: 60%;
+    left: 60%;
+    animation-delay: -20s;
+}
+
+@keyframes nebulaDrift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-30px, -20px) rotate(120deg); }
+    66% { transform: translate(20px, 30px) rotate(240deg); }
+}
+
+/* Floating Planets */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent);
+    animation: planetOrbit 40s infinite linear;
+}
+
+.planet-1 {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a6f);
+    top: 15%;
+    right: 20%;
+    animation-delay: 0s;
+}
+
+.planet-2 {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, #4ecdc4, #44a08d);
+    bottom: 25%;
+    left: 10%;
+    animation-delay: -15s;
+}
+
+.planet-3 {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #feca57, #ff9ff3);
+    top: 70%;
+    right: 10%;
+    animation-delay: -25s;
+}
+
+@keyframes planetOrbit {
+    0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+/* Cosmic Particles */
+.cosmic-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cosmic-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: cosmicFloat 15s infinite ease-in-out;
+}
+
+.cp-1 { top: 10%; left: 20%; animation-delay: 0s; }
+.cp-2 { top: 30%; right: 25%; animation-delay: -2s; }
+.cp-3 { bottom: 40%; left: 15%; animation-delay: -4s; }
+.cp-4 { top: 80%; right: 30%; animation-delay: -6s; }
+.cp-5 { top: 50%; left: 70%; animation-delay: -8s; }
+.cp-6 { bottom: 20%; right: 40%; animation-delay: -10s; }
+.cp-7 { top: 25%; left: 60%; animation-delay: -12s; }
+.cp-8 { bottom: 60%; left: 40%; animation-delay: -14s; }
+
+@keyframes cosmicFloat {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.5;
+    }
+    25% { 
+        transform: translateY(-30px) translateX(20px) scale(1.2);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-15px) translateX(-25px) scale(0.8);
+        opacity: 0.7;
+    }
+    75% { 
+        transform: translateY(-40px) translateX(30px) scale(1.1);
+        opacity: 0.9;
+    }
+}
+
+/* Galaxy Spiral */
+.galaxy-spiral {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.05) 90deg,
+        transparent 180deg,
+        rgba(255, 255, 255, 0.05) 270deg,
+        transparent 360deg
+    );
+    border-radius: 50%;
+    animation: galaxyRotate 60s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes galaxyRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Skills Header */
+.skills-header {
+    margin-bottom: 3rem;
+}
+
+.galaxy-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.title-glow {
+    background: linear-gradient(45deg, #ffffff, #64ffda, #bb86fc, #ffffff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShine 4s infinite ease-in-out;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes titleShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.galaxy-subtitle {
+    font-size: 1.2rem;
+    color: #b0b3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Galaxy Navigation */
+.galaxy-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.galaxy-tab {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 1rem 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.galaxy-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.galaxy-tab:hover::before,
+.galaxy-tab.active::before {
+    left: 100%;
+}
+
+.galaxy-tab:hover,
+.galaxy-tab.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.tab-icon {
+    font-size: 1.5rem;
+    animation: iconFloat 3s infinite ease-in-out;
+}
+
+.tab-orbit {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.galaxy-tab:hover .tab-orbit,
+.galaxy-tab.active .tab-orbit {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.3);
+    animation: orbitSpin 2s linear infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes orbitSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Skills Constellation */
+.skills-constellation {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-galaxy {
+    display: none;
+    position: relative;
+    min-height: 600px;
+    animation: galaxyAppear 1s ease-out;
+}
+
+.skill-galaxy.active {
     display: block;
 }
 
-/* Skill List */
-.skill-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-.skill-list li {
-    font-size: 1.3rem;
-    color: #e0e0e0;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 15px;
-    margin: 5px 0;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.skill-list li:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-}
-* {
-  font-family: 'Poppins', sans-serif;
+@keyframes galaxyAppear {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.8) rotateY(180deg);
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1) rotateY(0deg);
+    }
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.galaxy-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+}
+
+.constellation-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.constellation-subtitle {
+    color: #b0b3b8;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Skill Orbits */
+.skill-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbitRotate 30s infinite linear;
+}
+
+.orbit-1 {
+    width: 300px;
+    height: 300px;
+    animation-duration: 20s;
+}
+
+.orbit-2 {
+    width: 450px;
+    height: 450px;
+    animation-duration: 35s;
+    animation-direction: reverse;
+}
+
+.orbit-3 {
+    width: 600px;
+    height: 600px;
+    animation-duration: 50s;
+}
+
+@keyframes orbitRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Skill Planets */
+.skill-planet {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.orbit-1 .skill-planet:nth-child(1) { top: -40px; left: calc(50% - 40px); }
+.orbit-1 .skill-planet:nth-child(2) { bottom: -40px; left: calc(50% - 40px); }
+
+.orbit-2 .skill-planet:nth-child(1) { top: -40px; left: calc(50% - 40px); }
+.orbit-2 .skill-planet:nth-child(2) { top: calc(50% - 40px); right: -40px; }
+.orbit-2 .skill-planet:nth-child(3) { bottom: -40px; left: calc(50% - 40px); }
+
+.orbit-3 .skill-planet:nth-child(1) { top: -40px; left: calc(50% - 40px); }
+.orbit-3 .skill-planet:nth-child(2) { top: calc(25% - 40px); right: calc(13% - 40px); }
+
+.planet-core {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.planet-icon {
+    font-size: 2rem;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.planet-ring {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.4s ease;
+    animation: ringPulse 3s infinite ease-in-out;
+}
+
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+.skill-planet:hover {
+    transform: scale(1.2);
+    z-index: 10;
+}
+
+.skill-planet:hover .planet-core {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.skill-planet:hover .planet-ring {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.skill-planet:hover .planet-icon {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Skill Names - Always Visible with Counter-Rotation */
+.skill-name {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    min-width: 60px;
+    animation: counterRotate 30s infinite linear;
+}
+
+/* Counter-rotation for orbit-1 skill names */
+.orbit-1 .skill-name {
+    animation: counterRotate1 20s infinite linear;
+}
+
+/* Counter-rotation for orbit-2 skill names */
+.orbit-2 .skill-name {
+    animation: counterRotate2 35s infinite linear reverse;
+}
+
+/* Counter-rotation for orbit-3 skill names */
+.orbit-3 .skill-name {
+    animation: counterRotate3 50s infinite linear;
+}
+
+/* Counter-rotation animations to keep text upright */
+@keyframes counterRotate1 {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(-360deg); }
+}
+
+@keyframes counterRotate2 {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes counterRotate3 {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(-360deg); }
+}
+
+.skill-planet:hover .skill-name {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.1);
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Override hover transform to maintain counter-rotation */
+.orbit-1 .skill-planet:hover .skill-name {
+    animation: counterRotate1Hover 20s infinite linear;
+    transform: translateX(-50%) scale(1.1);
+}
+
+.orbit-2 .skill-planet:hover .skill-name {
+    animation: counterRotate2Hover 35s infinite linear reverse;
+    transform: translateX(-50%) scale(1.1);
+}
+
+.orbit-3 .skill-planet:hover .skill-name {
+    animation: counterRotate3Hover 50s infinite linear;
+    transform: translateX(-50%) scale(1.1);
+}
+
+@keyframes counterRotate1Hover {
+    0% { transform: translateX(-50%) scale(1.1) rotate(0deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(-360deg); }
+}
+
+@keyframes counterRotate2Hover {
+    0% { transform: translateX(-50%) scale(1.1) rotate(0deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(360deg); }
+}
+
+@keyframes counterRotate3Hover {
+    0% { transform: translateX(-50%) scale(1.1) rotate(0deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(-360deg); }
+}
+
+/* Skill Tooltips */
+.skill-tooltip {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    pointer-events: none;
+    z-index: 100;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    min-width: 120px;
+    text-align: center;
+}
+
+.skill-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(0, 0, 0, 0.95);
+}
+
+.skill-planet:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+    animation: tooltipBounce 0.4s ease-out;
+}
+
+@keyframes tooltipBounce {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(5px) scale(0.8);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-15px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10px) scale(1);
+    }
+}
+
+/* Planet Color Themes */
+.js-planet { background: radial-gradient(circle at 30% 30%, #f7df1e, #d4c441); }
+.react-planet { background: radial-gradient(circle at 30% 30%, #61dafb, #4fa8c5); }
+.python-planet { background: radial-gradient(circle at 30% 30%, #3776ab, #2d5aa0); }
+.cpp-planet { background: radial-gradient(circle at 30% 30%, #00599c, #004482); }
+.node-planet { background: radial-gradient(circle at 30% 30%, #339933, #2d7e2d); }
+.html-planet { background: radial-gradient(circle at 30% 30%, #e34f26, #c63320); }
+.css-planet { background: radial-gradient(circle at 30% 30%, #1572b6, #1260a0); }
+.git-planet { background: radial-gradient(circle at 30% 30%, #f05032, #d63384); }
+.aws-planet { background: radial-gradient(circle at 30% 30%, #ff9900, #e68a00); }
+.docker-planet { background: radial-gradient(circle at 30% 30%, #2496ed, #1e7cc7); }
+.linux-planet { background: radial-gradient(circle at 30% 30%, #fcc624, #e0b01c); }
+.postman-planet { background: radial-gradient(circle at 30% 30%, #ff6c37, #e55a2b); }
+.tf-planet { background: radial-gradient(circle at 30% 30%, #ff6f00, #e55a00); }
+.pytorch-planet { background: radial-gradient(circle at 30% 30%, #ee4c2c, #d63384); }
+.ml-planet { background: radial-gradient(circle at 30% 30%, #00d4aa, #00b894); }
+.dl-planet { background: radial-gradient(circle at 30% 30%, #6c5ce7, #5a4fcf); }
+.nlp-planet { background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7); }
+.plc-planet { background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3); }
+.embedded-planet { background: radial-gradient(circle at 30% 30%, #fd79a8, #e84393); }
+.iot-planet { background: radial-gradient(circle at 30% 30%, #55a3ff, #2d96ff); }
+.matlab-planet { background: radial-gradient(circle at 30% 30%, #ff7675, #e17055); }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .galaxy-title { font-size: 3rem; }
+    .orbit-1 { width: 250px; height: 250px; }
+    .orbit-2 { width: 400px; height: 400px; }
+    .orbit-3 { width: 550px; height: 550px; }
+}
+
+@media (max-width: 768px) {
+    .galaxy-title { font-size: 2.5rem; }
+    .galaxy-nav { flex-direction: column; align-items: center; }
+    .galaxy-tab { width: 200px; justify-content: center; }
+    .skill-galaxy { min-height: 500px; }
+    .orbit-1 { width: 200px; height: 200px; }
+    .orbit-2 { width: 300px; height: 300px; }
+    .orbit-3 { width: 400px; height: 400px; }
+    .skill-planet { width: 60px; height: 60px; }
+    .orbit-1 .skill-planet:nth-child(1), 
+    .orbit-1 .skill-planet:nth-child(2) { left: calc(50% - 30px); }
+    .orbit-2 .skill-planet:nth-child(1), 
+    .orbit-2 .skill-planet:nth-child(3) { left: calc(50% - 30px); }
+    .orbit-2 .skill-planet:nth-child(2) { top: calc(50% - 30px); right: -30px; }
+    .orbit-3 .skill-planet:nth-child(1) { top: -30px; left: calc(50% - 30px); }
+    .orbit-3 .skill-planet:nth-child(2) { top: calc(25% - 30px); right: calc(13% - 30px); }
+}
+
+@media (max-width: 480px) {
+    .skill-galaxy { min-height: 400px; }
+    .orbit-1 { width: 150px; height: 150px; }
+    .orbit-2 { width: 220px; height: 220px; }
+    .orbit-3 { width: 300px; height: 300px; }
+    .skill-planet { width: 50px; height: 50px; }
+    .planet-icon { font-size: 1.5rem; }
+    .constellation-title { font-size: 2rem; }
 }
 </style>
 
-<!-- JavaScript for Tab Switching -->
+<!-- Enhanced Galaxy Skills JavaScript -->
 <script>
-function showSkills(category) {
-    document.querySelectorAll('.skill-content').forEach(div => div.classList.remove('active'));
-    document.querySelectorAll('.skill-tab').forEach(btn => btn.classList.remove('active'));
+function showGalaxySkills(category) {
+    // Hide all skill galaxies
+    document.querySelectorAll('.skill-galaxy').forEach(galaxy => {
+        galaxy.classList.remove('active');
+    });
+    
+    // Remove active class from all tabs
+    document.querySelectorAll('.galaxy-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected galaxy
     document.getElementById(category).classList.add('active');
-    document.querySelector(`[onclick="showSkills('${category}')"]`).classList.add('active');
+    
+    // Add active class to selected tab
+    document.querySelector(`[onclick="showGalaxySkills('${category}')"]`).classList.add('active');
+    
+    // Add entrance animation
+    const activeGalaxy = document.getElementById(category);
+    activeGalaxy.style.animation = 'none';
+    setTimeout(() => {
+        activeGalaxy.style.animation = 'galaxyAppear 1s ease-out';
+    }, 10);
 }
+
+// Enhanced planet interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const skillPlanets = document.querySelectorAll('.skill-planet');
+    
+    skillPlanets.forEach(planet => {
+        planet.addEventListener('mouseenter', function() {
+            // Add glowing effect
+            this.style.filter = 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))';
+            
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'planet-ripple';
+            ripple.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                animation: planetRipple 1s ease-out forwards;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+        
+        planet.addEventListener('mouseleave', function() {
+            this.style.filter = '';
+        });
+        
+        // Click effect
+        planet.addEventListener('click', function() {
+            const burst = document.createElement('div');
+            burst.className = 'planet-burst';
+            burst.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+                transform: translate(-50%, -50%);
+                animation: planetBurst 0.6s ease-out forwards;
+                pointer-events: none;
+                z-index: 15;
+            `;
+            
+            this.appendChild(burst);
+            
+            setTimeout(() => {
+                burst.remove();
+            }, 600);
+        });
+    });
+    
+    // Intersection Observer for skill galaxy animations
+    const galaxyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const planets = entry.target.querySelectorAll('.skill-planet');
+                planets.forEach((planet, index) => {
+                    setTimeout(() => {
+                        planet.style.opacity = '1';
+                        planet.style.transform = 'scale(1)';
+                    }, index * 100);
+                });
+            }
+        });
+    }, {
+        threshold: 0.3
+    });
+    
+    document.querySelectorAll('.skill-galaxy').forEach(galaxy => {
+        galaxyObserver.observe(galaxy);
+        
+        // Initially hide planets
+        const planets = galaxy.querySelectorAll('.skill-planet');
+        planets.forEach(planet => {
+            planet.style.opacity = '0';
+            planet.style.transform = 'scale(0.5)';
+            planet.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
+        });
+    });
+});
+
+// Add dynamic CSS for animations
+const planetAnimationCSS = `
+    @keyframes planetRipple {
+        0% {
+            width: 0;
+            height: 0;
+            opacity: 1;
+        }
+        100% {
+            width: 160px;
+            height: 160px;
+            opacity: 0;
+        }
+    }
+    
+    @keyframes planetBurst {
+        0% {
+            width: 0;
+            height: 0;
+            opacity: 1;
+        }
+        100% {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    }
+`;
+
+const planetStyle = document.createElement('style');
+planetStyle.textContent = planetAnimationCSS;
+document.head.appendChild(planetStyle);
 </script>
 
 
@@ -938,7 +5602,7 @@ function showSkills(category) {
     animation: fadeInUp 0.8s ease-in-out;
 }
     * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 </style>
@@ -1206,9 +5870,854 @@ footer {
 }
 </style>
 
+<!-- AI Chatbot Styles -->
+<style>
+/* Chatbot Container */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+}
 
+/* Chat Toggle Button */
+.chat-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.chat-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+.chat-toggle:hover::before {
+    transform: scale(1.2);
+}
+
+.chat-toggle i {
+    font-size: 24px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.chat-toggle:hover i {
+    transform: scale(1.1);
+}
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: #ff4757;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Chat Window */
+.chat-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 500px;
+    background: rgba(17, 25, 40, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.chat-window.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Chat Header */
+.chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.chat-info h3 {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.chat-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    margin: 2px 0 0 0;
+}
+
+.chat-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Chat Messages */
+.chat-messages {
+    height: 280px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.6);
+    border-radius: 2px;
+}
+
+.message {
+    display: flex;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.bot-message .message-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+    color: white;
+}
+
+.message-content {
+    max-width: 250px;
+}
+
+.bot-message .message-content {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.user-message .message-content {
+    background: rgba(54, 209, 220, 0.1);
+    border: 1px solid rgba(54, 209, 220, 0.2);
+}
+
+.message-content {
+    padding: 12px 16px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+}
+
+.message-content p {
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.message-time {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 5px;
+    display: block;
+}
+
+/* Quick Actions */
+.quick-actions {
+    padding: 0 20px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-btn {
+    padding: 8px 12px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #667eea;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.quick-btn:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Chat Input */
+.chat-input-container {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 5px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#chat-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 16px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+#chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    margin-top: 10px;
+}
+
+.typing-indicator.active {
+    display: flex;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.6);
+    animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .chatbot-container {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .chat-window {
+        width: calc(100vw - 20px);
+        height: 400px;
+        bottom: 70px;
+        right: 0;
+    }
+    
+    .chat-messages {
+        height: 220px;
+    }
+}
+
+/* Animation for chat window appearance */
+@keyframes chatAppear {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chat-window.appear {
+    animation: chatAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
+
+
+<!-- AI-Powered Chatbot -->
+<div id="ai-chatbot" class="chatbot-container">
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle" class="chat-toggle">
+        <i class="fas fa-robot"></i>
+        <div class="notification-badge" id="notification-badge" style="display: none;">1</div>
+    </button>
+    
+    <!-- Chatbot Window -->
+    <div id="chat-window" class="chat-window">
+        <!-- Chatbot Header -->
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat-info">
+                    <h3>Yash AI Assistant</h3>
+                    <p>Online • Ready to help</p>
+                </div>
+            </div>
+            <div class="chat-controls">
+                <button id="minimize-chat" class="control-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button id="close-chat" class="control-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Chat Messages Container -->
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hi! I'm Yashodip's AI assistant. Ask me anything about his experience, skills, projects, or education! 🚀</p>
+                    <span class="message-time">Just now</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Action Buttons -->
+        <div class="quick-actions">
+            <button class="quick-btn" data-message="Tell me about Yashodip's experience">Experience</button>
+            <button class="quick-btn" data-message="What are his technical skills?">Skills</button>
+            <button class="quick-btn" data-message="Show me his projects">Projects</button>
+            <button class="quick-btn" data-message="What's his education background?">Education</button>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <input type="text" id="chat-input" placeholder="Ask me about Yashodip..." autocomplete="off">
+                <button id="send-message" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="script.js"></script>
+
+<!-- AI Chatbot JavaScript -->
+<script>
+class AIChatbot {
+    constructor() {
+        this.chatToggle = document.getElementById('chatbot-toggle');
+        this.chatWindow = document.getElementById('chat-window');
+        this.chatMessages = document.getElementById('chat-messages');
+        this.chatInput = document.getElementById('chat-input');
+        this.sendButton = document.getElementById('send-message');
+        this.quickBtns = document.querySelectorAll('.quick-btn');
+        this.closeBtn = document.getElementById('close-chat');
+        this.minimizeBtn = document.getElementById('minimize-chat');
+        this.typingIndicator = document.getElementById('typing-indicator');
+        this.notificationBadge = document.getElementById('notification-badge');
+        
+        this.isOpen = false;
+        this.isMinimized = false;
+        this.isTyping = false;
+        
+        this.knowledgeBase = {
+            experience: {
+                keywords: ['experience', 'work', 'job', 'career', 'employment', 'professional'],
+                response: `Yashodip is a passionate software developer with experience in:
+                
+• **Web Development**: Full-stack development using modern frameworks
+• **AI/ML Projects**: Implementing machine learning solutions
+• **Competitive Programming**: Active problem solver on various platforms
+• **Open Source**: Contributing to various projects and maintaining personal repositories
+
+He has worked on multiple projects ranging from web applications to AI-powered solutions, demonstrating versatility in different tech stacks.`
+            },
+            skills: {
+                keywords: ['skills', 'technology', 'tech', 'programming', 'languages', 'frameworks', 'tools'],
+                response: `Yashodip's technical expertise includes:
+
+**Programming Languages:**
+• Python, JavaScript, Java, C++
+• HTML5, CSS3, SQL
+
+**Frameworks & Libraries:**
+• React.js, Node.js, Express.js
+• TensorFlow, Pandas, NumPy
+• Bootstrap, Tailwind CSS
+
+**Tools & Technologies:**
+• Git/GitHub, VS Code
+• MongoDB, MySQL
+• Docker, AWS basics
+• Machine Learning, Data Analysis
+
+**Soft Skills:**
+• Problem-solving, Team collaboration
+• Project management, Communication`
+            },
+            projects: {
+                keywords: ['projects', 'portfolio', 'work', 'applications', 'development', 'built', 'created'],
+                response: `Here are some of Yashodip's notable projects:
+
+**🔥 Key Projects:**
+• **AI-Powered Web Apps**: Intelligent applications with ML integration
+• **Responsive Portfolio**: This very website you're browsing!
+• **Text Editor**: Feature-rich text editing application
+• **Competitive Programming Solutions**: Optimized algorithms and data structures
+
+**🛠️ Technical Features:**
+• Modern UI/UX design
+• Responsive across all devices
+• Performance optimized
+• Clean, maintainable code
+
+Each project showcases different aspects of his technical skills and problem-solving abilities.`
+            },
+            education: {
+                keywords: ['education', 'study', 'degree', 'college', 'university', 'qualification', 'academic'],
+                response: `Yashodip's educational background:
+
+**🎓 Academic Journey:**
+• **Higher Secondary Certificate (HSC)**: Completed with strong performance
+• **Secondary School Certificate (SSC)**: Solid foundation in academics
+• **Current Studies**: Pursuing advanced studies in Computer Science
+
+**📚 Continuous Learning:**
+• Self-taught in various programming languages
+• Regular participation in coding competitions
+• Online courses and certifications
+• Active in tech communities and forums
+
+His education combines formal academic knowledge with practical, hands-on learning experience.`
+            },
+            contact: {
+                keywords: ['contact', 'reach', 'email', 'connect', 'hire', 'collaboration'],
+                response: `Ready to connect with Yashodip? Here's how:
+
+**📬 Get in Touch:**
+• **Email**: Available through the contact form on this website
+• **LinkedIn**: Connect for professional networking
+• **GitHub**: Check out his code repositories
+• **Portfolio**: You're already here! Explore his work
+
+**💼 For Opportunities:**
+• Open to full-time positions
+• Available for freelance projects
+• Interested in collaboration
+• Ready for technical discussions
+
+Feel free to reach out for any opportunities or just to say hello! 👋`
+            },
+            about: {
+                keywords: ['about', 'who', 'yashodip', 'yash', 'developer', 'person'],
+                response: `Meet Yashodip More - A passionate software developer! 👋
+
+**🚀 About Yashodip:**
+• Creative problem-solver with a love for clean code
+• Passionate about AI/ML and modern web technologies  
+• Always eager to learn new technologies and frameworks
+• Believes in writing code that makes a difference
+
+**🎯 Current Focus:**
+• Building innovative web applications
+• Exploring AI/ML implementations
+• Contributing to open-source projects
+• Continuous skill development
+
+**💡 Philosophy:**
+"Code is not just about solving problems - it's about creating experiences that matter."
+
+He combines technical expertise with creative thinking to build solutions that are both functional and beautiful.`
+            },
+            default: {
+                keywords: [],
+                response: `I'm here to help you learn about Yashodip! I can tell you about:
+
+• **Experience** - His professional journey and work
+• **Skills** - Technical expertise and tools he uses  
+• **Projects** - Cool things he's built and created
+• **Education** - Academic background and learning
+• **Contact** - How to reach out and connect
+
+What would you like to know more about? Just ask me anything! 😊`
+            }
+        };
+        
+        this.initEventListeners();
+        this.showWelcomeMessage();
+    }
+    
+    initEventListeners() {
+        // Toggle chat window
+        this.chatToggle.addEventListener('click', () => this.toggleChat());
+        
+        // Close chat
+        this.closeBtn.addEventListener('click', () => this.closeChat());
+        
+        // Minimize chat
+        this.minimizeBtn.addEventListener('click', () => this.minimizeChat());
+        
+        // Send message
+        this.sendButton.addEventListener('click', () => this.sendMessage());
+        
+        // Enter key to send message
+        this.chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.sendMessage();
+            }
+        });
+        
+        // Quick action buttons
+        this.quickBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const message = btn.getAttribute('data-message');
+                this.sendMessage(message);
+            });
+        });
+        
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+            if (!this.chatWindow.contains(e.target) && !this.chatToggle.contains(e.target) && this.isOpen) {
+                // this.closeChat(); // Uncomment if you want click-outside-to-close behavior
+            }
+        });
+    }
+    
+    toggleChat() {
+        if (this.isOpen) {
+            this.closeChat();
+        } else {
+            this.openChat();
+        }
+    }
+    
+    openChat() {
+        this.isOpen = true;
+        this.isMinimized = false;
+        this.chatWindow.classList.add('active');
+        this.chatWindow.classList.add('appear');
+        this.hideNotification();
+        
+        // Focus on input
+        setTimeout(() => {
+            this.chatInput.focus();
+        }, 300);
+    }
+    
+    closeChat() {
+        this.isOpen = false;
+        this.chatWindow.classList.remove('active');
+        this.chatWindow.classList.remove('appear');
+    }
+    
+    minimizeChat() {
+        this.isMinimized = true;
+        this.chatWindow.classList.remove('active');
+    }
+    
+    sendMessage(messageText = null) {
+        const message = messageText || this.chatInput.value.trim();
+        
+        if (!message) return;
+        
+        // Add user message
+        this.addMessage(message, 'user');
+        
+        // Clear input
+        this.chatInput.value = '';
+        
+        // Show typing indicator
+        this.showTyping();
+        
+        // Generate AI response
+        setTimeout(() => {
+            const response = this.generateResponse(message);
+            this.hideTyping();
+            this.addMessage(response, 'bot');
+        }, 1000 + Math.random() * 1500); // Random delay for realism
+    }
+    
+    addMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${sender}-message`);
+        
+        const avatar = document.createElement('div');
+        avatar.classList.add('message-avatar');
+        avatar.innerHTML = sender === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+        
+        const content = document.createElement('div');
+        content.classList.add('message-content');
+        
+        const messageP = document.createElement('p');
+        messageP.innerHTML = this.formatMessage(message);
+        
+        const timeSpan = document.createElement('span');
+        timeSpan.classList.add('message-time');
+        timeSpan.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        content.appendChild(messageP);
+        content.appendChild(timeSpan);
+        
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(content);
+        
+        this.chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        this.scrollToBottom();
+    }
+    
+    formatMessage(message) {
+        // Convert markdown-like formatting to HTML
+        return message
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>')
+            .replace(/•/g, '•');
+    }
+    
+    generateResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Find the best matching category
+        for (const [category, data] of Object.entries(this.knowledgeBase)) {
+            if (category === 'default') continue;
+            
+            const hasKeyword = data.keywords.some(keyword => 
+                lowerMessage.includes(keyword)
+            );
+            
+            if (hasKeyword) {
+                return data.response;
+            }
+        }
+        
+        // Check for greetings
+        if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening)/)) {
+            return `Hello! 👋 Great to meet you! I'm Yashodip's AI assistant, and I'm excited to tell you all about his amazing journey in tech. 
+
+What would you like to know? I can share details about his experience, skills, projects, or education. Just ask away! 🚀`;
+        }
+        
+        // Check for thanks
+        if (lowerMessage.match(/(thank|thanks|appreciate)/)) {
+            return `You're very welcome! 😊 I'm glad I could help you learn more about Yashodip. 
+
+Is there anything else you'd like to know about his experience, skills, projects, or background? I'm here to help! 🚀`;
+        }
+        
+        // Default response
+        return this.knowledgeBase.default.response;
+    }
+    
+    showTyping() {
+        this.isTyping = true;
+        this.typingIndicator.classList.add('active');
+        this.scrollToBottom();
+    }
+    
+    hideTyping() {
+        this.isTyping = false;
+        this.typingIndicator.classList.remove('active');
+    }
+    
+    scrollToBottom() {
+        setTimeout(() => {
+            this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+        }, 100);
+    }
+    
+    showNotification() {
+        this.notificationBadge.style.display = 'flex';
+    }
+    
+    hideNotification() {
+        this.notificationBadge.style.display = 'none';
+    }
+    
+    showWelcomeMessage() {
+        // Show notification after 3 seconds if chat is not opened
+        setTimeout(() => {
+            if (!this.isOpen) {
+                this.showNotification();
+            }
+        }, 3000);
+    }
+}
+
+// Initialize the chatbot when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new AIChatbot();
+});
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
     AOS.init();
