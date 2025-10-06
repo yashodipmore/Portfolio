@@ -6681,7 +6681,18 @@ What would you like to know more about? Just ask me anything! 😊`
         
         // Check for greetings
         if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening)/)) {
-            return `Hello! 👋 Great to meet you! I'm Yashodip's AI assistant, and I'm excited to tell you all about his amazing journey in tech. 
+            const hour = new Date().getHours();
+            let timeGreeting = 'Hello!';
+            
+            if (hour < 12) {
+                timeGreeting = 'Good morning!';
+            } else if (hour < 17) {
+                timeGreeting = 'Good afternoon!';
+            } else {
+                timeGreeting = 'Good evening!';
+            }
+            
+            return `${timeGreeting} 👋 Great to meet you! I'm Yashodip's AI assistant, and I'm excited to tell you all about his amazing journey in tech. 
 
 What would you like to know? I can share details about his experience, skills, projects, or education. Just ask away! 🚀`;
         }
