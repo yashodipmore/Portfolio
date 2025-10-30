@@ -6,7 +6,8 @@
     <title>Portfolio - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Claude.ai-style Typography System -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- AOS Library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -14,6 +15,67 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 
+
+    <!-- Claude.ai-style Typography System -->
+    <style>
+        :root {
+            /* Typography - Claude.ai Style */
+            --font-heading: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-body: Georgia, 'Playfair Display', 'Times New Roman', serif;
+            
+            /* Colors - Soft neutral palette */
+            --color-text: #0A0A0A;
+            --color-background: #F9F9F9;
+            --color-text-muted: #4A4A4A;
+            --color-accent: #2563eb;
+            
+            /* Typography Scale */
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            
+            /* Letter Spacing */
+            --letter-spacing-tight: -0.01em;
+            --letter-spacing-normal: 0;
+            --letter-spacing-wide: 0.025em;
+        }
+        
+        /* Global Typography Reset - Claude.ai Style */
+        * {
+            font-family: var(--font-body);
+        }
+        
+        /* Headings use sans-serif (Inter/Poppins fallback) */
+        h1, h2, h3, h4, h5, h6,
+        .heading,
+        button,
+        input,
+        select,
+        textarea,
+        nav,
+        .btn,
+        .nav-link,
+        .mobile-nav-link {
+            font-family: var(--font-heading) !important;
+            font-weight: var(--font-weight-medium);
+            letter-spacing: var(--letter-spacing-wide);
+        }
+        
+        /* Paragraphs and long-form text use serif (Georgia/Playfair Display fallback) */
+        p, .text, .description, .message-content p {
+            font-family: var(--font-body) !important;
+            font-weight: var(--font-weight-normal);
+            letter-spacing: var(--letter-spacing-normal);
+            line-height: 1.65;
+        }
+        
+        /* Maintain readability */
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
     <!-- Header Section -->
@@ -58,10 +120,6 @@
     
     <!-- CSS Styling -->
     <style>
-        * {
-  font-family: 'Poppins', sans-serif;
-}
-
         /* General Navigation Styles */
         .nav-link, .mobile-nav-link {
             color: #9fc3e3;
@@ -248,10 +306,6 @@ particlesJS("particles-js", {
 
 <!-- Button & Image Floating Animation Styles -->
 <style>
-    * {
-  font-family: 'Inter', sans-serif;
-}
-
 /* Graph Paper Grid Effect */
 .graph-paper-grid {
     background-image: 
@@ -5621,10 +5675,6 @@ document.head.appendChild(planetStyle);
 .relative.flex {
     animation: fadeInUp 0.8s ease-in-out;
 }
-    * {
-  font-family: 'Inter', sans-serif;
-}
-
 </style>
 
 <!-- Qualification Section -->
@@ -5753,10 +5803,6 @@ document.head.appendChild(planetStyle);
     border-radius: 8px;
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
-    * {
-  font-family: 'Poppins', sans-serif;
-}
-
 </style>
 
 
@@ -5826,10 +5872,6 @@ particlesJS("contact-particles", {
 
 <!-- Social Icons Hover Effects -->
 <style>
-    * {
-  font-family: 'Poppins', sans-serif;
-}
-
 /* Floating Card Style */
 .bg-white\/10 {
     box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.3);
