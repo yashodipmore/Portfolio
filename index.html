@@ -25,67 +25,83 @@
     --pink-light: #fce8ee;
     --pink-border: #f0c4d0;
     --border: #ddd0d4;
+    --linux-orange: #f4a020;
     --mono: 'JetBrains Mono', monospace;
     --serif: 'IBM Plex Serif', Georgia, serif;
   }
-
-  body { background: #fefcfd; }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: var(--mono);
-    background: var(--white);
+    background: #fefcfd;
     color: var(--black);
     font-size: 13px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    /* Linux grain texture */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23fefcfd'/%3E%3Ccircle cx='1' cy='1' r='0.4' fill='%23f0c4d0' opacity='0.18'/%3E%3C/svg%3E");
   }
+
+  /* ─── LINUX AURA — floating tux watermark ─── */
+  #linux-aura {
+    position: fixed; right: -60px; bottom: 80px; z-index: 0; pointer-events: none;
+    opacity: 0.035; transform: rotate(-8deg);
+    animation: auraDrift 12s ease-in-out infinite alternate;
+  }
+  @keyframes auraDrift { 0%{transform:rotate(-8deg) translateY(0);} 100%{transform:rotate(-5deg) translateY(-20px);} }
+
+  /* Linux terminal prompt in corner */
+  #linux-prompt {
+    position: fixed; left: 16px; bottom: 16px; z-index: 50; pointer-events: none;
+    font-family: var(--mono); font-size: 9px; color: var(--linux-orange);
+    opacity: 0.55; letter-spacing: 0.5px;
+    animation: promptBlink 4s ease-in-out infinite;
+  }
+  @keyframes promptBlink { 0%,90%,100%{opacity:0.55;} 95%{opacity:0.2;} }
 
   /* ─── LOADER ─── */
   #loader {
-    position: fixed; inset: 0; background: #fff; z-index: 9999;
+    position: fixed; inset: 0; background: #0d0d0d; z-index: 9999;
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; gap: 16px;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
   }
   #loader.hidden { opacity: 0; visibility: hidden; }
-  .loader-text { font-family: var(--mono); font-size: 11px; color: var(--gray-3); letter-spacing: 2px; }
-  .loader-bar { width: 200px; height: 1px; background: var(--gray-5); position: relative; overflow: hidden; }
+  .loader-tux { animation: loaderSpin 1s ease-out forwards; }
+  @keyframes loaderSpin { from{transform:scale(0) rotate(-180deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
+  .loader-text { font-family: var(--mono); font-size: 10px; color: var(--linux-orange); letter-spacing: 3px; }
+  .loader-sub  { font-family: var(--mono); font-size: 9px; color: #555; letter-spacing: 1px; }
+  .loader-bar  { width: 200px; height: 1px; background: #333; position: relative; overflow: hidden; }
   .loader-bar::after {
     content: ''; position: absolute; left: -100%; top: 0; height: 100%; width: 100%;
-    background: var(--accent); animation: loadBar 1.2s ease forwards;
+    background: var(--linux-orange); animation: loadBar 1.4s ease forwards 0.3s;
   }
   @keyframes loadBar { to { left: 0; } }
 
   /* ─── TOPBAR ─── */
   #topbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
+    background: rgba(254,252,253,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--pink-border);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px; height: 44px;
     font-size: 11px; letter-spacing: 0.5px;
   }
-  .topbar-logo { font-weight: 700; color: var(--accent); font-size: 12px; letter-spacing: 1px; }
-  .topbar-logo span { color: var(--accent2); }
+  .topbar-logo { font-weight: 700; color: var(--accent); font-size: 12px; letter-spacing: 1px; display:flex; align-items:center; gap:8px; }
+  .topbar-logo .tux-mini { opacity:0.7; }
   .topbar-nav { display: flex; gap: 28px; }
-  .topbar-nav a {
-    color: var(--gray-2); text-decoration: none; font-size: 11px; letter-spacing: 0.5px;
-    transition: color 0.15s; position: relative;
-  }
-  .topbar-nav a:hover { color: var(--accent); }
-  .topbar-nav a::after {
-    content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px;
-    background: var(--accent); transition: width 0.2s;
-  }
+  .topbar-nav a { color: var(--gray-2); text-decoration: none; font-size: 11px; letter-spacing: 0.5px; transition: color 0.15s; position: relative; }
+  .topbar-nav a:hover { color: var(--pink); }
+  .topbar-nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--pink); transition: width 0.2s; }
   .topbar-nav a:hover::after { width: 100%; }
   .topbar-status { display: flex; align-items: center; gap: 6px; color: var(--gray-3); font-size: 10px; }
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s ease-in-out infinite; }
   @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
   /* ─── LAYOUT ─── */
-  main { max-width: 960px; margin: 0 auto; padding: 80px 40px 40px; }
+  main { max-width: 980px; margin: 0 auto; padding: 80px 40px 40px; position: relative; z-index: 1; }
 
   /* ─── SECTION TITLES ─── */
   .section-title {
@@ -96,88 +112,76 @@
   }
   .section-title::before { content: '§'; color: var(--pink); font-size: 13px; }
 
-  /* ─── HERO ─── */
+  /* ─── HERO WRAP ─── */
   #hero-wrap {
-    padding: 40px 0 50px;
+    padding: 36px 0 50px;
     border-bottom: 1px solid var(--border);
-    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+    opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
   }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+  /* BIG CURVY PINK CARD */
   #hero {
-    display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: center;
+    display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: center;
     background: var(--pink-light);
-    border: 1px solid var(--pink-border);
-    border-radius: 20px;
-    padding: 40px 40px;
-    position: relative;
-    overflow: hidden;
+    border: 1.5px solid var(--pink-border);
+    border-radius: 36px;
+    padding: 72px 72px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 48px rgba(214,79,122,0.12), 0 2px 8px rgba(0,0,0,0.05);
+    min-height: 480px;
   }
+  /* decorative circles */
   #hero::before {
-    content:''; position:absolute; top:-40px; right:-40px;
-    width:160px; height:160px; border-radius:50%;
-    background: radial-gradient(circle, rgba(214,79,122,0.10) 0%, transparent 70%);
+    content:''; position:absolute; top:-60px; right:-60px;
+    width:220px; height:220px; border-radius:50%;
+    background: radial-gradient(circle, rgba(214,79,122,0.13) 0%, transparent 70%);
     pointer-events:none;
   }
   #hero::after {
-    content:''; position:absolute; bottom:-30px; left:-30px;
-    width:120px; height:120px; border-radius:50%;
-    background: radial-gradient(circle, rgba(51,102,204,0.07) 0%, transparent 70%);
+    content:''; position:absolute; bottom:-50px; left:-50px;
+    width:180px; height:180px; border-radius:50%;
+    background: radial-gradient(circle, rgba(51,102,204,0.08) 0%, transparent 70%);
     pointer-events:none;
   }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+  /* Linux kernel ring decoration inside card */
+  .hero-linux-ring {
+    position:absolute; top:18px; right:260px;
+    opacity:0.07; pointer-events:none;
+    animation: auraDrift 8s ease-in-out infinite alternate;
+  }
 
-  .hero-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .hero-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
   .hero-name {
-    font-family: var(--serif); font-size: 42px; font-weight: 300; letter-spacing: -1px;
+    font-family: var(--serif); font-size: 46px; font-weight: 300; letter-spacing: -1px;
     line-height: 1.1; color: var(--black); margin-bottom: 6px;
   }
   .hero-name em { font-style: italic; color: var(--gray-2); }
-  .hero-title { font-size: 12px; color: var(--gray-3); margin-bottom: 20px; letter-spacing: 0.5px; }
+  .hero-title { font-size: 12px; color: var(--gray-2); margin-bottom: 20px; letter-spacing: 0.5px; }
 
   .hero-desc {
-    font-size: 13px; color: var(--gray-2); line-height: 1.8; max-width: 520px;
-    border-left: 2px solid var(--border); padding-left: 16px;
+    font-size: 13px; color: var(--gray-2); line-height: 1.85; max-width: 520px;
+    border-left: 2px solid var(--pink-border); padding-left: 16px;
+    background: rgba(255,255,255,0.5); padding: 12px 12px 12px 16px; border-radius: 0 8px 8px 0;
   }
   .hero-desc strong { color: var(--black); font-weight: 600; }
 
-  .hero-links { display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+  .hero-links { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
   .hero-link {
     font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px;
-    padding: 5px 12px; border: 1px solid var(--accent); transition: all 0.15s;
+    padding: 6px 14px; border: 1px solid var(--accent); border-radius: 6px;
+    transition: all 0.15s; display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.7);
   }
   .hero-link:hover { background: var(--accent); color: #fff; }
-  .hero-link.red { color: var(--accent2); border-color: var(--accent2); }
-  .hero-link.red:hover { background: var(--accent2); color: #fff; }
+  .hero-link svg { flex-shrink:0; }
+  .hero-link.pink { color: var(--pink); border-color: var(--pink); }
+  .hero-link.pink:hover { background: var(--pink); color: #fff; }
+  .hero-link.gh { color: #24292f; border-color: #24292f; }
+  .hero-link.gh:hover { background: #24292f; color: #fff; }
 
-  /* Photo */
-  .hero-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .hero-photo {
-    width: 160px; height: 160px; border-radius: 4px;
-    border: 1px solid var(--border);
-    object-fit: cover; display: block;
-    filter: grayscale(15%);
-    transition: filter 0.3s;
-    background: var(--gray-6);
-    position: relative;
-  }
-  .hero-photo:hover { filter: grayscale(0%); }
-  .photo-placeholder {
-    width: 160px; height: 160px; border-radius: 4px;
-    border: 1px dashed var(--border);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 8px; color: var(--gray-4); font-size: 10px; letter-spacing: 1px;
-    background: var(--gray-6);
-  }
-  .photo-placeholder svg { opacity: 0.3; }
-  .photo-label { font-size: 9px; color: var(--gray-4); letter-spacing: 1.5px; text-align: center; line-height: 1.5; }
-
-  /* Stats row */
-  .hero-stats { display: flex; gap: 0; margin-top: 28px; border: 1px solid var(--pink-border); border-radius: 8px; overflow: hidden; background: #fff; }
-  .stat { flex: 1; padding: 12px 16px; border-right: 1px solid var(--pink-border); }
-  .stat:last-child { border-right: none; }
-  .stat-val { font-size: 18px; font-weight: 700; color: var(--black); line-height: 1; }
-  .stat-key { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-3); margin-top: 3px; }
-  .stat-val .accent { color: var(--accent); }
-  .stat-val .red { color: var(--accent2); }
+  /* Photo / cat wrap */
+  .hero-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; position:relative; z-index:2; }
 
   /* ─── TICKER ─── */
   .ticker-wrap {
@@ -185,14 +189,37 @@
     padding: 8px 0; background: var(--pink-light);
     font-size: 10px; color: var(--gray-3); letter-spacing: 1px;
   }
-  .ticker { display: flex; width: max-content; animation: ticker 30s linear infinite; white-space: nowrap; }
+  .ticker { display: flex; width: max-content; animation: ticker 32s linear infinite; white-space: nowrap; }
   .ticker-item { padding: 0 32px; }
-  .ticker-item span { color: var(--accent); }
+  .ticker-item span { color: var(--pink); }
   @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-  /* ─── SECTION ─── */
+  /* ─── SECTIONS ─── */
   section { padding: 40px 0; border-bottom: 1px solid var(--border); opacity: 0; }
   section.visible { animation: fadeUp 0.6s ease forwards; }
+
+  /* ─── LOGO BADGE in timeline / table ─── */
+  .org-logo {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-weight: 700; color: var(--black);
+  }
+  .org-logo img, .org-logo svg { width: 18px; height: 18px; object-fit: contain; flex-shrink:0; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:var(--pink-border); }
+  .tl-item { position: relative; padding: 0 0 30px 24px; }
+  .tl-item::before {
+    content:''; position:absolute; left:-4px; top:7px;
+    width:8px; height:8px; border-radius:50%;
+    border:1.5px solid var(--pink); background:var(--white);
+    transition: background 0.2s;
+  }
+  .tl-item:hover::before { background: var(--pink); }
+  .tl-date { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-3); margin-bottom: 5px; }
+  .tl-role { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+  .tl-org  { font-size: 12px; color: var(--accent); margin-bottom: 5px; display:flex; align-items:center; gap:8px; }
+  .tl-desc { font-size: 11px; color: var(--gray-3); line-height: 1.6; }
 
   /* ─── TABLE ─── */
   .cf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -201,155 +228,158 @@
     color: var(--gray-3); padding: 6px 12px; background: var(--gray-6);
     border: 1px solid var(--border); font-weight: 500;
   }
-  .cf-table td {
-    padding: 9px 12px; border: 1px solid var(--border); vertical-align: top;
-    color: var(--gray-1); line-height: 1.5;
-  }
-  .cf-table tr:hover td { background: #fafafa; }
+  .cf-table td { padding: 9px 12px; border: 1px solid var(--border); vertical-align: middle; color: var(--gray-1); line-height: 1.5; }
+  .cf-table tr:hover td { background: #fdf0f4; }
   .cf-table td:first-child { font-weight: 600; color: var(--black); }
-  .tag-badge {
-    display: inline-block; padding: 1px 7px; font-size: 9px; letter-spacing: 1px;
-    border: 1px solid; margin: 1px 2px; text-transform: uppercase;
-  }
-  .tag-blue { border-color: var(--accent); color: var(--accent); }
-  .tag-red  { border-color: var(--accent2); color: var(--accent2); }
+  .tag-badge { display: inline-block; padding: 1px 7px; font-size: 9px; letter-spacing: 1px; border: 1px solid; margin: 1px 2px; text-transform: uppercase; border-radius:3px; }
+  .tag-blue  { border-color: var(--accent); color: var(--accent); }
+  .tag-red   { border-color: var(--accent2); color: var(--accent2); }
   .tag-green { border-color: var(--green); color: var(--green); }
-  .tag-gray { border-color: var(--gray-3); color: var(--gray-3); }
-
-  /* prize highlight */
+  .tag-gray  { border-color: var(--gray-3); color: var(--gray-3); }
   .prize { color: var(--accent2); font-weight: 700; }
 
-  /* ─── SKILLS GRID ─── */
+  /* ─── SKILLS ─── */
   .skills-grid { display: flex; flex-wrap: wrap; gap: 6px; }
   .skill-chip {
     padding: 4px 10px; border: 1px solid var(--border); font-size: 11px;
     color: var(--gray-2); background: var(--gray-6); letter-spacing: 0.3px;
-    transition: all 0.15s; cursor: default;
+    transition: all 0.15s; cursor: default; border-radius: 5px;
   }
-  .skill-chip:hover { border-color: var(--accent); color: var(--accent); background: #fff; transform: translateY(-1px); }
+  .skill-chip:hover { border-color: var(--pink); color: var(--pink); background: #fff; transform: translateY(-1px); }
   .skill-chip.primary { border-color: var(--gray-3); color: var(--black); background: #fff; font-weight: 600; }
 
   /* ─── OSS CARDS ─── */
-  .oss-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .oss-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius:10px; overflow:hidden; }
   .oss-card {
-    background: var(--white); padding: 18px; transition: background 0.15s;
+    background: var(--white); padding: 20px; transition: background 0.15s;
     position: relative; overflow: hidden;
   }
-  .oss-card:hover { background: var(--gray-6); }
-  .oss-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0;
-    background: var(--accent); transition: height 0.3s;
-  }
+  .oss-card:hover { background: #fdf0f4; }
+  .oss-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--pink); transition: height 0.3s; }
   .oss-card:hover::before { height: 100%; }
-  .oss-org { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-3); margin-bottom: 6px; }
+  .oss-card-header { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+  .oss-logo-wrap { width:28px; height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .oss-org  { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-3); }
   .oss-name { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
   .oss-desc { font-size: 11px; color: var(--gray-3); line-height: 1.6; margin-bottom: 10px; }
   .oss-status { font-size: 9px; color: var(--green); letter-spacing: 1px; }
 
-  /* ─── TIMELINE ─── */
-  .timeline { position: relative; padding-left: 20px; }
-  .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:var(--border); }
-  .tl-item { position: relative; padding: 0 0 28px 20px; }
-  .tl-item::before {
-    content:''; position:absolute; left:-4px; top:6px;
-    width:8px; height:8px; border-radius:50%; border:1.5px solid var(--accent); background:var(--white);
-    transition: background 0.2s;
+  /* ─── BADGE PROGRAMS ─── */
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .prog-badge {
+    font-size: 10px; letter-spacing: 0.8px; padding: 5px 12px;
+    border: 1px solid var(--pink-border); color: var(--gray-2); background: var(--pink-light);
+    display: flex; align-items: center; gap: 7px; border-radius:6px;
   }
-  .tl-item:hover::before { background: var(--accent); }
-  .tl-date { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-3); margin-bottom: 4px; }
-  .tl-role { font-size: 13px; font-weight: 700; color: var(--black); }
-  .tl-org  { font-size: 11px; color: var(--accent); margin-bottom: 4px; }
-  .tl-desc { font-size: 11px; color: var(--gray-3); line-height: 1.6; }
+  .prog-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink:0; }
 
-  /* ─── TERMINAL BLOCK ─── */
+  /* ─── TERMINAL ─── */
   .terminal {
     background: #0d0d0d; color: #d4d4d4; font-family: var(--mono);
     font-size: 11px; padding: 20px 24px; line-height: 1.9;
-    border: 1px solid #222; position: relative;
+    border: 1px solid #222; border-radius:8px; position: relative;
   }
-  .terminal-bar {
-    display: flex; gap: 6px; margin-bottom: 16px; padding-bottom: 12px;
-    border-bottom: 1px solid #222;
-  }
+  .terminal-bar { display: flex; gap: 6px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #222; align-items:center; }
   .tb { width: 10px; height: 10px; border-radius: 50%; }
-  .tb-r { background: #ff5f57; }
-  .tb-y { background: #febc2e; }
-  .tb-g { background: #28c840; }
-  .t-prompt { color: #27ae60; }
-  .t-cmd    { color: #fff; }
-  .t-out    { color: #888; }
-  .t-key    { color: #4ec9b0; }
-  .t-val    { color: #ce9178; }
-  .t-num    { color: #b5cea8; }
+  .tb-r{background:#ff5f57;} .tb-y{background:#febc2e;} .tb-g{background:#28c840;}
+  .t-prompt{color:#f4a020;} .t-cmd{color:#fff;} .t-key{color:#4ec9b0;} .t-val{color:#ce9178;} .t-num{color:#b5cea8;}
   .t-cursor { display: inline-block; width: 7px; height: 12px; background: #aaa; animation: cur 1s step-end infinite; vertical-align: text-bottom; }
   @keyframes cur { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
+  /* ─── ILLUSTRATIONS ─── */
+  .illus-row { display: flex; justify-content: center; gap: 40px; padding: 20px 0; opacity: 0.65; }
+  .illus-item { text-align: center; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-3); }
+  .svg-float { animation: svgFloat 4s ease-in-out infinite; }
+  @keyframes svgFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+  .svg-spin { animation: svgSpin 12s linear infinite; transform-origin: center; }
+  @keyframes svgSpin { to{transform:rotate(360deg);} }
+
   /* ─── FOOTER ─── */
   footer {
-    padding: 32px 40px; max-width: 960px; margin: 0 auto;
+    padding: 32px 40px; max-width: 980px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: center;
     font-size: 10px; color: var(--gray-4); letter-spacing: 0.5px;
   }
   footer a { color: var(--accent); text-decoration: none; }
+  .footer-linux { display:flex; align-items:center; gap:6px; color: var(--linux-orange); opacity:0.6; font-size:9px; letter-spacing:1px; }
 
-  /* ─── SCROLL PROGRESS ─── */
-  #progress { position: fixed; top: 44px; left: 0; height: 1px; background: var(--accent); width: 0%; z-index: 99; transition: width 0.1s linear; }
-
-  /* ─── BACK TO TOP ─── */
-  #btt {
-    position: fixed; bottom: 28px; right: 28px; font-size: 10px; letter-spacing: 1px;
-    color: var(--gray-3); background: var(--white); border: 1px solid var(--border);
-    padding: 6px 12px; cursor: pointer; transition: all 0.15s;
-    opacity: 0; pointer-events: none;
-  }
+  /* ─── PROGRESS + BTT ─── */
+  #progress { position: fixed; top: 44px; left: 0; height: 2px; background: linear-gradient(90deg, var(--pink), var(--linux-orange)); width: 0%; z-index: 99; transition: width 0.1s linear; }
+  #btt { position: fixed; bottom: 28px; right: 28px; font-size: 10px; letter-spacing: 1px; color: var(--gray-3); background: var(--white); border: 1px solid var(--border); padding: 6px 12px; cursor: pointer; transition: all 0.15s; opacity: 0; pointer-events: none; border-radius:4px; }
   #btt.show { opacity: 1; pointer-events: all; }
-  #btt:hover { color: var(--accent); border-color: var(--accent); }
+  #btt:hover { color: var(--pink); border-color: var(--pink); }
 
-  /* ─── TYPING ANIMATION ─── */
-  .typewriter { overflow: hidden; white-space: nowrap; width: 0; animation: type 1.5s steps(30) 1.5s forwards; }
-  @keyframes type { to { width: 100%; } }
-
-  /* ─── BADGE PROGRAM ROW ─── */
-  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .prog-badge {
-    font-size: 10px; letter-spacing: 0.8px; padding: 4px 12px;
-    border: 1px solid var(--border); color: var(--gray-2); background: var(--gray-6);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .prog-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
-
-  /* ─── LOTTIE / ILLUSTRATIONS ─── */
-  .illus-row { display: flex; justify-content: center; gap: 40px; padding: 20px 0; opacity: 0.6; }
-  .illus-item { text-align: center; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-3); }
-
-  /* SVG illustrations inline */
-  .svg-float { animation: svgFloat 4s ease-in-out infinite; }
-  @keyframes svgFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
-  .svg-spin { animation: svgSpin 12s linear infinite; }
-  @keyframes svgSpin { to{transform:rotate(360deg);} }
-  .svg-pulse { animation: svgPulse 2.5s ease-in-out infinite; }
-  @keyframes svgPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);} }
+  /* ─── CONTACT ─── */
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); max-width:480px; border-radius:10px; overflow:hidden; }
+  .contact-cell { background:var(--white); padding:16px; }
+  .contact-cell:hover { background: #fdf0f4; }
+  .contact-label { font-size:9px; letter-spacing:2px; color:var(--gray-3); text-transform:uppercase; margin-bottom:6px; }
+  .contact-val { color:var(--accent); font-size:12px; text-decoration:none; display:flex; align-items:center; gap:6px; }
+  .contact-val:hover { color:var(--pink); }
 
   @media (max-width: 720px) {
-    #hero { grid-template-columns: 1fr; padding: 24px; }
+    #hero { grid-template-columns: 1fr; padding: 28px 24px; }
     .hero-photo-wrap { align-items: center; }
     .oss-grid { grid-template-columns: 1fr; }
     main { padding: 70px 20px 20px; }
     #topbar { padding: 0 20px; }
-    footer { flex-direction: column; gap: 8px; }
+    footer { flex-direction: column; gap: 8px; text-align:center; }
+    .contact-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <rect x="2" y="2" width="28" height="28" rx="2" stroke="#3366cc" stroke-width="1.5" stroke-dasharray="4 2"/>
-    <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3366cc" font-weight="700">YM</text>
+<!-- LINUX BACKGROUND AURA -->
+<div id="linux-aura">
+  <!-- Giant Tux penguin watermark -->
+  <svg width="420" height="500" viewBox="0 0 420 500" fill="none">
+    <!-- tux body -->
+    <ellipse cx="210" cy="300" rx="120" ry="150" fill="#000"/>
+    <!-- tux belly -->
+    <ellipse cx="210" cy="320" rx="75" ry="110" fill="#f5f5f5"/>
+    <!-- tux head -->
+    <ellipse cx="210" cy="130" rx="80" ry="85" fill="#000"/>
+    <!-- tux face white -->
+    <ellipse cx="210" cy="140" rx="52" ry="58" fill="#f5f5f5"/>
+    <!-- eyes -->
+    <circle cx="190" cy="120" r="12" fill="#fff"/>
+    <circle cx="230" cy="120" r="12" fill="#fff"/>
+    <circle cx="193" cy="121" r="6" fill="#000"/>
+    <circle cx="233" cy="121" r="6" fill="#000"/>
+    <circle cx="195" cy="119" r="2" fill="#fff"/>
+    <circle cx="235" cy="119" r="2" fill="#fff"/>
+    <!-- beak -->
+    <ellipse cx="210" cy="150" rx="18" ry="12" fill="#f4a020"/>
+    <!-- feet -->
+    <ellipse cx="170" cy="448" rx="38" ry="16" fill="#f4a020"/>
+    <ellipse cx="250" cy="448" rx="38" ry="16" fill="#f4a020"/>
+    <!-- wings -->
+    <ellipse cx="100" cy="290" rx="38" ry="90" fill="#000" transform="rotate(-10 100 290)"/>
+    <ellipse cx="320" cy="290" rx="38" ry="90" fill="#000" transform="rotate(10 320 290)"/>
   </svg>
+</div>
+
+<!-- LINUX TERMINAL PROMPT -->
+<div id="linux-prompt">root@yashodip:~$ █</div>
+
+<!-- LOADER — dark terminal style -->
+<div id="loader">
+  <div class="loader-tux">
+    <svg width="48" height="56" viewBox="0 0 48 56" fill="none">
+      <ellipse cx="24" cy="34" rx="14" ry="17" fill="#f4a020"/>
+      <ellipse cx="24" cy="34" rx="9" ry="13" fill="#fff" opacity="0.9"/>
+      <ellipse cx="24" cy="15" rx="10" ry="10" fill="#f4a020"/>
+      <circle cx="20" cy="13" r="2.5" fill="#0d0d0d"/>
+      <circle cx="28" cy="13" r="2.5" fill="#0d0d0d"/>
+      <ellipse cx="24" cy="19" rx="4" ry="2.5" fill="#c8720a"/>
+      <ellipse cx="18" cy="51" rx="6" ry="3" fill="#c8720a"/>
+      <ellipse cx="30" cy="51" rx="6" ry="3" fill="#c8720a"/>
+    </svg>
+  </div>
   <div class="loader-bar"></div>
-  <div class="loader-text">INITIALIZING...</div>
+  <div class="loader-text">BOOTING SYSTEM...</div>
+  <div class="loader-sub">kernel: yashodip-dev v2025.1</div>
 </div>
 
 <!-- SCROLL PROGRESS -->
@@ -357,7 +387,21 @@
 
 <!-- TOPBAR -->
 <nav id="topbar">
-  <div class="topbar-logo">Yashodip<span>More</span><span style="color:#888;font-weight:400">.dev</span></div>
+  <div class="topbar-logo">
+    <svg class="tux-mini" width="16" height="19" viewBox="0 0 16 19" fill="none">
+      <ellipse cx="8" cy="12" rx="5" ry="6" fill="#0a0a0a"/>
+      <ellipse cx="8" cy="12" rx="3" ry="4" fill="#f5f5f5"/>
+      <ellipse cx="8" cy="5" rx="4" ry="4" fill="#0a0a0a"/>
+      <circle cx="6.5" cy="4" r="1" fill="#fff"/>
+      <circle cx="9.5" cy="4" r="1" fill="#fff"/>
+      <circle cx="6.8" cy="4.1" r="0.5" fill="#0a0a0a"/>
+      <circle cx="9.8" cy="4.1" r="0.5" fill="#0a0a0a"/>
+      <ellipse cx="8" cy="7" rx="1.5" ry="1" fill="#f4a020"/>
+      <ellipse cx="5.5" cy="17" rx="2.5" ry="1.2" fill="#f4a020"/>
+      <ellipse cx="10.5" cy="17" rx="2.5" ry="1.2" fill="#f4a020"/>
+    </svg>
+    YashodipMore<span style="color:#888;font-weight:400">.dev</span>
+  </div>
   <div class="topbar-nav">
     <a href="#experience">Experience</a>
     <a href="#oss">Open Source</a>
@@ -374,225 +418,259 @@
 <!-- TICKER -->
 <div class="ticker-wrap" style="margin-top:44px;">
   <div class="ticker">
-    <span class="ticker-item">LFX Mentee @ RISC-V International &nbsp;<span>✦</span></span>
-    <span class="ticker-item">C4GT DMP 2025 — Top 94 / 55,000+ &nbsp;<span>✦</span></span>
-    <span class="ticker-item">AI Research Lead @ IIT Ropar &nbsp;<span>✦</span></span>
-    <span class="ticker-item">Google Gemini Contributor &nbsp;<span>✦</span></span>
-    <span class="ticker-item">₹4,00,000+ in Prizes &nbsp;<span>✦</span></span>
-    <span class="ticker-item">IICPC Global Rank 121 / 45,000+ &nbsp;<span>✦</span></span>
-    <span class="ticker-item">SWE Intern @ Dunnhumby &nbsp;<span>✦</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item">LFX Mentee @ RISC-V International &nbsp;<span>✦</span></span>
-    <span class="ticker-item">C4GT DMP 2025 — Top 94 / 55,000+ &nbsp;<span>✦</span></span>
-    <span class="ticker-item">AI Research Lead @ IIT Ropar &nbsp;<span>✦</span></span>
-    <span class="ticker-item">Google Gemini Contributor &nbsp;<span>✦</span></span>
-    <span class="ticker-item">₹4,00,000+ in Prizes &nbsp;<span>✦</span></span>
-    <span class="ticker-item">IICPC Global Rank 121 / 45,000+ &nbsp;<span>✦</span></span>
-    <span class="ticker-item">SWE Intern @ Dunnhumby &nbsp;<span>✦</span></span>
+    <span class="ticker-item">🐧 LFX Mentee @ RISC-V International <span>✦</span></span>
+    <span class="ticker-item">C4GT DMP 2025 — Top 94 / 55,000+ <span>✦</span></span>
+    <span class="ticker-item">AI Research Lead @ IIT Ropar <span>✦</span></span>
+    <span class="ticker-item">Google Gemini Contributor <span>✦</span></span>
+    <span class="ticker-item">₹4,00,000+ in Prizes <span>✦</span></span>
+    <span class="ticker-item">🐧 Linux &amp; Open Source Evangelist <span>✦</span></span>
+    <span class="ticker-item">SWE Intern @ Dunnhumby <span>✦</span></span>
+    <span class="ticker-item">🐧 LFX Mentee @ RISC-V International <span>✦</span></span>
+    <span class="ticker-item">C4GT DMP 2025 — Top 94 / 55,000+ <span>✦</span></span>
+    <span class="ticker-item">AI Research Lead @ IIT Ropar <span>✦</span></span>
+    <span class="ticker-item">Google Gemini Contributor <span>✦</span></span>
+    <span class="ticker-item">₹4,00,000+ in Prizes <span>✦</span></span>
+    <span class="ticker-item">🐧 Linux &amp; Open Source Evangelist <span>✦</span></span>
+    <span class="ticker-item">SWE Intern @ Dunnhumby <span>✦</span></span>
   </div>
 </div>
 
 <main>
 
-  <!-- ═══════ HERO ═══════ -->
+  <!-- ═══════════ HERO ═══════════ -->
   <div id="hero-wrap">
-  <div id="hero">
-    <div>
-      <div class="hero-tag">// software engineer &amp; open source contributor</div>
-      <h1 class="hero-name">Yashodip<br/><em>More</em></h1>
-      <div class="hero-title">India 🇮🇳 &nbsp;·&nbsp; Non-CS → Top OSS Programs &nbsp;·&nbsp; Building for Impact</div>
+    <div id="hero">
 
-      <div class="hero-desc">
-        Software engineer who went from a <strong>non-CS background</strong> to cracking
-        <strong>LFX Mentorship @ RISC-V</strong>, <strong>C4GT DMP 2025</strong> (top 94 of 55,000+),
-        and leading AI research at <strong>IIT Ropar</strong>.
-        Currently interning at <strong>Dunnhumby</strong> while contributing to
-        Google Gemini, CNCF, Processing Foundation and more.
+      <!-- Linux ring watermark inside card -->
+      <div class="hero-linux-ring">
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+          <circle cx="45" cy="45" r="40" stroke="#f4a020" stroke-width="2" stroke-dasharray="6 4"/>
+          <circle cx="45" cy="45" r="28" stroke="#f4a020" stroke-width="1" stroke-dasharray="3 6"/>
+          <circle cx="45" cy="45" r="4" fill="#f4a020"/>
+        </svg>
       </div>
 
-      <div class="hero-links">
-        <a class="hero-link" href="https://linkedin.com/in/yashodipmore22" target="_blank">↗ LinkedIn</a>
-        <a class="hero-link" href="https://github.com/yashodipmore" target="_blank">↗ GitHub</a>
-        <a class="hero-link" href="https://yashodipmore.me" target="_blank">↗ Portfolio</a>
-        <a class="hero-link red" href="mailto:yashodipmore2004@gmail.com">✉ Email</a>
+      <div>
+        <div class="hero-tag">// software engineer &amp; linux open source contributor</div>
+        <h1 class="hero-name">Yashodip<br/><em>More</em></h1>
+        <div class="hero-title">
+          India 🇮🇳 &nbsp;·&nbsp; Non-CS → Top OSS Programs &nbsp;·&nbsp; Building for Impact
+          &nbsp;<span style="color:var(--linux-orange);font-size:11px;">🐧 Linux User</span>
+        </div>
+
+        <div class="hero-desc">
+          Software engineer who went from a <strong>non-CS background</strong> to cracking
+          <strong>LFX Mentorship @ RISC-V</strong>, <strong>C4GT DMP 2025</strong> (top 94 of 55,000+),
+          and leading AI research at <strong>IIT Ropar</strong>.
+          Currently interning at <strong>Dunnhumby</strong> while contributing to
+          Google Gemini, CNCF, Processing Foundation and more.
+          Runs <strong style="color:var(--linux-orange)">Linux</strong> btw. 🐧
+        </div>
+
+        <div class="hero-links">
+          <!-- LinkedIn real logo -->
+          <a class="hero-link" href="https://linkedin.com/in/yashodipmore22" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <!-- GitHub real logo -->
+          <a class="hero-link gh" href="https://github.com/yashodipmore" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+          <a class="hero-link" href="https://yashodipmore.me" target="_blank">↗ Portfolio</a>
+          <a class="hero-link pink" href="mailto:yashodipmore2004@gmail.com">✉ Email</a>
+        </div>
+      </div>
+
+      <!-- JUNIOR BILLA DEV SVG -->
+      <div class="hero-photo-wrap">
+        <svg width="210" height="225" viewBox="0 0 210 225" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: svgFloat 3.5s ease-in-out infinite;">
+
+          <!-- desk -->
+          <rect x="18" y="172" width="174" height="9" rx="3" fill="#f5d0d8" stroke="#e8b0bc" stroke-width="1"/>
+          <rect x="32" y="181" width="11" height="32" rx="2" fill="#f5d0d8" stroke="#e8b0bc" stroke-width="1"/>
+          <rect x="167" y="181" width="11" height="32" rx="2" fill="#f5d0d8" stroke="#e8b0bc" stroke-width="1"/>
+
+          <!-- laptop base -->
+          <rect x="38" y="138" width="134" height="38" rx="5" fill="#1e1e2e" stroke="#12121e" stroke-width="1.5"/>
+          <!-- screen area -->
+          <rect x="42" y="142" width="126" height="30" rx="2" fill="#0d1117"/>
+          <!-- VS Code style editor on screen -->
+          <!-- line numbers sidebar -->
+          <rect x="42" y="142" width="14" height="30" fill="#161b22"/>
+          <rect x="44" y="146" width="8" height="1.5" rx="0.5" fill="#444" opacity="0.8"/>
+          <rect x="44" y="150" width="8" height="1.5" rx="0.5" fill="#444" opacity="0.8"/>
+          <rect x="44" y="154" width="8" height="1.5" rx="0.5" fill="#444" opacity="0.8"/>
+          <rect x="44" y="158" width="8" height="1.5" rx="0.5" fill="#444" opacity="0.8"/>
+          <rect x="44" y="162" width="8" height="1.5" rx="0.5" fill="#444" opacity="0.8"/>
+          <!-- code lines -->
+          <rect x="60" y="146" width="22" height="1.5" rx="0.5" fill="#c586c0"/>
+          <rect x="84" y="146" width="14" height="1.5" rx="0.5" fill="#9cdcfe"/>
+          <rect x="100" y="146" width="10" height="1.5" rx="0.5" fill="#ce9178"/>
+          <rect x="64" y="150" width="16" height="1.5" rx="0.5" fill="#4ec9b0"/>
+          <rect x="82" y="150" width="28" height="1.5" rx="0.5" fill="#dcdcaa"/>
+          <rect x="60" y="154" width="10" height="1.5" rx="0.5" fill="#569cd6"/>
+          <rect x="73" y="154" width="22" height="1.5" rx="0.5" fill="#9cdcfe"/>
+          <rect x="60" y="158" width="36" height="1.5" rx="0.5" fill="#ce9178"/>
+          <rect x="60" y="162" width="18" height="1.5" rx="0.5" fill="#4ec9b0"/>
+          <rect x="80" y="162" width="8" height="1.5" rx="0.5" fill="#d4d4d4"/>
+          <!-- blinking cursor -->
+          <rect x="90" y="162" width="5" height="1.5" rx="0.5" fill="#ffffff">
+            <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+          </rect>
+          <!-- laptop hinge -->
+          <rect x="38" y="172" width="134" height="4" rx="1.5" fill="#0a0a14"/>
+
+          <!-- LEFT ARM — holding coffee mug -->
+          <path d="M74 118 Q60 123 56 135 Q53 142 59 144" stroke="#e8b090" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <!-- mug -->
+          <rect x="50" y="141" width="18" height="16" rx="4" fill="white" stroke="#e0b0b0" stroke-width="1.2"/>
+          <rect x="50" y="141" width="18" height="6" rx="3" fill="#c0392b"/>
+          <!-- "Jr" text on mug -->
+          <text x="55" y="155" font-family="JetBrains Mono,monospace" font-size="5" fill="#888" font-weight="700">Jr.</text>
+          <!-- handle -->
+          <path d="M68 144 Q75 144 75 149 Q75 154 68 154" stroke="#e0b0b0" stroke-width="1.3" fill="none"/>
+          <!-- steam -->
+          <path d="M55 139 Q57 134 55 130" stroke="#ccc" stroke-width="1" fill="none" opacity="0.6" stroke-linecap="round">
+            <animate attributeName="d" values="M55 139 Q57 134 55 130;M55 139 Q53 134 55 130;M55 139 Q57 134 55 130" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <path d="M61 138 Q63 133 61 129" stroke="#ccc" stroke-width="1" fill="none" opacity="0.4" stroke-linecap="round">
+            <animate attributeName="d" values="M61 138 Q63 133 61 129;M61 138 Q59 133 61 129;M61 138 Q63 133 61 129" dur="1.6s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- RIGHT ARM — typing -->
+          <path d="M136 118 Q150 123 155 137" stroke="#e8b090" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <ellipse cx="157" cy="140" rx="9" ry="5.5" fill="#f5c5a3" stroke="#e0a882" stroke-width="1"/>
+          <circle cx="152" cy="138" r="2.2" fill="#fde8d8"/>
+          <circle cx="157" cy="137" r="2.2" fill="#fde8d8"/>
+          <circle cx="162" cy="138" r="2.2" fill="#fde8d8"/>
+
+          <!-- BODY -->
+          <ellipse cx="105" cy="120" rx="34" ry="29" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.3"/>
+          <ellipse cx="105" cy="125" rx="21" ry="19" fill="#fde8d8" stroke="#e8c4a8" stroke-width="0.8"/>
+
+          <!-- HEAD -->
+          <ellipse cx="105" cy="82" rx="32" ry="30" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.5"/>
+
+          <!-- EARS -->
+          <polygon points="79,66 72,46 92,62" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
+          <polygon points="81,64 75,50 90,63" fill="#ffb3ba"/>
+          <polygon points="131,66 138,46 118,62" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
+          <polygon points="129,64 135,50 120,63" fill="#ffb3ba"/>
+
+          <!-- GLASSES — round nerdy ones -->
+          <circle cx="92" cy="80" r="9" fill="rgba(200,230,255,0.3)" stroke="#2a2a2a" stroke-width="2"/>
+          <circle cx="118" cy="80" r="9" fill="rgba(200,230,255,0.3)" stroke="#2a2a2a" stroke-width="2"/>
+          <path d="M101 80 Q105 78 109 80" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+          <line x1="83" y1="80" x2="77" y2="79" stroke="#2a2a2a" stroke-width="1.5"/>
+          <line x1="127" y1="80" x2="133" y2="79" stroke="#2a2a2a" stroke-width="1.5"/>
+
+          <!-- EYES behind glasses -->
+          <circle cx="92" cy="80" r="4.5" fill="#fff"/>
+          <circle cx="118" cy="80" r="4.5" fill="#fff"/>
+          <circle cx="93" cy="80" r="2.8" fill="#2a1a08"/>
+          <circle cx="119" cy="80" r="2.8" fill="#2a1a08"/>
+          <circle cx="94.2" cy="78.8" r="1" fill="#fff"/>
+          <circle cx="120.2" cy="78.8" r="1" fill="#fff"/>
+
+          <!-- NOSE -->
+          <ellipse cx="105" cy="89" rx="3" ry="2" fill="#e88fa0"/>
+          <!-- SMIRK smile -->
+          <path d="M100 93 Q106 98 112 93" stroke="#c0708a" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+
+          <!-- WHISKERS -->
+          <line x1="74" y1="87" x2="93" y2="89" stroke="#c8a080" stroke-width="0.8" opacity="0.65"/>
+          <line x1="74" y1="91" x2="93" y2="91" stroke="#c8a080" stroke-width="0.8" opacity="0.65"/>
+          <line x1="117" y1="89" x2="136" y2="87" stroke="#c8a080" stroke-width="0.8" opacity="0.65"/>
+          <line x1="117" y1="91" x2="136" y2="91" stroke="#c8a080" stroke-width="0.8" opacity="0.65"/>
+
+          <!-- TAIL curled up behind -->
+          <path d="M138 148 Q168 138 170 120 Q172 104 160 98 Q150 92 154 84" stroke="#e0a882" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <ellipse cx="156" cy="81" rx="7" ry="5" fill="#fde8d8" stroke="#e0a882" stroke-width="1"/>
+
+          <!-- "Junior Dev" badge on chest -->
+          <rect x="90" y="115" width="30" height="12" rx="3" fill="white" stroke="#f0c4d0" stroke-width="1"/>
+          <text x="105" y="124" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#d64f7a" text-anchor="middle" font-weight="700">Jr. Dev 🐾</text>
+
+          <!-- Linux penguin sticker on laptop -->
+          <ellipse cx="90" cy="160" rx="6" ry="7" fill="#f4a020" opacity="0.85"/>
+          <ellipse cx="90" cy="163" rx="3.5" ry="4" fill="white" opacity="0.9"/>
+          <ellipse cx="90" cy="154" rx="4" ry="4" fill="#f4a020" opacity="0.85"/>
+          <circle cx="88.5" cy="153" r="1" fill="white" opacity="0.9"/>
+          <circle cx="91.5" cy="153" r="1" fill="white" opacity="0.9"/>
+
+          <!-- speech bubble -->
+          <rect x="116" y="22" width="82" height="34" rx="9" fill="#fff" stroke="#f0c4d0" stroke-width="1.2"/>
+          <polygon points="128,56 118,64 138,56" fill="#fff" stroke="#f0c4d0" stroke-width="1"/>
+          <line x1="129" y1="56" x2="137" y2="56" stroke="#fff" stroke-width="2.5"/>
+          <text x="157" y="36" font-family="JetBrains Mono,monospace" font-size="7" fill="#555" text-anchor="middle" font-weight="600">sudo make</text>
+          <text x="157" y="46" font-family="JetBrains Mono,monospace" font-size="7" fill="#d64f7a" text-anchor="middle">me_a_senior 😭</text>
+
+          <!-- floating stars -->
+          <text x="22" y="68" font-size="11" fill="#e87a9a" opacity="0.55">♥</text>
+          <text x="170" y="72" font-size="10" fill="#f4a020" opacity="0.5">🐧</text>
+          <text x="16" y="102" font-size="8" fill="#e87a9a" opacity="0.4">✦</text>
+        </svg>
+
+        <div style="font-size:9px;color:var(--pink);letter-spacing:1.5px;text-align:center;font-weight:700;margin-top:-6px;">
+          Junior Billa Dev 🐾
+        </div>
+        <div style="font-size:8px;color:var(--linux-orange);letter-spacing:1px;text-align:center;opacity:0.7;">
+          🐧 btw i use linux
+        </div>
       </div>
     </div>
-
-    <!-- FUNNY CODING CAT SVG -->
-    <div class="hero-photo-wrap">
-      <svg width="200" height="210" viewBox="0 0 200 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-float" style="animation-duration:3s;">
-
-        <!-- desk / table -->
-        <rect x="20" y="162" width="160" height="8" rx="3" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
-        <rect x="35" y="170" width="10" height="30" rx="2" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
-        <rect x="155" y="170" width="10" height="30" rx="2" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
-
-        <!-- laptop body -->
-        <rect x="42" y="130" width="116" height="34" rx="4" fill="#2a2a2a" stroke="#1a1a1a" stroke-width="1.5"/>
-        <!-- laptop screen bezel -->
-        <rect x="46" y="133" width="108" height="28" rx="2" fill="#1a1a1a"/>
-        <!-- laptop screen glow -->
-        <rect x="48" y="135" width="104" height="24" rx="1.5" fill="#0a1628"/>
-        <!-- code lines on screen -->
-        <rect x="52" y="139" width="28" height="2" rx="1" fill="#4ec9b0" opacity="0.9"/>
-        <rect x="84" y="139" width="18" height="2" rx="1" fill="#ce9178" opacity="0.9"/>
-        <rect x="56" y="143" width="20" height="2" rx="1" fill="#569cd6" opacity="0.8"/>
-        <rect x="80" y="143" width="32" height="2" rx="1" fill="#4ec9b0" opacity="0.7"/>
-        <rect x="52" y="147" width="14" height="2" rx="1" fill="#d4d4d4" opacity="0.6"/>
-        <rect x="70" y="147" width="24" height="2" rx="1" fill="#ce9178" opacity="0.8"/>
-        <rect x="98" y="147" width="16" height="2" rx="1" fill="#b5cea8" opacity="0.7"/>
-        <!-- cursor blink -->
-        <rect x="118" y="147" width="5" height="2" rx="0.5" fill="#fff" opacity="0.9">
-          <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
-        </rect>
-        <!-- laptop hinge -->
-        <rect x="42" y="162" width="116" height="4" rx="2" fill="#1a1a1a"/>
-
-        <!-- CAT BODY -->
-        <!-- body torso -->
-        <ellipse cx="100" cy="112" rx="30" ry="26" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
-        <!-- belly patch -->
-        <ellipse cx="100" cy="116" rx="18" ry="16" fill="#fde8d8" stroke="#e8c4a8" stroke-width="0.8"/>
-        <!-- tummy stripe -->
-        <path d="M93 108 Q100 112 107 108" stroke="#e8b090" stroke-width="1" fill="none" opacity="0.5"/>
-
-        <!-- LEFT ARM holding coffee -->
-        <path d="M70 108 Q58 112 55 122 Q53 128 58 130" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
-        <!-- coffee cup -->
-        <rect x="50" y="128" width="16" height="14" rx="3" fill="#fff" stroke="#d0a0a0" stroke-width="1.2"/>
-        <rect x="50" y="128" width="16" height="5" rx="2" fill="#d0847a"/>
-        <!-- cup handle -->
-        <path d="M66 131 Q72 131 72 135 Q72 139 66 139" stroke="#d0a0a0" stroke-width="1.2" fill="none"/>
-        <!-- steam from coffee -->
-        <path d="M55 126 Q57 122 55 118" stroke="#ccc" stroke-width="1" fill="none" opacity="0.7" stroke-linecap="round">
-          <animate attributeName="d" values="M55 126 Q57 122 55 118;M55 126 Q53 122 55 118;M55 126 Q57 122 55 118" dur="2s" repeatCount="indefinite"/>
-        </path>
-        <path d="M60 125 Q62 121 60 117" stroke="#ccc" stroke-width="1" fill="none" opacity="0.5" stroke-linecap="round">
-          <animate attributeName="d" values="M60 125 Q62 121 60 117;M60 125 Q58 121 60 117;M60 125 Q62 121 60 117" dur="1.5s" repeatCount="indefinite"/>
-        </path>
-
-        <!-- RIGHT ARM typing -->
-        <path d="M130 108 Q142 112 146 125" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
-        <!-- paw on keyboard -->
-        <ellipse cx="147" cy="128" rx="8" ry="5" fill="#f5c5a3" stroke="#e0a882" stroke-width="1"/>
-        <circle cx="143" cy="126" r="2" fill="#fde8d8"/>
-        <circle cx="147" cy="125" r="2" fill="#fde8d8"/>
-        <circle cx="151" cy="126" r="2" fill="#fde8d8"/>
-
-        <!-- CAT HEAD -->
-        <ellipse cx="100" cy="76" rx="28" ry="26" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.5"/>
-
-        <!-- Ears -->
-        <polygon points="76,60 70,42 88,56" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
-        <polygon points="78,58 73,46 86,57" fill="#ffb3ba"/>
-        <polygon points="124,60 130,42 112,56" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
-        <polygon points="122,58 127,46 114,57" fill="#ffb3ba"/>
-
-        <!-- GLASSES frames -->
-        <rect x="79" y="71" width="16" height="12" rx="5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
-        <rect x="105" y="71" width="16" height="12" rx="5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
-        <!-- glasses bridge -->
-        <path d="M95 77 Q100 75 105 77" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
-        <!-- glasses arms -->
-        <line x1="79" y1="77" x2="74" y2="76" stroke="#2a2a2a" stroke-width="1.5"/>
-        <line x1="121" y1="77" x2="126" y2="76" stroke="#2a2a2a" stroke-width="1.5"/>
-        <!-- EYES behind glasses — focused/intense look -->
-        <circle cx="87" cy="77" r="4" fill="#fff"/>
-        <circle cx="113" cy="77" r="4" fill="#fff"/>
-        <circle cx="88" cy="77" r="2.5" fill="#3a2010"/>
-        <circle cx="114" cy="77" r="2.5" fill="#3a2010"/>
-        <!-- eye shine -->
-        <circle cx="89" cy="76" r="0.8" fill="#fff"/>
-        <circle cx="115" cy="76" r="0.8" fill="#fff"/>
-
-        <!-- NOSE -->
-        <ellipse cx="100" cy="86" rx="3" ry="2" fill="#e88fa0"/>
-        <!-- MOUTH — slight smirk -->
-        <path d="M96 89 Q100 93 104 89" stroke="#c0708a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M96 89 Q94 87 95 85" stroke="#c0708a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
-
-        <!-- WHISKERS -->
-        <line x1="72" y1="84" x2="90" y2="86" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
-        <line x1="72" y1="88" x2="90" y2="88" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
-        <line x1="110" y1="86" x2="128" y2="84" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
-        <line x1="110" y1="88" x2="128" y2="88" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
-
-        <!-- TAIL -->
-        <path d="M130 138 Q158 130 162 115 Q166 100 155 94" stroke="#e0a882" stroke-width="7" stroke-linecap="round" fill="none"/>
-        <path d="M155 94 Q148 88 152 84 Q158 80 158 88" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
-
-        <!-- STRIPE markings on head -->
-        <path d="M92 55 Q100 50 108 55" stroke="#e0a882" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
-        <path d="M88 52 Q100 46 112 52" stroke="#e0a882" stroke-width="1" fill="none" opacity="0.25" stroke-linecap="round"/>
-
-        <!-- Floating hearts/stars around cat (because why not) -->
-        <text x="30" y="72" font-size="12" opacity="0.5" fill="#e87a9a">♥</text>
-        <text x="160" y="68" font-size="10" opacity="0.4" fill="#3366cc">★</text>
-        <text x="22" y="100" font-size="8" opacity="0.35" fill="#e87a9a">✦</text>
-
-        <!-- speech bubble -->
-        <rect x="108" y="28" width="76" height="28" rx="8" fill="#fff" stroke="#f0c4d0" stroke-width="1.2"/>
-        <polygon points="120,56 112,62 128,56" fill="#fff" stroke="#f0c4d0" stroke-width="1.2"/>
-        <!-- fix overlap -->
-        <line x1="121" y1="56" x2="127" y2="56" stroke="#fff" stroke-width="2"/>
-        <text x="146" y="40" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#444" text-anchor="middle" font-weight="600">git commit -m</text>
-        <text x="146" y="51" font-family="JetBrains Mono,monospace" font-size="7" fill="#d64f7a" text-anchor="middle">"fix: meow 🐾"</text>
-
-      </svg>
-
-      <div style="font-size:9px;color:var(--pink);letter-spacing:1.5px;text-align:center;margin-top:-4px;font-weight:600;">
-        Senior Billa Dev 🐱
-      </div>
-    </div>
-  </div>
   </div>
 
   <!-- ═══════ FLOATING ILLUSTRATIONS ═══════ -->
   <div class="illus-row">
-    <!-- Code icon -->
     <div class="illus-item">
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:0s">
-        <rect x="1" y="1" width="34" height="34" rx="3" stroke="#bbb" stroke-width="1"/>
-        <path d="M12 13l-5 5 5 5M24 13l5 5-5 5M20 11l-4 14" stroke="#3366cc" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="1" y="1" width="34" height="34" rx="3" stroke="#e0b0b8" stroke-width="1"/>
+        <path d="M12 13l-5 5 5 5M24 13l5 5-5 5M20 11l-4 14" stroke="#d64f7a" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <div style="margin-top:6px">Engineer</div>
     </div>
-    <!-- Open source icon -->
     <div class="illus-item">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:0.8s">
-        <circle cx="18" cy="18" r="16" stroke="#bbb" stroke-width="1"/>
-        <circle cx="18" cy="18" r="5" stroke="#3366cc" stroke-width="1.5"/>
-        <path d="M18 2v5M18 29v5M2 18h5M29 18h5" stroke="#bbb" stroke-width="1" stroke-linecap="round"/>
-        <path d="M10 10l3.5 3.5M22.5 22.5L26 26M26 10l-3.5 3.5M13.5 22.5L10 26" stroke="#bbb" stroke-width="1" stroke-linecap="round"/>
+      <!-- Linux Tux mini -->
+      <svg width="36" height="42" viewBox="0 0 36 42" fill="none" class="svg-float" style="animation-delay:0.7s">
+        <ellipse cx="18" cy="28" rx="10" ry="12" fill="#f4a020"/>
+        <ellipse cx="18" cy="30" rx="6" ry="8" fill="#fff"/>
+        <ellipse cx="18" cy="12" rx="8" ry="8" fill="#f4a020"/>
+        <circle cx="15" cy="10" r="2" fill="#fff"/>
+        <circle cx="21" cy="10" r="2" fill="#fff"/>
+        <circle cx="15.5" cy="10.3" r="1" fill="#0a0a0a"/>
+        <circle cx="21.5" cy="10.3" r="1" fill="#0a0a0a"/>
+        <ellipse cx="18" cy="15" rx="3" ry="2" fill="#c8720a"/>
+        <ellipse cx="12" cy="39" rx="4" ry="2" fill="#c8720a"/>
+        <ellipse cx="24" cy="39" rx="4" ry="2" fill="#c8720a"/>
+      </svg>
+      <div style="margin-top:2px">Linux</div>
+    </div>
+    <div class="illus-item">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:1.4s">
+        <circle cx="18" cy="18" r="16" stroke="#e0b0b8" stroke-width="1"/>
+        <circle cx="18" cy="18" r="5" stroke="#d64f7a" stroke-width="1.5"/>
+        <path d="M18 2v5M18 29v5M2 18h5M29 18h5" stroke="#e0b0b8" stroke-width="1" stroke-linecap="round"/>
+        <path d="M8 8l3.5 3.5M24.5 24.5L28 28M28 8l-3.5 3.5M11.5 24.5L8 28" stroke="#e0b0b8" stroke-width="1" stroke-linecap="round"/>
       </svg>
       <div style="margin-top:6px">Open Source</div>
     </div>
-    <!-- AI icon -->
     <div class="illus-item">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:1.6s">
-        <rect x="8" y="10" width="20" height="16" rx="2" stroke="#bbb" stroke-width="1"/>
-        <circle cx="13" cy="18" r="2" fill="#3366cc"/>
-        <circle cx="23" cy="18" r="2" fill="#3366cc"/>
-        <path d="M13 10V7M23 10V7M13 26v3M23 26v3M8 15H4M8 21H4M28 15h4M28 21h4" stroke="#bbb" stroke-width="1" stroke-linecap="round"/>
-        <path d="M15 20.5c.8 1 5.2 1 6 0" stroke="#3366cc" stroke-width="1" stroke-linecap="round"/>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:2.1s">
+        <rect x="8" y="10" width="20" height="16" rx="2" stroke="#e0b0b8" stroke-width="1"/>
+        <circle cx="13" cy="18" r="2" fill="#d64f7a"/>
+        <circle cx="23" cy="18" r="2" fill="#d64f7a"/>
+        <path d="M13 10V7M23 10V7M13 26v3M23 26v3M8 15H4M8 21H4M28 15h4M28 21h4" stroke="#e0b0b8" stroke-width="1" stroke-linecap="round"/>
+        <path d="M15 20.5c.8 1 5.2 1 6 0" stroke="#d64f7a" stroke-width="1" stroke-linecap="round"/>
       </svg>
       <div style="margin-top:6px">AI Research</div>
     </div>
-    <!-- Trophy icon -->
     <div class="illus-item">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-float" style="animation-delay:2.4s">
-        <path d="M12 5h12v14a6 6 0 01-12 0V5z" stroke="#bbb" stroke-width="1"/>
-        <path d="M12 9H7a4 4 0 004 4M24 9h5a4 4 0 01-5 4" stroke="#bbb" stroke-width="1"/>
-        <path d="M18 25v4M12 31h12" stroke="#bbb" stroke-width="1" stroke-linecap="round"/>
-        <circle cx="18" cy="14" r="2" fill="#c0392b"/>
-      </svg>
-      <div style="margin-top:6px">₹4L+ Won</div>
-    </div>
-    <!-- Gear -->
-    <div class="illus-item">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-spin" style="transform-origin:18px 18px">
-        <circle cx="18" cy="18" r="5" stroke="#3366cc" stroke-width="1.5"/>
-        <path d="M18 4v4M18 28v4M4 18h4M28 18h4M7.76 7.76l2.83 2.83M25.41 25.41l2.83 2.83M7.76 28.24l2.83-2.83M25.41 10.59l2.83-2.83" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="svg-spin">
+        <circle cx="18" cy="18" r="5" stroke="#d64f7a" stroke-width="1.5"/>
+        <path d="M18 4v4M18 28v4M4 18h4M28 18h4M7.76 7.76l2.83 2.83M25.41 25.41l2.83 2.83M7.76 28.24l2.83-2.83M25.41 10.59l2.83-2.83" stroke="#e0b0b8" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <div style="margin-top:6px">DevOps</div>
     </div>
@@ -602,34 +680,75 @@
   <section id="experience">
     <div class="section-title">Professional Experience</div>
     <div class="timeline">
+
       <div class="tl-item">
         <div class="tl-date">Present</div>
         <div class="tl-role">SWE Intern</div>
-        <div class="tl-org">Dunnhumby</div>
-        <div class="tl-desc">Software Engineering Internship — building scalable systems.</div>
+        <div class="tl-org">
+          <!-- Dunnhumby logo -->
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="12" fill="#E4002B"/>
+            <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="42" fill="white" font-weight="900">d</text>
+          </svg>
+          Dunnhumby
+        </div>
+        <div class="tl-desc">Software Engineering Internship — building scalable data-driven systems.</div>
       </div>
+
       <div class="tl-item">
         <div class="tl-date">Sep – Nov 2025</div>
         <div class="tl-role">LFX Mentee</div>
-        <div class="tl-org">RISC-V International — Linux Foundation</div>
-        <div class="tl-desc">Selected for Linux Foundation Mentorship Program. Contributed to RISC-V toolchain automation — open source infrastructure used globally.</div>
+        <div class="tl-org">
+          <!-- Linux Foundation LFX logo -->
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="8" fill="#003778"/>
+            <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="32" fill="white" font-weight="900">LF</text>
+          </svg>
+          RISC-V International — Linux Foundation
+        </div>
+        <div class="tl-desc">Selected for Linux Foundation Mentorship. Contributed to RISC-V toolchain automation — open source infrastructure used globally. 🐧</div>
       </div>
+
       <div class="tl-item">
         <div class="tl-date">Jun – Aug 2025</div>
         <div class="tl-role">C4GT DMP 2025 Intern</div>
-        <div class="tl-org">Code For GovTech @ NSUT</div>
-        <div class="tl-desc">Selected in top 94 out of 55,000+ applicants. Worked on open civic tech platforms. Stipend: ₹1,00,000.</div>
+        <div class="tl-org">
+          <!-- C4GT logo -->
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="8" fill="#FF6B00"/>
+            <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="26" fill="white" font-weight="900">C4G</text>
+          </svg>
+          Code For GovTech @ NSUT
+        </div>
+        <div class="tl-desc">Top 94 out of 55,000+ applicants. Worked on open civic tech platforms. Stipend: ₹1,00,000.</div>
       </div>
+
       <div class="tl-item">
         <div class="tl-date">May – Jul 2025</div>
         <div class="tl-role">AI Research Intern — Lead</div>
-        <div class="tl-org">Annam.AI @ IIT Ropar</div>
-        <div class="tl-desc">Led a 5-member research team on AI/ML projects. Stipend: ₹15,000/month. Won 3rd place in the hackathon (₹3,00,000 prize).</div>
+        <div class="tl-org">
+          <!-- Annam.AI logo -->
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="8" fill="#1a1a2e"/>
+            <circle cx="50" cy="50" r="28" stroke="#a78bfa" stroke-width="5"/>
+            <circle cx="50" cy="50" r="10" fill="#a78bfa"/>
+            <path d="M50 22 L50 78 M22 50 L78 50" stroke="#a78bfa" stroke-width="3" opacity="0.5"/>
+          </svg>
+          Annam.AI @ IIT Ropar
+        </div>
+        <div class="tl-desc">Led a 5-member research team on AI/ML projects. Stipend: ₹15,000/month. Won 3rd place in hackathon (₹3,00,000 prize).</div>
       </div>
+
       <div class="tl-item">
         <div class="tl-date">May – Jun 2025</div>
         <div class="tl-role">Summer Intern</div>
-        <div class="tl-org">Celebal Technologies</div>
+        <div class="tl-org">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="8" fill="#0052cc"/>
+            <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="28" fill="white" font-weight="900">CT</text>
+          </svg>
+          Celebal Technologies
+        </div>
         <div class="tl-desc">Full-stack development internship.</div>
       </div>
     </div>
@@ -640,7 +759,7 @@
     <div class="section-title">Open Source Contributions</div>
 
     <div class="badge-row">
-      <div class="prog-badge"><div class="dot"></div>LFX Mentee — RISC-V International</div>
+      <div class="prog-badge"><div class="dot"></div>LFX Mentee — RISC-V / Linux Foundation</div>
       <div class="prog-badge"><div class="dot"></div>C4GT DMP 2025</div>
       <div class="prog-badge"><div class="dot"></div>GSSoC Extended</div>
       <div class="prog-badge"><div class="dot"></div>SSOC Contributor</div>
@@ -648,42 +767,113 @@
     </div>
 
     <div class="oss-grid">
+
       <div class="oss-card">
-        <div class="oss-org">Google</div>
-        <div class="oss-name">Gemini API</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- Google G logo -->
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+          <div>
+            <div class="oss-org">Google</div>
+            <div class="oss-name">Gemini API</div>
+          </div>
+        </div>
         <div class="oss-desc">AI integration & SDK contributions to Google's Gemini ecosystem.</div>
         <div class="oss-status">● Active Contributor</div>
       </div>
+
       <div class="oss-card">
-        <div class="oss-org">CNCF / Layer5</div>
-        <div class="oss-name">Meshery</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- CNCF / Layer5 -->
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="10" fill="#0d6efd"/>
+              <path d="M20 50 L50 20 L80 50 L50 80 Z" stroke="white" stroke-width="6" fill="none"/>
+              <circle cx="50" cy="50" r="10" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <div class="oss-org">CNCF / Layer5</div>
+            <div class="oss-name">Meshery</div>
+          </div>
+        </div>
         <div class="oss-desc">Cloud native service mesh management. CNCF Sandbox project.</div>
         <div class="oss-status">● Active Contributor</div>
       </div>
+
       <div class="oss-card">
-        <div class="oss-org">Processing Foundation</div>
-        <div class="oss-name">p5.js</div>
-        <div class="oss-desc">Creative coding framework used by artists, educators worldwide.</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- p5.js Processing Foundation -->
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="50" fill="#ed225d"/>
+              <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia" font-size="42" fill="white" font-weight="700">p5</text>
+            </svg>
+          </div>
+          <div>
+            <div class="oss-org">Processing Foundation</div>
+            <div class="oss-name">p5.js</div>
+          </div>
+        </div>
+        <div class="oss-desc">Creative coding framework used by artists & educators worldwide.</div>
         <div class="oss-status">● Active Contributor</div>
       </div>
+
       <div class="oss-card">
-        <div class="oss-org">Keploy</div>
-        <div class="oss-name">keploy/keploy</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- Keploy -->
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="10" fill="#FF914D"/>
+              <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="28" fill="white" font-weight="900">K</text>
+            </svg>
+          </div>
+          <div>
+            <div class="oss-org">Keploy</div>
+            <div class="oss-name">keploy/keploy</div>
+          </div>
+        </div>
         <div class="oss-desc">API testing automation — zero-code test generation from real traffic.</div>
         <div class="oss-status">● Active Contributor</div>
       </div>
+
       <div class="oss-card">
-        <div class="oss-org">RISC-V International</div>
-        <div class="oss-name">Toolchain Automation</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- Linux Foundation -->
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="8" fill="#003778"/>
+              <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="26" fill="white" font-weight="900">LF</text>
+            </svg>
+          </div>
+          <div>
+            <div class="oss-org">RISC-V International</div>
+            <div class="oss-name">Toolchain Automation</div>
+          </div>
+        </div>
         <div class="oss-desc">LFX Mentorship. RISC-V open-source toolchain infrastructure.</div>
-        <div class="oss-status">● LFX Mentee</div>
+        <div class="oss-status">● LFX Mentee 🐧</div>
       </div>
+
       <div class="oss-card">
-        <div class="oss-org">Code For GovTech</div>
-        <div class="oss-name">GovTech Platform</div>
+        <div class="oss-card-header">
+          <div class="oss-logo-wrap">
+            <!-- C4GT -->
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="8" fill="#FF6B00"/>
+              <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black" font-size="24" fill="white" font-weight="900">C4G</text>
+            </svg>
+          </div>
+          <div>
+            <div class="oss-org">Code For GovTech</div>
+            <div class="oss-name">GovTech Platform</div>
+          </div>
+        </div>
         <div class="oss-desc">Open civic technology. DMP 2025 — top 94 from 55,000+ applicants.</div>
         <div class="oss-status">● DMP 2025 Intern</div>
       </div>
+
     </div>
   </section>
 
@@ -693,10 +883,7 @@
     <table class="cf-table">
       <thead>
         <tr>
-          <th>Event</th>
-          <th>Organizer</th>
-          <th>Result</th>
-          <th>Prize</th>
+          <th>Event</th><th>Organizer</th><th>Result</th><th>Prize</th>
         </tr>
       </thead>
       <tbody>
@@ -744,7 +931,7 @@
         </tr>
       </tbody>
     </table>
-    <div style="margin-top:14px;font-size:11px;color:var(--gray-2);padding:10px 14px;background:var(--gray-6);border-left:2px solid var(--accent2);">
+    <div style="margin-top:14px;font-size:11px;color:var(--gray-2);padding:10px 16px;background:var(--pink-light);border-left:2px solid var(--pink);border-radius:0 6px 6px 0;">
       Total earnings across hackathons &amp; stipends: <strong style="color:var(--accent2)">₹4,00,000+</strong>
     </div>
   </section>
@@ -752,40 +939,49 @@
   <!-- ═══════ STACK ═══════ -->
   <section id="stack">
     <div class="section-title">Tech Stack</div>
-
-    <!-- Terminal block -->
     <div class="terminal">
       <div class="terminal-bar">
         <div class="tb tb-r"></div><div class="tb tb-y"></div><div class="tb tb-g"></div>
-        <span style="margin-left:8px;font-size:9px;color:#555">yashodip@dev ~ zsh</span>
+        <span style="margin-left:10px;font-size:9px;color:#555">yashodip@arch-linux ~ zsh</span>
+        <span style="margin-left:auto;font-size:9px;color:#f4a020;opacity:0.6;">🐧 linux</span>
       </div>
-      <div><span class="t-prompt">yashodip@dev</span><span style="color:#888"> ~ </span><span class="t-cmd">cat skills.json</span></div>
+      <div><span class="t-prompt">yashodip@arch</span><span style="color:#666"> ~ </span><span style="color:#fff">cat skills.json</span></div>
       <div>&nbsp;</div>
       <div>{</div>
       <div>&nbsp; <span class="t-key">"languages"</span>: [<span class="t-val">"C"</span>, <span class="t-val">"C++"</span>, <span class="t-val">"Python"</span>, <span class="t-val">"JavaScript"</span>, <span class="t-val">"TypeScript"</span>, <span class="t-val">"Go"</span>, <span class="t-val">"SQL"</span>],</div>
       <div>&nbsp; <span class="t-key">"web"</span>: [<span class="t-val">"React"</span>, <span class="t-val">"Node.js"</span>, <span class="t-val">"Express"</span>, <span class="t-val">"FastAPI"</span>, <span class="t-val">"TailwindCSS"</span>],</div>
       <div>&nbsp; <span class="t-key">"ai_ml"</span>: [<span class="t-val">"PyTorch"</span>, <span class="t-val">"TensorFlow"</span>, <span class="t-val">"OpenCV"</span>, <span class="t-val">"scikit-learn"</span>],</div>
       <div>&nbsp; <span class="t-key">"devops"</span>: [<span class="t-val">"Docker"</span>, <span class="t-val">"Kubernetes"</span>, <span class="t-val">"AWS"</span>, <span class="t-val">"Linux"</span>, <span class="t-val">"Git"</span>],</div>
-      <div>&nbsp; <span class="t-key">"hackathon_wins"</span>: <span class="t-num">3</span>,</div>
+      <div>&nbsp; <span class="t-key">"os"</span>: <span class="t-val" style="color:#f4a020">"Linux (btw)"</span>,</div>
       <div>&nbsp; <span class="t-key">"oss_programs"</span>: <span class="t-num">6</span>,</div>
       <div>&nbsp; <span class="t-key">"total_prize_inr"</span>: <span class="t-num">400000</span></div>
       <div>}</div>
       <div>&nbsp;</div>
-      <div><span class="t-prompt">yashodip@dev</span><span style="color:#888"> ~ </span><span class="t-cursor"></span></div>
+      <div><span class="t-prompt">yashodip@arch</span><span style="color:#666"> ~ </span><span class="t-cursor"></span></div>
     </div>
 
     <div style="margin-top:16px;">
       <div class="skills-grid">
-        <span class="skill-chip primary">C</span><span class="skill-chip primary">C++</span>
-        <span class="skill-chip primary">Python</span><span class="skill-chip primary">JavaScript</span>
-        <span class="skill-chip primary">TypeScript</span><span class="skill-chip primary">Go</span>
-        <span class="skill-chip">SQL / PostgreSQL</span><span class="skill-chip">React</span>
-        <span class="skill-chip">Node.js</span><span class="skill-chip">Express</span>
-        <span class="skill-chip">FastAPI</span><span class="skill-chip">TailwindCSS</span>
-        <span class="skill-chip">PyTorch</span><span class="skill-chip">TensorFlow</span>
-        <span class="skill-chip">OpenCV</span><span class="skill-chip">scikit-learn</span>
-        <span class="skill-chip">Docker</span><span class="skill-chip">Kubernetes</span>
-        <span class="skill-chip">AWS</span><span class="skill-chip">Linux</span>
+        <span class="skill-chip primary">C</span>
+        <span class="skill-chip primary">C++</span>
+        <span class="skill-chip primary">Python</span>
+        <span class="skill-chip primary">JavaScript</span>
+        <span class="skill-chip primary">TypeScript</span>
+        <span class="skill-chip primary">Go</span>
+        <span class="skill-chip">SQL / PostgreSQL</span>
+        <span class="skill-chip">React</span>
+        <span class="skill-chip">Node.js</span>
+        <span class="skill-chip">Express</span>
+        <span class="skill-chip">FastAPI</span>
+        <span class="skill-chip">TailwindCSS</span>
+        <span class="skill-chip">PyTorch</span>
+        <span class="skill-chip">TensorFlow</span>
+        <span class="skill-chip">OpenCV</span>
+        <span class="skill-chip">scikit-learn</span>
+        <span class="skill-chip">Docker</span>
+        <span class="skill-chip">Kubernetes</span>
+        <span class="skill-chip">AWS</span>
+        <span class="skill-chip" style="border-color:var(--linux-orange);color:var(--linux-orange);">🐧 Linux</span>
         <span class="skill-chip">Git</span>
       </div>
     </div>
@@ -794,28 +990,40 @@
   <!-- ═══════ CONTACT ═══════ -->
   <section id="contact" style="border-bottom:none;">
     <div class="section-title">Contact</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);max-width:480px;">
-      <div style="background:var(--white);padding:16px;">
-        <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">Email</div>
-        <a href="/cdn-cgi/l/email-protection#10697163787f7479607d7f62752220202450777d71797c3e737f7d" style="color:var(--accent);font-size:12px;text-decoration:none;"><span class="__cf_email__" data-cfemail="1960786a71767d706974766b7c2b29292d597e74787075377a7674">[email&#160;protected]</span></a>
+    <div class="contact-grid">
+      <div class="contact-cell">
+        <div class="contact-label">Email</div>
+        <a class="contact-val" href="mailto:yashodipmore2004@gmail.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#EA4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          yashodipmore2004@gmail.com
+        </a>
       </div>
-      <div style="background:var(--white);padding:16px;">
-        <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">LinkedIn</div>
-        <a href="https://linkedin.com/in/yashodipmore22" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none;">/in/yashodipmore22</a>
+      <div class="contact-cell">
+        <div class="contact-label">LinkedIn</div>
+        <a class="contact-val" href="https://linkedin.com/in/yashodipmore22" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          /in/yashodipmore22
+        </a>
       </div>
-      <div style="background:var(--white);padding:16px;">
-        <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">GitHub</div>
-        <a href="https://github.com/yashodipmore" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none;">@yashodipmore</a>
+      <div class="contact-cell">
+        <div class="contact-label">GitHub</div>
+        <a class="contact-val" href="https://github.com/yashodipmore" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#24292f"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          @yashodipmore
+        </a>
       </div>
-      <div style="background:var(--white);padding:16px;">
-        <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">Portfolio</div>
-        <a href="https://yashodipmore.me" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none;">yashodipmore.me</a>
+      <div class="contact-cell">
+        <div class="contact-label">Portfolio</div>
+        <a class="contact-val" href="https://yashodipmore.me" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#d64f7a"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          yashodipmore.me
+        </a>
       </div>
     </div>
 
-    <div style="margin-top:20px;font-size:11px;color:var(--gray-3);padding:12px 16px;border:1px solid var(--border);max-width:480px;line-height:1.8;">
-      Open to: <strong style="color:var(--black)">SWE Roles</strong> · <strong style="color:var(--black)">Research</strong> · <strong style="color:var(--black)">Open Source Collaborations</strong><br/>
-      <span style="font-size:10px;letter-spacing:0.5px;">— "Code. Contribute. Create Impact."</span>
+    <div style="margin-top:20px;font-size:11px;color:var(--gray-3);padding:14px 18px;border:1px solid var(--pink-border);max-width:480px;line-height:1.9;border-radius:8px;background:var(--pink-light);">
+      Open to: <strong style="color:var(--black)">SWE Roles</strong> · <strong style="color:var(--black)">Research</strong> · <strong style="color:var(--black)">Open Source</strong><br/>
+      <span style="font-size:10px;color:var(--linux-orange);">🐧 "I use Linux btw" — Code. Contribute. Create Impact.</span>
     </div>
   </section>
 
@@ -823,31 +1031,41 @@
 
 <!-- FOOTER -->
 <footer>
-  <div>© 2025 Yashodip More &nbsp;·&nbsp; Built with precision</div>
-  <div><a href="#hero">↑ Back to top</a> &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#3b425a4853545f524b5654495e090b0b0f7b5c565a525715585456"><span class="__cf_email__" data-cfemail="7d041c0e151219140d10120f184f4d4d493d1a101c1411531e1210">[email&#160;protected]</span></a></div>
+  <div>© 2025 Yashodip More &nbsp;·&nbsp; Built with precision &amp; <span style="color:var(--linux-orange)">🐧</span></div>
+  <div class="footer-linux">
+    <svg width="14" height="16" viewBox="0 0 36 42" fill="none">
+      <ellipse cx="18" cy="28" rx="10" ry="12" fill="#f4a020"/>
+      <ellipse cx="18" cy="30" rx="6" ry="8" fill="#fff"/>
+      <ellipse cx="18" cy="12" rx="8" ry="8" fill="#f4a020"/>
+      <circle cx="15" cy="10" r="2" fill="#0a0a0a"/>
+      <circle cx="21" cy="10" r="2" fill="#0a0a0a"/>
+      <ellipse cx="18" cy="15" rx="3" ry="2" fill="#c8720a"/>
+      <ellipse cx="12" cy="39" rx="4" ry="2" fill="#c8720a"/>
+      <ellipse cx="24" cy="39" rx="4" ry="2" fill="#c8720a"/>
+    </svg>
+    btw i use linux
+  </div>
+  <div><a href="#hero-wrap">↑ Top</a> &nbsp;·&nbsp; <a href="mailto:yashodipmore2004@gmail.com">Email</a></div>
 </footer>
 
-<!-- BACK TO TOP -->
+<!-- BTT -->
 <div id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ TOP</div>
+<!-- SCROLL PROGRESS -->
+<div id="progress"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Loader
+<script>
   window.addEventListener('load', () => {
-    setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1400);
+    setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1600);
   });
-
-  // Scroll progress
   window.addEventListener('scroll', () => {
     const h = document.documentElement;
     const pct = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
     document.getElementById('progress').style.width = pct + '%';
     document.getElementById('btt').classList.toggle('show', window.scrollY > 300);
   });
-
-  // Intersection observer — section fade-in
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('section').forEach(s => obs.observe(s));
 </script>
 </body>
