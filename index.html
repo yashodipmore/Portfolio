@@ -16,15 +16,20 @@
     --gray-3: #888;
     --gray-4: #bbb;
     --gray-5: #e8e8e8;
-    --gray-6: #f4f4f4;
+    --gray-6: #fdf4f6;
     --white: #ffffff;
-    --accent: #3366cc;    /* Codeforces blue */
-    --accent2: #c0392b;   /* Codeforces red */
+    --accent: #3366cc;
+    --accent2: #c0392b;
     --green: #27ae60;
-    --border: #d8d8d8;
+    --pink: #d64f7a;
+    --pink-light: #fce8ee;
+    --pink-border: #f0c4d0;
+    --border: #ddd0d4;
     --mono: 'JetBrains Mono', monospace;
     --serif: 'IBM Plex Serif', Georgia, serif;
   }
+
+  body { background: #fefcfd; }
 
   html { scroll-behavior: smooth; }
 
@@ -86,17 +91,37 @@
   .section-title {
     font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--gray-3); margin-bottom: 20px; padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--pink-border);
     display: flex; align-items: center; gap: 10px;
   }
-  .section-title::before { content: '§'; color: var(--accent); font-size: 13px; }
+  .section-title::before { content: '§'; color: var(--pink); font-size: 13px; }
 
   /* ─── HERO ─── */
-  #hero {
-    padding: 60px 0 50px;
-    display: grid; grid-template-columns: 1fr 180px; gap: 48px; align-items: start;
+  #hero-wrap {
+    padding: 40px 0 50px;
     border-bottom: 1px solid var(--border);
     opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  #hero {
+    display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: center;
+    background: var(--pink-light);
+    border: 1px solid var(--pink-border);
+    border-radius: 20px;
+    padding: 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content:''; position:absolute; top:-40px; right:-40px;
+    width:160px; height:160px; border-radius:50%;
+    background: radial-gradient(circle, rgba(214,79,122,0.10) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  #hero::after {
+    content:''; position:absolute; bottom:-30px; left:-30px;
+    width:120px; height:120px; border-radius:50%;
+    background: radial-gradient(circle, rgba(51,102,204,0.07) 0%, transparent 70%);
+    pointer-events:none;
   }
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 
@@ -146,8 +171,8 @@
   .photo-label { font-size: 9px; color: var(--gray-4); letter-spacing: 1.5px; text-align: center; line-height: 1.5; }
 
   /* Stats row */
-  .hero-stats { display: flex; gap: 0; margin-top: 28px; border: 1px solid var(--border); }
-  .stat { flex: 1; padding: 12px 16px; border-right: 1px solid var(--border); }
+  .hero-stats { display: flex; gap: 0; margin-top: 28px; border: 1px solid var(--pink-border); border-radius: 8px; overflow: hidden; background: #fff; }
+  .stat { flex: 1; padding: 12px 16px; border-right: 1px solid var(--pink-border); }
   .stat:last-child { border-right: none; }
   .stat-val { font-size: 18px; font-weight: 700; color: var(--black); line-height: 1; }
   .stat-key { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-3); margin-top: 3px; }
@@ -156,8 +181,8 @@
 
   /* ─── TICKER ─── */
   .ticker-wrap {
-    overflow: hidden; border-bottom: 1px solid var(--border);
-    padding: 8px 0; background: var(--gray-6);
+    overflow: hidden; border-bottom: 1px solid var(--pink-border);
+    padding: 8px 0; background: var(--pink-light);
     font-size: 10px; color: var(--gray-3); letter-spacing: 1px;
   }
   .ticker { display: flex; width: max-content; animation: ticker 30s linear infinite; white-space: nowrap; }
@@ -306,8 +331,8 @@
   @keyframes svgPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);} }
 
   @media (max-width: 720px) {
-    #hero { grid-template-columns: 1fr; }
-    .hero-photo-wrap { align-items: flex-start; }
+    #hero { grid-template-columns: 1fr; padding: 24px; }
+    .hero-photo-wrap { align-items: center; }
     .oss-grid { grid-template-columns: 1fr; }
     main { padding: 70px 20px 20px; }
     #topbar { padding: 0 20px; }
@@ -370,6 +395,7 @@
 <main>
 
   <!-- ═══════ HERO ═══════ -->
+  <div id="hero-wrap">
   <div id="hero">
     <div>
       <div class="hero-tag">// software engineer &amp; open source contributor</div>
@@ -390,36 +416,135 @@
         <a class="hero-link" href="https://yashodipmore.me" target="_blank">↗ Portfolio</a>
         <a class="hero-link red" href="mailto:yashodipmore2004@gmail.com">✉ Email</a>
       </div>
-
-      <!-- Stats -->
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-val"><span class="red">₹4L+</span></div>
-          <div class="stat-key">Prize Money</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val"><span class="accent">55K+</span></div>
-          <div class="stat-key">C4GT Applicants</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">6+</div>
-          <div class="stat-key">OSS Programs</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val"><span class="accent">#121</span></div>
-          <div class="stat-key">IICPC Global</div>
-        </div>
-      </div>
     </div>
 
-    <!-- PHOTO -->
+    <!-- FUNNY CODING CAT SVG -->
     <div class="hero-photo-wrap">
-      <!-- Replace src with your actual photo URL -->
-      <img class="hero-photo" src="assets/yash.png" alt="Yashodip More"/>
-      <div style="font-size:9px;color:var(--gray-4);letter-spacing:1px;text-align:center;line-height:1.6;">
-        Yashodip More<br/>SWE · Open Source
+      <svg width="200" height="210" viewBox="0 0 200 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-float" style="animation-duration:3s;">
+
+        <!-- desk / table -->
+        <rect x="20" y="162" width="160" height="8" rx="3" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
+        <rect x="35" y="170" width="10" height="30" rx="2" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
+        <rect x="155" y="170" width="10" height="30" rx="2" fill="#e8c4c4" stroke="#d4a0a0" stroke-width="1"/>
+
+        <!-- laptop body -->
+        <rect x="42" y="130" width="116" height="34" rx="4" fill="#2a2a2a" stroke="#1a1a1a" stroke-width="1.5"/>
+        <!-- laptop screen bezel -->
+        <rect x="46" y="133" width="108" height="28" rx="2" fill="#1a1a1a"/>
+        <!-- laptop screen glow -->
+        <rect x="48" y="135" width="104" height="24" rx="1.5" fill="#0a1628"/>
+        <!-- code lines on screen -->
+        <rect x="52" y="139" width="28" height="2" rx="1" fill="#4ec9b0" opacity="0.9"/>
+        <rect x="84" y="139" width="18" height="2" rx="1" fill="#ce9178" opacity="0.9"/>
+        <rect x="56" y="143" width="20" height="2" rx="1" fill="#569cd6" opacity="0.8"/>
+        <rect x="80" y="143" width="32" height="2" rx="1" fill="#4ec9b0" opacity="0.7"/>
+        <rect x="52" y="147" width="14" height="2" rx="1" fill="#d4d4d4" opacity="0.6"/>
+        <rect x="70" y="147" width="24" height="2" rx="1" fill="#ce9178" opacity="0.8"/>
+        <rect x="98" y="147" width="16" height="2" rx="1" fill="#b5cea8" opacity="0.7"/>
+        <!-- cursor blink -->
+        <rect x="118" y="147" width="5" height="2" rx="0.5" fill="#fff" opacity="0.9">
+          <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
+        </rect>
+        <!-- laptop hinge -->
+        <rect x="42" y="162" width="116" height="4" rx="2" fill="#1a1a1a"/>
+
+        <!-- CAT BODY -->
+        <!-- body torso -->
+        <ellipse cx="100" cy="112" rx="30" ry="26" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
+        <!-- belly patch -->
+        <ellipse cx="100" cy="116" rx="18" ry="16" fill="#fde8d8" stroke="#e8c4a8" stroke-width="0.8"/>
+        <!-- tummy stripe -->
+        <path d="M93 108 Q100 112 107 108" stroke="#e8b090" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <!-- LEFT ARM holding coffee -->
+        <path d="M70 108 Q58 112 55 122 Q53 128 58 130" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <!-- coffee cup -->
+        <rect x="50" y="128" width="16" height="14" rx="3" fill="#fff" stroke="#d0a0a0" stroke-width="1.2"/>
+        <rect x="50" y="128" width="16" height="5" rx="2" fill="#d0847a"/>
+        <!-- cup handle -->
+        <path d="M66 131 Q72 131 72 135 Q72 139 66 139" stroke="#d0a0a0" stroke-width="1.2" fill="none"/>
+        <!-- steam from coffee -->
+        <path d="M55 126 Q57 122 55 118" stroke="#ccc" stroke-width="1" fill="none" opacity="0.7" stroke-linecap="round">
+          <animate attributeName="d" values="M55 126 Q57 122 55 118;M55 126 Q53 122 55 118;M55 126 Q57 122 55 118" dur="2s" repeatCount="indefinite"/>
+        </path>
+        <path d="M60 125 Q62 121 60 117" stroke="#ccc" stroke-width="1" fill="none" opacity="0.5" stroke-linecap="round">
+          <animate attributeName="d" values="M60 125 Q62 121 60 117;M60 125 Q58 121 60 117;M60 125 Q62 121 60 117" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- RIGHT ARM typing -->
+        <path d="M130 108 Q142 112 146 125" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <!-- paw on keyboard -->
+        <ellipse cx="147" cy="128" rx="8" ry="5" fill="#f5c5a3" stroke="#e0a882" stroke-width="1"/>
+        <circle cx="143" cy="126" r="2" fill="#fde8d8"/>
+        <circle cx="147" cy="125" r="2" fill="#fde8d8"/>
+        <circle cx="151" cy="126" r="2" fill="#fde8d8"/>
+
+        <!-- CAT HEAD -->
+        <ellipse cx="100" cy="76" rx="28" ry="26" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.5"/>
+
+        <!-- Ears -->
+        <polygon points="76,60 70,42 88,56" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
+        <polygon points="78,58 73,46 86,57" fill="#ffb3ba"/>
+        <polygon points="124,60 130,42 112,56" fill="#f5c5a3" stroke="#e0a882" stroke-width="1.2"/>
+        <polygon points="122,58 127,46 114,57" fill="#ffb3ba"/>
+
+        <!-- GLASSES frames -->
+        <rect x="79" y="71" width="16" height="12" rx="5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        <rect x="105" y="71" width="16" height="12" rx="5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        <!-- glasses bridge -->
+        <path d="M95 77 Q100 75 105 77" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <!-- glasses arms -->
+        <line x1="79" y1="77" x2="74" y2="76" stroke="#2a2a2a" stroke-width="1.5"/>
+        <line x1="121" y1="77" x2="126" y2="76" stroke="#2a2a2a" stroke-width="1.5"/>
+        <!-- EYES behind glasses — focused/intense look -->
+        <circle cx="87" cy="77" r="4" fill="#fff"/>
+        <circle cx="113" cy="77" r="4" fill="#fff"/>
+        <circle cx="88" cy="77" r="2.5" fill="#3a2010"/>
+        <circle cx="114" cy="77" r="2.5" fill="#3a2010"/>
+        <!-- eye shine -->
+        <circle cx="89" cy="76" r="0.8" fill="#fff"/>
+        <circle cx="115" cy="76" r="0.8" fill="#fff"/>
+
+        <!-- NOSE -->
+        <ellipse cx="100" cy="86" rx="3" ry="2" fill="#e88fa0"/>
+        <!-- MOUTH — slight smirk -->
+        <path d="M96 89 Q100 93 104 89" stroke="#c0708a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M96 89 Q94 87 95 85" stroke="#c0708a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+        <!-- WHISKERS -->
+        <line x1="72" y1="84" x2="90" y2="86" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
+        <line x1="72" y1="88" x2="90" y2="88" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
+        <line x1="110" y1="86" x2="128" y2="84" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
+        <line x1="110" y1="88" x2="128" y2="88" stroke="#c8a080" stroke-width="0.8" opacity="0.7"/>
+
+        <!-- TAIL -->
+        <path d="M130 138 Q158 130 162 115 Q166 100 155 94" stroke="#e0a882" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <path d="M155 94 Q148 88 152 84 Q158 80 158 88" stroke="#e0a882" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+        <!-- STRIPE markings on head -->
+        <path d="M92 55 Q100 50 108 55" stroke="#e0a882" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+        <path d="M88 52 Q100 46 112 52" stroke="#e0a882" stroke-width="1" fill="none" opacity="0.25" stroke-linecap="round"/>
+
+        <!-- Floating hearts/stars around cat (because why not) -->
+        <text x="30" y="72" font-size="12" opacity="0.5" fill="#e87a9a">♥</text>
+        <text x="160" y="68" font-size="10" opacity="0.4" fill="#3366cc">★</text>
+        <text x="22" y="100" font-size="8" opacity="0.35" fill="#e87a9a">✦</text>
+
+        <!-- speech bubble -->
+        <rect x="108" y="28" width="76" height="28" rx="8" fill="#fff" stroke="#f0c4d0" stroke-width="1.2"/>
+        <polygon points="120,56 112,62 128,56" fill="#fff" stroke="#f0c4d0" stroke-width="1.2"/>
+        <!-- fix overlap -->
+        <line x1="121" y1="56" x2="127" y2="56" stroke="#fff" stroke-width="2"/>
+        <text x="146" y="40" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#444" text-anchor="middle" font-weight="600">git commit -m</text>
+        <text x="146" y="51" font-family="JetBrains Mono,monospace" font-size="7" fill="#d64f7a" text-anchor="middle">"fix: meow 🐾"</text>
+
+      </svg>
+
+      <div style="font-size:9px;color:var(--pink);letter-spacing:1.5px;text-align:center;margin-top:-4px;font-weight:600;">
+        Senior Billa Dev 🐱
       </div>
     </div>
+  </div>
   </div>
 
   <!-- ═══════ FLOATING ILLUSTRATIONS ═══════ -->
@@ -672,7 +797,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);max-width:480px;">
       <div style="background:var(--white);padding:16px;">
         <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">Email</div>
-        <a href="mailto:yashodipmore2004@gmail.com" style="color:var(--accent);font-size:12px;text-decoration:none;">yashodipmore2004@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#10697163787f7479607d7f62752220202450777d71797c3e737f7d" style="color:var(--accent);font-size:12px;text-decoration:none;"><span class="__cf_email__" data-cfemail="1960786a71767d706974766b7c2b29292d597e74787075377a7674">[email&#160;protected]</span></a>
       </div>
       <div style="background:var(--white);padding:16px;">
         <div style="font-size:9px;letter-spacing:2px;color:var(--gray-3);text-transform:uppercase;margin-bottom:6px;">LinkedIn</div>
@@ -699,13 +824,13 @@
 <!-- FOOTER -->
 <footer>
   <div>© 2025 Yashodip More &nbsp;·&nbsp; Built with precision</div>
-  <div><a href="#hero">↑ Back to top</a> &nbsp;·&nbsp; <a href="mailto:yashodipmore2004@gmail.com">yashodipmore2004@gmail.com</a></div>
+  <div><a href="#hero">↑ Back to top</a> &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#3b425a4853545f524b5654495e090b0b0f7b5c565a525715585456"><span class="__cf_email__" data-cfemail="7d041c0e151219140d10120f184f4d4d493d1a101c1411531e1210">[email&#160;protected]</span></a></div>
 </footer>
 
 <!-- BACK TO TOP -->
 <div id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ TOP</div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Loader
   window.addEventListener('load', () => {
     setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1400);
